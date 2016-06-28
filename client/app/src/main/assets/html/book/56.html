@@ -1,0 +1,142 @@
+<html xmlns:o="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>输入流</title>
+</head>
+<body>
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>重要的输入流类：</span></b><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>istream</span><span
+            style='font-family:"微软雅黑","sans-serif"'>类最适合用于顺序文本模式输入。<span lang=EN-US><br>
+<span style='mso-bidi-font-weight:bold'>cin</span></span><span
+            style='mso-bidi-font-weight:bold'>是</span>其实例<b>。</b><span lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ifstream</span><span
+            style='font-family:"微软雅黑","sans-serif"'>类支持磁盘文件输入。<span lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>istringstream<o:p></o:p></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>输入流对象<span
+            lang=EN-US><o:p></o:p></span></span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>如果在构造函数中指定一个文件名，在构造该对象时该文件便自动打开。<span
+            lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>ifstream myFile(&quot;filename&quot;);</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>在调用默认构造函数之后使用<span
+            lang=EN-US>open</span>函数来打开文件。<span lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ifstream
+myFile;//</span><span style='font-family:"微软雅黑","sans-serif"'>建立一个文件流对象<span
+            lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>myFile.open(&quot;filename&quot;,);</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-spacerun:yes'>&nbsp;</span>//</span><span
+            style='font-family:"微软雅黑","sans-serif";mso-bidi-font-weight:bold'>打开文件<span
+            lang=EN-US>&quot;filename</span>”</span><span lang=EN-US style='font-family:
+"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>打开文件时可以指定模式<span
+            lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>ifstream myFile(&quot;filename&quot;, ios_base::in |
+ios_base::binary);<o:p></o:p></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>提取运算符（<span
+            lang=EN-US>&gt;&gt;</span>）<span lang=EN-US><o:p></o:p></span></span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif";mso-bidi-font-weight:
+bold'>提取运算符<span lang=EN-US>(&gt;&gt;)</span>对于所有标准<span lang=EN-US>C++</span>数据类型都是预先设计好的。</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif";mso-bidi-font-weight:
+bold'>是从一个输入流对象获取字节最容易的方法。</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>ios</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>类中的很多操纵符都可以应用于输入流。但是只有少数几个对输入流对象具有实际影响，其中最重要的是进制操纵符<span
+            lang=EN-US>dec</span>、<span lang=EN-US>oct</span>和<span lang=EN-US>hex</span>。</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>输入流成员函数</span></b><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>open</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>函数把该流与一个特定磁盘文件相关联。</span><span lang=EN-US
+                                                          style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>get</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>函数的功能与提取运算符（<span lang=EN-US>&gt;&gt;</span>）很相像，主要的不同点是<span
+            lang=EN-US>get</span>函数在读入数据时包括空白字符。（第<span lang=EN-US>6</span>章介绍过）</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>getline</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>的功能是从输入流中读取多个字符，并且允许指定输入终止字符，读取完成后，从读取的内容中删除终止字符。（第<span
+            lang=EN-US>6</span>章介绍过）</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>read</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>成员函数从一个文件读字节到一个指定的内存区域，由长度参数确定要读的字节数。<span
+            lang=EN-US><br>
+</span>如果给出长度参数，当遇到文件结束或者在文本模式文件中遇到文件结束标记字符时结束读取。</span><span lang=EN-US
+                                                              style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>输入流成员函数<span
+            lang=EN-US><o:p></o:p></span></span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>seekg</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>函数用来设置文件输入流中读取数据位置的指针。</span><span lang=EN-US
+                                                              style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>tellg</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>函数返回当前文件读指针的位置。</span><span lang=EN-US
+                                                       style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>close</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>函数关闭与一个文件输入流关联的磁盘文件。</span><span lang=EN-US
+                                                            style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>字符串输入流<span
+            lang=EN-US>istringstream<o:p></o:p></span></span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif";mso-bidi-font-weight:
+bold'>用于从字符串读取数据</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif";mso-bidi-font-weight:
+bold'>在构造函数中设置要读取的字符串</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif";mso-bidi-font-weight:
+bold'>功能</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>支持<span
+            lang=EN-US>ifstream</span>类的除<span lang=EN-US>open</span>、<span lang=EN-US>close</span>外的所有操作<span
+            lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif";mso-bidi-font-weight:
+bold'>典型应用</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>将字符串转换为数值<span
+            lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US><o:p>&nbsp;</o:p></span></p>
+</div>
+
+</body>
+</html>

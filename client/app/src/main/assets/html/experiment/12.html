@@ -1,0 +1,812 @@
+<html>
+<head>
+    <title>多态性</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+<h2 align="center">实验8 多态性 </h2>
+<p>
+    <strong>实验目的 </strong><br />
+    （1）掌握运算符重载的方法。 <br />
+    （2）学习实验虚函数实现动态多态性。 <br />
+    <br />
+    <strong>实验任务 </strong><br />
+    （1）声明Point类，有坐标_x，_y两个成员变量；对Point类重载“++”（自增）、“--”（自减）运算符，实现对坐标值的改变。<strong></strong><br />
+    （2）声明一个车（vehicle）基类，有Run、Stop等成员函数，由此派生出自行车（bicycle）类、汽车（motorcar）类，从bicycle和motorcar派生出摩托车（motorcycle）类，它们都有Run、Stop等成员函数。观察虚函数的作用。 <br />
+</p>
+<p align="left"><strong>实验步骤 </strong><br />
+    （1）编写程序声明Point类，在类中声明整型的私有成员变量_x、_y，声明成员函数Point &amp; operator++（）；Point operator++(int)；以实现对Point类重载“++”（自增）运算符，声明成员函数Point &amp; operator--（）；Point operator--(int)；以实现对Point类重载“--”（自减）运算符，实现对坐标值的改变。 </p>
+<p> 参考代码<br />
+<p> 参考代码<br />
+              #include &lt;iostream&gt;<br />
+                using namespace std;<br><br />
+              class Point<br />
+                {<br />
+                private:<br />
+                int _x, _y;<br />
+                public:<br />
+                Point&amp; operator++();<br />
+                Point operator++(int);<br />
+  <br />
+                Point&amp; operator--();<br />
+                Point operator--(int);<br />
+  <br />
+                Point() { _x = _y = 0; }<br />
+  <br />
+                int x() { return _x; }<br />
+                int y() { return _y; }<br />
+                };<br>
+              <br />Point&amp; Point::operator++()<br />
+                {<br />
+                _x++;<br />
+                _y++;<br />
+                return *this;<br />
+                }<br>
+              <br>Point Point::operator++(int)<br />
+                {<br />
+                Point temp = *this;<br />
+                ++*this;<br />
+                return temp;<br />
+                }<br>
+              <br>Point&amp; Point::operator--()<br />
+                {<br />
+                _x--;<br />
+                _y--;<br />
+                return *this;<br />
+                }<br>
+              <br>Point Point::operator--(int)<br />
+                {<br />
+                Point temp = *this;<br />
+                --*this;<br />
+                return temp;<br />
+                }<br>
+              <br>void main()<br />
+                {<br />
+                Point A;<br />
+                cout &lt;&lt; &quot;A的值为：&quot; &lt;&lt; A.x() &lt;&lt; &quot; , &quot; &lt;&lt; A.y() &lt;&lt; endl;<br />
+                A++;<br />
+                cout &lt;&lt; &quot;A的值为：&quot; &lt;&lt; A.x() &lt;&lt; &quot; , &quot; &lt;&lt; A.y() &lt;&lt; endl;<br />
+                ++A;<br />
+                cout &lt;&lt; &quot;A的值为：&quot; &lt;&lt; A.x() &lt;&lt; &quot; , &quot; &lt;&lt; A.y() &lt;&lt; endl;<br />
+                A--;<br />
+                cout &lt;&lt; &quot;A的值为：&quot; &lt;&lt; A.x() &lt;&lt; &quot; , &quot; &lt;&lt; A.y() &lt;&lt; endl;<br />
+                --A;<br />
+                cout &lt;&lt; &quot;A的值为：&quot; &lt;&lt; A.x() &lt;&lt; &quot; , &quot; &lt;&lt; A.y() &lt;&lt; endl;<br />
+                }<br /></span>
+</p>
+
+<p>  （2）编写程序 声明一个车（vehicle）基类，有Run、Stop等成员函数，由此派生出自行车（bicycle）类、汽车（motorcar）类，从bicycle和motorcar派生出摩托车（motorcycle）类，它们都有Run、Stop等成员函数。在main（）函数中声明vehicle、bicycle、motorcar、motorcycle的对象，调用其Run（）、Stop（）函数，观察其执行情况。再分别用vehicle类型的指针来调用这几个对象的成员函数，看看能否成功；把Run、Stop声明为虚函数，再试试看。</p>
+<p> 参考代码<br>
+              #include &lt;iostream&gt;<br />
+using namespace std;<br>
+<br>class vehicle<br />
+  {<br />
+  private:<br />
+  int MaxSpeed;<br />
+  int Weight;<br />
+  public:<br />
+  vehicle(){MaxSpeed=0; Weight=0;};<br />
+  ~vehicle(){};<br />
+  virtual void Run() {cout &lt;&lt; &quot;A vehicle is running!&quot; &lt;&lt; endl; }<br />
+  virtual void Stop() {cout &lt;&lt; &quot;A vehicle has stopped!&quot; &lt;&lt; endl; }<br />
+  };<br>
+<br>class bicycle : virtual public vehicle<br />
+  { <br />
+  private:<br />
+  int Height;<br />
+  public:<br />
+  bicycle(){};<br />
+  ~bicycle(){};<br />
+  void Run() {cout &lt;&lt; &quot;A bicycle is running!&quot; &lt;&lt; endl; }<br />
+  void Stop() {cout &lt;&lt; &quot;A bicycle has stopped!&quot; &lt;&lt; endl; }<br />
+  };<br />
+  <br />
+  class motorcar : virtual public vehicle<br />
+  { <br />
+  private:<br />
+  int SeatNum;<br />
+  public:<br />
+  motorcar(){};<br />
+  ~motorcar(){};<br />
+  void Run() {cout &lt;&lt; &quot;A motorcar is running!&quot; &lt;&lt; endl; }<br />
+  void Stop() {cout &lt;&lt; &quot;A motorcar has stopped!&quot; &lt;&lt; endl; }<br />
+  };<br>
+<br>class motorcycle : public bicycle , public motorcar<br />
+  { <br />
+  public:<br />
+  motorcycle (){};<br />
+  ~motorcycle (){};<br />
+  void Run() {cout &lt;&lt; &quot;A motorcycle is running!&quot; &lt;&lt; endl; }<br />
+  void Stop() {cout &lt;&lt; &quot;A motorcycle has stopped!&quot; &lt;&lt; endl; }<br />
+  };<br>
+<br>void main()<br />
+  {<br />
+  vehicle * ptr;<br />
+  vehicle a;<br />
+  bicycle b;<br />
+  motorcar c;<br />
+  motorcycle d;<br />
+  a.Run();<br />
+  a.Stop();<br />
+  b.Run();<br />
+  b.Stop();<br />
+  c.Run();<br />
+  c.Stop();<br />
+  d.Run();<br />
+  d.Stop();<br />
+  ptr = &amp;a;<br />
+  ptr-&gt;Run();<br />
+  ptr = &amp;b;<br />
+  ptr-&gt;Run();<br />
+  ptr = &amp;c;<br />
+  ptr-&gt;Run();<br />
+  ptr = &amp;d;<br />
+  ptr-&gt;Run();<br />
+  <br />
+  }<br /></span>
+</p>
+
+<h3>利用虚函数求不同图形的面积 </h3>
+<p>问题：利用虚函数编写程序，实现计算长方形，圆和三角形的面积。 </p>
+<h4> 算法分析 </h4>
+<p> 定义一个抽象类Point，以该类为基类派生出Rect类，Circle类和Triangle类。由于不同图形计算面积的方法不同，故将成员函数double CalArea（）声明为纯虚函数，其目的是在各个派生类中重新定义该函数，分别计算出各图形的面积。 <br />
+    在主函数中定义三个指向抽象类对象的指针变量，是他们分别指向三个图形，从而调用三个派生类的成员函数，计算不同图形的面积。 </p>
+<h4> 程序代码:</h4>
+<p>#include&lt;iostream.h&gt;<br />
+    #include&lt;math.h&gt;<br />
+    class Point{<br />
+    protected:<br />
+    double xcoord,ycoord;<br />
+    public:<br />
+    Point(double x ,double  y):xcoord(x),ycoord(y)<br />
+    {}<br />
+    virtual~Point()<br />
+    {}<br />
+    virtual double CalArea() const=0;<br />
+    };<br />
+    class Rect:public Point{<br />
+    protected:<br />
+    double xcoord1,ycoord1;<br />
+    public:<br />
+    Rect(doubule x,double y,double x1,double  y1):Point(x,y){<br />
+    xcoord1=x1;<br />
+    ycoord1=y1;}<br />
+    double CalArea()const{<br />
+    cout&lt;&lt;&quot;长方形面积&quot;&lt;&lt;endl;<br />
+    return(xcoord1-xcoord)*(ycoord1-ycoord);}};<br />
+    class Circle:public Point{<br />
+    protected:<br />
+    double r;<br />
+    public:<br />
+    Circl(double x,double y,double  d):Point(x,y),r(d){}<br />
+    double CalArea()const{<br />
+    cout&lt;&lt;&quot;圆的面积&quot;&lt;&lt;endl;<br />
+    return 3.14159*r*r;}<br />
+    };<br />
+    class Triangle:public Point{<br />
+    double x1,x2,y1,y2;<br />
+    public:<br />
+    Triangle(double x,double y,double a,double  b,double c,double d):<br />
+    Point(x,y),x1(a),y1(b),x2(c),y2(d)<br />
+    {}<br />
+    double CalArea() const;};<br />
+    double Triangle::CalArea()const{<br />
+    double k ,m,h,he;<br />
+    k=(y2-y1)/(x2-x1);<br />
+    m=-k*x1+y1;<br />
+    h=abs(k*xcoord-ycoord+m)/sqrt(k*k+1);<br />
+    he=sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));<br />
+    cout&lt;&lt;&quot;三角形面积&quot;&lt;&lt;endl;<br />
+    return h*he/2;}<br />
+    void main(){<br />
+    Point*shp[3];<br />
+    shp[0]=new Rect(0,0,100.44,243);<br />
+    shp[1]=new Circle(24,56,100.0);<br />
+    shp[2]=new Triangle(17.6,11,30.5,20,25,39);<br />
+    int i;<br />
+    for(i=0;i&lt;3;i++)<br />
+    cout&lt;&lt;&quot;The area  is&quot;&lt;&lt;shp[i]-&gt;CalArea()&lt;&lt;endl;<br />
+    }</p>
+<h4>测试数据及结果：</h4>
+<p> 长方形面积<br />
+    The area is 24406.9<br />
+    圆的面积<br />
+    The area is 31415.9<br />
+    三角形面积<br />
+    The area is 145.75</p>
+
+
+
+<h3>例 将“+”、“-”运算重载为复数类的成员函数。 </h3>
+<h3> 规则: 实部和虚部分别相加减。 </h3>
+<h3>操作数: 两个操作数都是复数类的对象。 </h3>
+<p>#include &lt;iostream&gt;<br />
+    using namespace std;<br />
+    class Complex {//复数类定义<br />
+    public: //外部接口<br />
+    Complex(double  r = 0.0, double i = 0.0) : real(r), imag(i) { } //构造函数<br />
+    Complex  operator + (const Complex &amp;c2) const; //运算符+重载成员函数<br />
+    Complex  operator - (const Complex &amp;c2) const; //运算符-重载成员函数<br />
+    void  display() const; //输出复数<br />
+    private://私有数据成员<br />
+    double  real; //复数实部<br />
+    double  imag //复数虚部<br />
+    };<br />
+    Complex Complex::operator + (const Complex  &amp;c2) const { //重载运算符函数实现<br />
+    return  Complex(real + c2.real, imag + c2.imag); //创建一个临时无名对象作为返回值<br />
+    }</p>
+<p>Complex Complex::operator - (const Complex  &amp;c2) const { //重载运算符函数实现<br />
+    return  Complex(real - c2.real, imag - c2.imag); //创建一个临时无名对象作为返回值<br />
+    }<br />
+    void Complex::display() const {<br />
+    cout  &lt;&lt; &quot;(&quot; &lt;&lt; real &lt;&lt; &quot;, &quot; &lt;&lt; imag  &lt;&lt; &quot;)&quot; &lt;&lt; endl;<br />
+    }<br />
+    int main() { //主函数<br />
+    Complex  c1(5, 4), c2(2, 10), c3;?????? //定义复数类的对象<br />
+    cout  &lt;&lt; &quot;c1 = &quot;; c1.display();<br />
+    cout  &lt;&lt; &quot;c2 = &quot;; c2.display();<br />
+    c3  = c1 - c2; //使用重载运算符完成复数减法<br />
+    cout  &lt;&lt; &quot;c3 = c1 - c2 = &quot;; c3.display();<br />
+    c3  = c1 + c2; //使用重载运算符完成复数加法<br />
+    cout  &lt;&lt; &quot;c3 = c1 + c2 = &quot;; c3.display();<br />
+    return  0;<br />
+    }<br />
+    程序输出的结果为：</p>
+<p>c1 = (5, 4)<br />
+    c2 = (2, 10)<br />
+    c3 = c1 - c2 = (3, -6)<br />
+    c3 = c1 + c2 = (7, 14)<br />
+    <strong>例 </strong><strong>运算符前置++</strong><strong>和后置++</strong><strong>重载为时钟类的成员函数。 </strong><br />
+    <strong>前置单目运算符，重载函数没有形参，对于后置单目运算符，重载函数需要有一个整型形参。操作数是时钟类的对象。实现时间增加1</strong><strong>秒钟 </strong><br />
+    #include &lt;iostream&gt;<br />
+    using namespace std;<br />
+    class Clock { //时钟类声明定义<br />
+    public:????? //外部接口<br />
+    Clock(int  hour = 0, int minute = 0, int second = 0);<br />
+    void  showTime() const;<br />
+    Clock&amp;  operator ++ (); //前置单目运算符重载<br />
+    Clock  operator ++ (int);//后置单目运算符重载<br />
+    private: //私有数据成员<br />
+    int  hour, minute, second;<br />
+    };<br />
+    //前置单目运算符重载函数<br />
+    Clock &amp; Clock::operator ++ () {<br />
+    second++;<br />
+    if  (second &gt;= 60) {<br />
+    second  -= 60;<br />
+    minute++;<br />
+    if  (minute &gt;= 60) {<br />
+    minute  -= 60;<br />
+    hour  = (hour + 1) % 24;<br />
+    }<br />
+    }<br />
+    return  *this;<br />
+    }<br />
+    //后置单目运算符重载<br />
+    Clock Clock::operator ++ (int) {<br />
+    //注意形参表中的整型参数<br />
+    Clock  old = *this;<br />
+    ++(*this); //调用前置“++”运算符<br />
+    return  old;<br />
+    }<br />
+    //其它成员函数的实现略</p>
+<p>int main() {<br />
+    Clock  myClock(23, 59, 59);<br />
+    cout  &lt;&lt; &quot;First time output: &quot;;<br />
+    myClock.showTime();<br />
+    cout  &lt;&lt; &quot;Show myClock++ &quot;;<br />
+    (myClock++).showTime();<br />
+    cout  &lt;&lt; &quot;Show ++myClock: &quot;;<br />
+    (++myClock).showTime();<br />
+    return  0;<br />
+    }<br />
+    程序运行结果为：</p>
+<p>First time output: 23:59:59<br />
+    Show myClock++: 23:59:59<br />
+    Show ++myClock: 0:0:1<br />
+    <br />
+    将+、-（双目）重载为非成员函数，并将其声明为复数类的友元，两个操作数都是复数类的常引用。<br />
+    将&lt;&lt;（双目）重载为非成员函数，并将其声明为复数类的友元，它的左操作数是std::ostream引用，右操作数为复数类的常引用，返回std::ostream引用，用以支持下面形式的输出：<br />
+    cout &lt;&lt; a &lt;&lt; b;<br />
+    该输出调用的是：<br />
+    operator &lt;&lt; (operator &lt;&lt; (cout, a), b);<br />
+    #include &lt;iostream&gt;<br />
+    using namespace std;<br />
+    class Complex { //复数类定义<br />
+    public: //外部接口<br />
+    Complex(double  r = 0.0, double i = 0.0) : real(r), imag(i) { } //构造函数<br />
+    friend  Complex operator + (const Complex &amp;c1, const Complex &amp;c2); //运算符+重载<br />
+    friend  Complex operator - (const Complex &amp;c1, const Complex &amp;c2);? //运算符-重载<br />
+    friend  ostream &amp; operator &lt;&lt; (ostream &amp;out, const Complex &amp;c); //运算符&lt;&lt;重载<br />
+    private: //私有数据成员<br />
+    double  real; //复数实部<br />
+    double  imag; //复数虚部<br />
+    };<br />
+    Complex operator + (const Complex &amp;c1,  const Complex &amp;c2) {<br />
+    return  Complex(c1.real + c2.real, c1.imag + c2.imag); <br />
+    }</p>
+<p>Complex operator - (const Complex &amp;c1,  const Complex &amp;c2) {<br />
+    return  Complex(c1.real - c2.real, c1.imag - c2.imag); <br />
+    }</p>
+<p>ostream &amp; operator &lt;&lt; (ostream  &amp;out, const Complex &amp;c) {<br />
+    out  &lt;&lt; &quot;(&quot; &lt;&lt; c.real &lt;&lt; &quot;, &quot; &lt;&lt; c.imag  &lt;&lt; &quot;)&quot;;<br />
+    return  out;<br />
+    }</p>
+
+
+
+
+<p> 编写程序 <br />
+    (1) 定义一个类People，包含姓名（name）、年龄(age)、性别(sex)数据和display（）虚成员函数，该成员函数的功能为显示上述基本信息。在此基础上派生出教师类（Teacher）和学生（Student）类，教师信息包括工号(t_id)和职称(position)，学生信息包括学号(s_id)和班级(class_id)。二者的虚成员函数display()分别实现对教师和学生的所有信息的显示（包括People类中的基本信息）。<br />
+    (2) 在上面的基础上，再定义论文(Thesis)类，包括题目(title)、作者(author)和指导教师(advisor)等信息。定义成员函数display()来显示论文题目、作者和指导教师的全部信息。其中论文作者为Student类对象，指导教师为Teacher类对象。注意各类的构造函数的写法。<br />
+    (3) 编写主函数来测试这些类。<br />
+    参考答案：<br>
+#include &lt;iostream&gt;<br />
+  #include &lt;string&gt;<br />
+  using namespace std;<br>
+<br>class People <br />
+  {<br />
+  public:<br />
+  People(string  aName, int anAge, char aSex);<br />
+  virtual  void display();<br />
+  People();<br />
+  virtual  ~People();<br>
+<br>protected:<br />
+  char  sex;<br />
+  string  name;<br />
+  int  age;<br />
+  };<br />
+  void People::display()<br />
+  {<br />
+  cout&lt;&lt;&quot;name:  &quot;&lt;&lt;name&lt;&lt;&quot; age: &quot;&lt;&lt;age&lt;&lt;&quot; sex:  &quot;&lt;&lt;sex&lt;&lt;&quot; &quot;;<br />
+  }<br>
+<br>People::People(string aName, int anAge,  char aSex):name(aName),age(anAge),sex(aSex)<br />
+  {<br />
+  }<br>
+<br>class Student : public People <br />
+  {<br />
+  public:<br />
+  Student(string  aName, int anAge, char aSex, int id, int cid);<br />
+  virtual  void display();<br />
+  Student();<br />
+  virtual  ~Student();<br>
+<br>private:<br />
+  int  class_id;<br />
+  int  s_id;<br />
+  };<br>
+<br>void Student::display()<br />
+  {<br />
+  People::display();<br />
+  cout&lt;&lt;&quot;id:  &quot;&lt;&lt;s_id&lt;&lt;&quot; class: &quot;&lt;&lt;class_id&lt;&lt;endl;<br />
+  }<br>
+<br>Student::Student(string aName, int anAge,  char aSex, int id, int cid):People(aName, anAge, aSex),s_id(id),class_id(cid)<br />
+  {<br />
+  }<br>
+<br>class Teacher : public People <br />
+  {<br />
+  public:<br />
+  Teacher(string  aName, int anAge, char aSex, int id, string po);<br />
+  virtual  void display();<br />
+  Teacher();<br />
+  virtual  ~Teacher();<br>
+<br>private:<br />
+  string  position;<br />
+  int  t_id;<br />
+  };<br>
+<br>void Teacher::display()<br />
+  {<br />
+  People::display();<br />
+  cout&lt;&lt;&quot;id:  &quot;&lt;&lt;t_id&lt;&lt;&quot; position: &quot;&lt;&lt;position&lt;&lt;endl;<br />
+  }<br>
+<br>Teacher::Teacher(string aName, int anAge,  char aSex, int id, string po):People(aName,anAge,aSex),t_id(id),position(po)<br />
+  {<br />
+  }<br>
+<br>class Thesis <br />
+  {<br />
+  public:<br />
+  Thesis(string  ti, Student au, Teacher adv);<br />
+  void  display();<br>
+<br>private:<br />
+  Teacher  advisor;<br />
+  Student  author;<br />
+  string  title;<br />
+  };<br>
+<br>void Thesis::display()<br />
+  {<br />
+  cout&lt;&lt;&quot;title:  &quot;&lt;&lt;title&lt;&lt;endl;<br />
+  cout&lt;&lt;&quot;author  information: &quot;&lt;&lt;endl&lt;&lt;&quot;\t&quot;;<br />
+  author.display();<br />
+  cout&lt;&lt;&quot;advisor  information: &quot;&lt;&lt;endl&lt;&lt;&quot;\t&quot;;<br />
+  advisor.display();<br />
+  }<br>
+<br>Thesis::Thesis(string ti, Student au,  Teacher adv):author(au),advisor(adv),title(ti)<br />
+  {<br />
+  }<br>
+<br>void main()<br />
+  {<br />
+  Teacher  t1(&quot;zhao&quot;,40,'M',1234,&quot;professor&quot;);<br />
+  Student  s1(&quot;li&quot;,22,'F',123456,200109);<br />
+  Thesis  th1(&quot;computer network&quot;,s1,t1);<br />
+  th1.display();<br />
+  }<br />
+  有一个交通工具类vehicle，将它作为基类派生小车类car、卡车类truck和轮船类boat，定义这些类并定义一个虚函数用来显示各类信息。<br />
+  #include&lt;iostream&gt;<br />
+  #include&lt;cstring&gt;<br />
+  using namespace std;<br />
+  class Vehicle{<br />
+  public:<br>
+<br> virtual  void showinfo()=0;<br />
+  protected: <br />
+  char  Name[20];<br />
+  };<br>
+<br>class Car:public Vehicle{<br />
+  public:<br />
+  Car(char  *name){<br />
+  strcpy(Name,name);<br />
+  }<br />
+  void  showinfo(){cout&lt;&lt;Name&lt;&lt;endl;}<br />
+  protected:<br />
+  int  Radius;<br />
+  };<br>
+<br>class Truck:public Vehicle{<br />
+  public:<br />
+  Truck(char  *name){<br />
+  strcpy(Name,name);<br />
+  }<br />
+  void  showinfo(){cout&lt;&lt;Name&lt;&lt;endl;}<br />
+  };<br />
+  class Boat:public Vehicle{<br />
+  public:<br />
+  Boat(char  *name){<br />
+  strcpy(Name,name);<br />
+  }<br />
+  void  showinfo(){cout&lt;&lt;Name&lt;&lt;endl;}<br />
+  };<br>
+<br>int main(){<br />
+  Vehicle  *vp;<br />
+  Car  car(&quot;奔驰&quot;);<br />
+  Truck  truck(&quot;运输卡车&quot;);<br />
+  Boat  boat(&quot;游艇&quot;);<br />
+  vp=&amp;car;<br />
+  vp-&gt;showinfo  ();<br />
+  vp=&amp;truck;<br />
+  vp-&gt;showinfo  ();<br />
+  vp=&amp;boat;<br />
+  vp-&gt;showinfo  ();<br />
+  return  0;<br />
+  }</span></p>
+
+
+
+<h3>例</h3>
+<p>#include  &lt;iostream.h&gt;<br />
+    using namespace  std;</p>
+<p>class Base1 { //基类Base1定义 <br />
+    public:<br />
+    virtual void display() const; //虚函数 <br />
+    };<br />
+    void  Base1::display() const {<br />
+    cout &lt;&lt; &quot;Base1::display()  &lt;&lt; endl;<br />
+    }</p>
+<p>class Base2: public  Base1 { //公有派生类Base2定义 <br />
+    public:<br />
+    void display() const; //覆盖基类的虚函数 <br />
+    };<br />
+    void  Base2::display() const {<br />
+    cout &lt;&lt; &quot;Base2::display()&quot;  &lt;&lt; endl;<br />
+    }<br />
+    //公有派生类Derived定义<br />
+    class Derived: public Base2 { <br />
+    public:<br />
+    void  display() const; //覆盖基类的虚函数<br />
+    };<br />
+    void Derived::display() const {<br />
+    cout  &lt;&lt; &quot;Derived::display()&quot; &lt;&lt; endl;<br />
+    }</p>
+<p>//参数为指向基类对象的指针<br />
+    void fun(Base1 *ptr) { <br />
+    ptr-&gt;display();? //&quot;对象指针-&gt;成员名&quot;<br />
+    }<br />
+    int main() { //主函数<br />
+    Base1  base1 ;//定义Base1类对象<br />
+    Base2  base2 ;//定义Base2类对象<br />
+    Derived  derived; //定义Derived类对象<br />
+    fun(&amp;base1); //用Base1对象的指针调用fun函数<br />
+    fun(&amp;base2); //用Base2对象的指针调用fun函数<br />
+    fun(&amp;derived); //用Derived对象的指针调用fun函数<br />
+    return  0;<br />
+    }<br />
+    运行结果：<br />
+    Base1::display()<br />
+    Base2::display()<br />
+    Derived::display()</p>
+
+
+
+<p> 编写程序 <br />
+    设计一个三角形类Triangle，具有底边长度和高两个私有数据成员。要求重载运算符”&gt;”和”&lt;”，以实现比较两个三角形对象面积的大小，请编写主函数进行测试<br />
+    参考答案：<br />
+  #include &lt;iostream.h&gt;<br />
+  class Rectangle<br />
+  {<br />
+  public:<br />
+  Rectangle(){}<br />
+  Rectangle(int  a,int b)<br />
+  {<br />
+  x=a;<br />
+  y=b;<br />
+  }<br />
+  void  display() <br />
+  {<br />
+  cout&lt;&lt;&quot;area=&quot;&lt;&lt;x*y&lt;&lt;endl;<br />
+  }<br />
+  friend  int operator&gt;(Rectangle,Rectangle);<br />
+  private:<br />
+  int  x;<br />
+  int  y;<br />
+  };<br>
+<br>int operator&gt;(Rectangle s1,Rectangle s2)<br />
+  {<br />
+  return  s1.x*s1.y&gt;s2.x*s2.y?1:0;<br />
+  }<br>
+<br>void main()<br />
+  {<br />
+  Rectangle  r1(5,6);<br />
+  Rectangle  r2(4,8);<br />
+  cout&lt;&lt;&quot;r1:&quot;;<br />
+  r1.display();<br />
+  cout&lt;&lt;&quot;r2:&quot;;<br />
+  r2.display();<br />
+  if(r1&gt;r2)<br />
+  cout&lt;&lt;&quot;r1&gt;r2&quot;&lt;&lt;endl;<br />
+  else<br />
+  cout&lt;&lt;&quot;r2&gt;r1&quot;&lt;&lt;endl;<br />
+  }</span></p>
+
+<h3>例 纯虚函数与抽象类。 </h3>
+<p>#include &lt;iostream.h&gt;<br />
+    using namespace std;<br />
+    class Base1 { //基类Base1定义<br />
+    public:<br />
+    virtual void display() const = 0; //纯虚函数<br />
+    };<br />
+    class Base2: public Base1 { //公有派生类Base2定义<br />
+    public:<br />
+    void display() const { //覆盖基类的虚函数<br />
+    cout &lt;&lt; &quot;Base2::display()&quot;  &lt;&lt; endl;<br />
+    }<br />
+    };<br />
+    class Derived: public Base2 { //公有派生类Derived定义<br />
+    public:<br />
+    void display() const { //覆盖基类的虚函数<br />
+    cout &lt;&lt;  &quot;Derived::display()&quot; &lt;&lt; endl;<br />
+    }<br />
+    };<br />
+    void fun(Base1 *ptr) {<br />
+    ptr-&gt;display(); //&quot;对象指针-&gt;成员名&quot;<br />
+    }<br />
+    int main() { //主函数<br />
+    Base2 base2; //定义Base2类对象<br />
+    Derived derived; //定义Derived类对象<br />
+    fun(&amp;base2); //用Base2对象的指针调用fun函数<br />
+    fun(&amp;derived);//用Derived对象的指针调用fun函数<br />
+    return 0;<br />
+    }<br />
+    运行结果：<br />
+    Base2::display()<br />
+    Derived::display()</p>
+
+
+<p class="STYLE1">编写程序 </p>
+<p class="STYLE2">定义一个抽象类Employee，成员数据：工号id，为一个整数；成员函数包括：（1）构造函数；（2）成员函数salary，返回员工的工资。共有三种雇员，Manager：其工资为基本工资base_salary加上工龄工资（工龄work_age每增加1年增加200元）；Part_time：只有兼职工资psalary；Salesman：工资为底薪base_salary加上销售额提成（销售额sales乘以5％）。分别设计这三种雇员类，并在主函数中进行测试。 </p>
+<p>
+    参考答案：<br />
+  # include &lt;iostream&gt;<br />
+  using namespace std;<br>
+<br>class Employee{<br />
+  public:<br />
+  Employee(int newid):id(newid){};<br />
+  virtual float salary()=0;<br />
+  protected:<br />
+  int id;<br />
+  };<br>
+<br>class Manager: public Employee{<br />
+  public:<br />
+  Manager(int newid, float base, int  age):Employee(newid),base_salary(base),work_age(age){}<br />
+  float salary(){return  base_salary+work_age*200;}<br />
+  private:<br />
+  float base_salary;<br />
+  int work_age;<br />
+  };<br>
+<br>class Part_time: public Employee{<br />
+  public:<br />
+  Part_time(int newid, float  sal):Employee(newid), psalary(sal){}<br />
+  float salary(){return psalary;}<br />
+  private:<br />
+  float psalary;<br />
+  };<br>
+<br>class Salesman: public Employee{<br />
+  public:<br />
+  Salesman(int newid, float base, float  sale): Employee(newid),base_salary(base),sales(sale){}<br />
+  float salary(){return  base_salary+sales*0.05;}<br />
+  private:<br />
+  float base_salary;<br />
+  float sales;<br />
+  };<br>
+<br>void main()<br />
+  {<br />
+  Manager m(1,1000,4);<br />
+  Part_time p(2,1500);<br />
+  Salesman s(3,300,20000);<br />
+  Employee *pe;<br>
+<br>pe=&amp;m;<br />
+  cout&lt;&lt;&quot;Manager's salary:  &quot;&lt;&lt;pe-&gt;salary()&lt;&lt;endl;<br />
+  pe=&amp;p;<br />
+  cout&lt;&lt;&quot;Part_time's salary:  &quot;&lt;&lt;pe-&gt;salary()&lt;&lt;endl;<br />
+  pe=&amp;s;<br />
+  cout&lt;&lt;&quot;Salesman's salary:  &quot;&lt;&lt;pe-&gt;salary()&lt;&lt;endl;<br />
+  }</span></p>
+
+
+<p>编写程序<br />
+    定义一个求任意三个具有相同类型的数据中较大值的函数模板，在主函数main()中进行调用，完成对整形、双精度实型和字符型相应功能的测试。<br />
+    <a href="javascript:showMe(dx3)">参考答案：</a><span id="dx3" style="DISPLAY:none"><br />
+  #include &lt;iostream&gt;<br />
+  using namespace std;<br>
+<br>template&lt;class  T&gt;<br />
+  T max(T x, T y, T  z)<br />
+  {<br />
+  if ((x&gt;=y) &amp; (x&gt;=z))<br />
+  return x;<br />
+  else if ((y&gt;=x) &amp; (y&gt;=z))<br />
+  return y;<br />
+  else return z;<br />
+  }<br />
+  void main()<br />
+  {<br />
+  int  a1=10,b1=20,c1=30;<br />
+  double  a2=1.0,b2=2.0,c2=3.0;<br />
+  char a3='a',b3='b',c3='c';<br />
+  cout&lt;&lt;&quot;较大的整数为:&quot;&lt;&lt;max(a1,b1,c1)&lt;&lt;endl;<br />
+  cout&lt;&lt;&quot;较大的实数为:&quot;&lt;&lt;max(a2,b2,c2)&lt;&lt;endl;<br />
+  cout&lt;&lt;&quot;较大的字符为:&quot;&lt;&lt;max(a3,b3,c3)&lt;&lt;endl;<br />
+  } <br /></span></p>
+<p> 设计一个函数模板，参数为数组名和数组大小，可以对某种简单数据类型的数组中的数据进行从大到小排序，然后在主函数中用整型数据和字符型数据进行验证。<br />
+    <a href="javascript:showMe(dx4)">参考答案：</a><span id="dx4" style="DISPLAY:none"><br />
+  #include &lt;iostream.h&gt;<br />
+  template &lt;class T&gt;<br />
+  void sort(T data[], int m)<br />
+  {<br />
+  int  i,j,k;<br />
+  T  temp;<br>
+<br>  cout&lt;&lt;&quot;排序前的序列为：&quot;;<br />
+  for(i=0;i&lt;=m-1;i++)<br />
+  cout&lt;&lt;data[i]&lt;&lt;&quot;  &quot;;<br />
+  cout&lt;&lt;endl;<br>
+<br>  for(i=0;i&lt;m-1;i++)<br />
+  {<br />
+  k=i;<br />
+  for(j=i+1;j&lt;m;j++)<br />
+  if(data[k]&lt;data[j])<br />
+  k=j;<br />
+  if(k!=i)<br />
+  {<br />
+  temp=data[k];<br />
+  data[k]=data[i];<br />
+  data[i]=temp;<br />
+  }<br />
+  }<br>
+<br>  cout&lt;&lt;&quot;排序前的序列为：&quot;;<br />
+  for(i=0;i&lt;=m-1;i++)<br />
+  cout&lt;&lt;data[i]&lt;&lt;&quot;  &quot;;<br />
+  cout&lt;&lt;endl;<br />
+  }<br>
+<br>void main() <br />
+  {<br />
+  int  source[] = { -3, 2, -100, 20, 200 };<br />
+  char  c[]={'a','b','c','x','y','z'};<br />
+  sort(source,5);<br />
+  sort(c,6);<br />
+  }</span></p>
+<p>&nbsp;</p>
+
+
+<h3>例 函数模板 </h3>
+<h3>求绝对值函数的模板 </h3>
+<p>#include&lt;iostream.h&gt;<br />
+    using namespace std;<br />
+    template&lt;typename T&gt;<br />
+    T abs(T x)<br />
+    { return  x&lt;0?-x:x; }</p>
+<p>int main()<br />
+    {? int n=-5;<br />
+    double d=-5.5;<br />
+    cout&lt;&lt;abs(n)&lt;&lt;endl;<br />
+    cout&lt;&lt;abs(d)&lt;&lt;endl;<br />
+    }</p>
+<p>  运行结果：<br />
+    5<br />
+    5.5</p>
+<p>  模板分析：<br />
+    编译器从调用abs()时实参的类型，推导出函数模板的类型参数。例如，对于调用表达式abs(n)，由于实参n为int型，所以推导出模板中类型参数T为int。<br />
+    当类型参数的含义确定后，编译器将以函数模板为样板，生成一个函数：<br />
+    int abs(int x)<br />
+    { return x&lt;0?-x:x; }</p>
+<h3>例  类模板 </h3>
+<p>#include &lt;iostream&gt;<br />
+    #include &lt;cstdlib&gt;<br />
+    using namespace std;</p>
+<p>// 结构体Student</p>
+<p>struct Student<br />
+    {<br />
+    int id; //学号 <br />
+    float gpa; //平均分 <br />
+    };</p>
+<p>template &lt;class T&gt;<br />
+    //类模板：实现对任意类型数据进行存取<br />
+    class Store<br />
+    { private:<br />
+    T item; //用于存放任意类型的数据<br />
+    int  haveValue;//用于标记item是否已被存入内容 <br />
+    public:<br />
+    Store(void); //默认形式（无形参）的构造函数<br />
+    GetElem(void); //提取数据函数 <br />
+    void  PutElem(T x);//存入数据函数 <br />
+    };</p>
+<p>// 默认形式构造函数的实现 <br />
+    template &lt;class T&gt;<br />
+    Store&lt;T&gt;::Store(void): haveValue(0) {}</p>
+<p>template &lt;class T&gt; // 提取数据函数的实现<br />
+    T Store&lt;T&gt;::GetElem(void)<br />
+    { // 如果试图提取未初始化的数据，则终止程序 <br />
+    if  (haveValue == 0)<br />
+    { cout &lt;&lt; &quot;No item present!&quot;  &lt;&lt; endl;<br />
+    exit(1);<br />
+    }<br />
+    return  item; // 返回item中存放的数据<br />
+    }</p>
+<p>template &lt;class T&gt; // 存入数据函数的实现 <br />
+    void Store&lt;T&gt;::PutElem(T x)<br />
+    { // 将haveValue 置为 TRUE，表示item中已存入数值 <br />
+    haveValue++; <br />
+    item =  x; // 将x值存入item<br />
+    }</p>
+<p>int main()<br />
+    { Student g=  {1000, 23};<br />
+    Store&lt;int&gt; S1, S2;<br />
+    Store&lt;Student&gt; S3;<br />
+    Store&lt;double&gt; D; <br />
+    S1.PutElem(3);<br />
+    S2.PutElem(-7);<br />
+    cout  &lt;&lt; S1.GetElem() &lt;&lt; &quot; &quot;&lt;&lt;S2.GetElem()&lt;&lt;endl;<br />
+    S3.PutElem(g);<br />
+    cout&lt;&lt;&quot;The student id is &quot;&lt;&lt;S3.GetElem().id&lt;&lt;endl;<br />
+    cout&lt;&lt;&quot;Retrieving object D &quot;;<br />
+    cout&lt;&lt;D.GetElem()&lt;&lt;endl; //输出对象D的数据成员<br />
+    // 由于D未经初始化,在执行函数D.GetElement()时出错<br />
+    }</p>
+
+
+<p><strong>Q</strong>：什么叫做多态性？在C++中是如何实现多态的？ <br />
+    <strong>A</strong>：多态是指同样的消息被不同的类型的对象接收时导致不同的行为。 <br />
+    <a href="http://zhidao.baidu.com/search?word=多态&amp;fr=qb_search_exp" target="_blank">多态</a>是<a href="http://zhidao.baidu.com/search?word=面向对象&amp;fr=qb_search_exp" target="_blank">面向对象</a>的基本特征之一。而<a href="http://zhidao.baidu.com/search?word=虚函数&amp;fr=qb_search_exp" target="_blank">虚函数</a>是实现<a href="http://zhidao.baidu.com/search?word=多态&amp;fr=qb_search_exp" target="_blank">多态</a>的方法。简单的说，建立一个父类的对象，它的内容可以是这个父类的，也可以是它的子类的,当子类拥有和父类同样的函数，当使用这个对象调用这个函数的时候，定义这个对象的类（也就是父类）里的同名函数将被调用，当在父类里的这个函数前加virtual关键字，那么子类的同名函数将被调用。 <br />
+    <strong>Q</strong>：什么叫做抽象类？抽象类有何作用？<br />
+    <strong>A</strong>： 带有纯虚函数的类是抽象类，抽象类的主要作用是通过它为一个类族建立一个公共的接口，使它们能够有效地发挥多态特性。 <br />
+    <strong>Q</strong>：运算符重载的规则是什么？<br />
+    <strong>A</strong>：运算符重载规则如下：<br />
+    （1））C++中的运算符除了少数几个之外，全部可以重载，而且只能重载C++中已经有的运算符。 <br />
+    （2）重载之后的运算符的优先级和结核性都不会改变。 <br />
+    （3）运算符重载是针对新类型数据的实际需要，对原有运算符进行改造。一般来讲，重载的功能应当与原有功能相类似，不能改变原运算符的操作对象个数，同时至少有一个操作对象是自定义的类型。 <br />
+    <strong>Q</strong>：抽象类的派生类是否一定要给出纯虚函数的实现？ <br />
+    <strong>A</strong>： 不一定，如果派生类给出纯虚函数的实现，这个派生类就可以定义自己的对象，因而不再是抽象类；反之，该派生类仍然是一个抽象类。 <br />
+    <strong>Q</strong>：在C++中，能否声明虚函数？为什么？ <br />
+    <strong>A</strong>： 声明虚函数，虚函数必须是非静态的成员函数。虚函数经过派生之后，在类族中就可以实现运行过程中的多态。 <br />
+    <strong>Q</strong>：在C++中，能否声明虚析构函数？为什么？ <br />
+    <strong>A</strong>：声明虚析构函数，如果一个类的析构函数是虚函数，那么由它派生而来的所有子类的析构函数也是虚函数。 </p>
+
+
+</body>
+</html>

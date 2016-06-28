@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:stretchColumns="0,1"
+    android:gravity="center"
+    android:background="@drawable/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow>
+        <Button
+            android:textSize="25dp"
+            android:id="@+id/mainBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mainBook" />
+
+        <Button
+            android:textSize="25dp"
+            android:id="@+id/mainExperiment"
+            android:text="实验大纲"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </TableRow>
+    <TableRow>
+
+        <Button
+            android:textSize="25dp"
+            android:id="@+id/mainVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mainVideo" />
+
+        <Button
+            android:textSize="25dp"
+            android:id="@+id/mainPpt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mainPpt" />
+
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:textSize="25dp"
+            android:id="@+id/mainExam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mainExam" />
+
+        <Button
+            android:textSize="25dp"
+            android:id="@+id/mainResource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="资源下载"/>
+
+    </TableRow>
+
+</TableLayout>

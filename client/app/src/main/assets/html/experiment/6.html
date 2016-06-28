@@ -1,0 +1,312 @@
+<html>
+<head>
+    <title>简单函数</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<h2>简单函数</h2>
+<p>一、实验目的：<br />
+    （1）学习函数的定义和调用方法；<br />
+    （2）练习重载函数的使用；<br />
+    （3）练习使用系统函数；<br />
+    （4）学会使用C++的Debug调试功能，使用Step into跟踪到函数内部。</p>
+<p>二、实验内容<br />
+    （1）编写一个函数把华氏温度转换为摄氏温度，转换公式为：C=（F-32）*5/9。<br />
+    （2）编写重载函数max1可分别求2个整数、3个整数、2个双精度数和3个双精度数的最大值。<br />
+    （3）使用系统函数pow (x, y) 计算x的y次方的值，注意包含头文件cmath。<br />
+    （4）用递归的方法编写函数求Fibonacci级数，观察递归调用的过程。<br />
+    三、实验步骤</p>
+<p>（1）编写函数float Convert(float TempFer)，参数和返回值都为float类型，实现算法C=（F-32）*5/9，在main ( ) 函数中实现输入输出。 <br/>
+   参考代码<br/>
+      #include &lt;iostream&gt;<br />
+      using namespace std;<br />
+      float Convert(float);<br />
+      int main()<br />
+      {<br />
+      float TempFer;<br />
+      float TempCel;<br />
+      cout &lt;&lt; &quot;Please  enter the temperature in Fahrenheit: &quot;;<br />
+      cin &gt;&gt; TempFer;<br />
+      TempCel =  Convert(TempFer);<br />
+      cout &lt;&lt;  &quot;\nHere's the temperature in Celsius: &quot;;<br />
+      cout &lt;&lt; TempCel  &lt;&lt; endl;<br />
+      return 0;<br />
+      }<br />
+      float Convert(float TempFer)<br />
+      {<br />
+      float TempCel;<br />
+      TempCel = ((TempFer -  32) * 5) / 9;<br />
+      return TempCel;<br />
+      }<br />
+    </span></p>
+<p>（2）分别编写4个同名的函数max1，实现函数重载，在main( )函数中测试函数功能； <br />
+   参考代码<br/>
+      #include &lt;iostream&gt;<br />
+      using namespace std;<br />
+  <br />
+      int max1(int x, int y)<br />
+      {<br />
+      return (x&gt;y?x:y);<br />
+      }<br />
+  <br />
+      int max1(int x, int y, int z)<br />
+      {<br />
+      int temp1=max1(x,y);<br />
+      return (y&gt;z?y:z);<br />
+      }<br />
+  <br />
+      double max1(double x, double y)<br />
+      {<br />
+      return (x&gt;y?x:y);<br />
+      }<br />
+  <br />
+      double max1(double x, double y, double z)<br />
+      {<br />
+      double temp1=max1(x,y);<br />
+      return (y&gt;z?y:z);<br />
+      }<br />
+  <br />
+      int main()<br />
+      {<br />
+      int x1, x2;<br />
+      double d1, d2;<br />
+      x1 = max1(5,6);<br />
+      x2 = max1(2,3,4);<br />
+      d1 = max1(2.1, 5.6);<br />
+      d2 = max1(12.3, 3.4,  7.8);<br />
+  <br />
+      cout &lt;&lt;  &quot;x1=&quot; &lt;&lt;x1 &lt;&lt; endl;<br />
+      cout &lt;&lt;  &quot;x2=&quot; &lt;&lt;x2 &lt;&lt; endl;<br />
+      cout &lt;&lt;  &quot;d1=&quot; &lt;&lt;d1 &lt;&lt; endl;<br />
+      cout &lt;&lt;  &quot;d2=&quot; &lt;&lt;d2 &lt;&lt; endl;<br />
+      }<br />
+    </span></p>
+<p>（3）在main( )函数中提示输入两个整数x、y，使用cin语句得到x、y的值，调用pow(x, y)函数计算x的y次幂的结果，再显示出来； <br />
+   参考代码<br/>
+      #include &lt;iostream&gt;<br />
+      #include &lt;cmath&gt;<br />
+      using namespace std;<br />
+  <br />
+      int main()<br />
+      {<br />
+      int  x, y;<br />
+  <br />
+      cout  &lt;&lt; &quot;输入x的值：&quot;;<br />
+      cin  &gt;&gt; x;<br />
+      cout  &lt;&lt; &quot;输入y的值：&quot;;<br />
+      cin  &gt;&gt; y;<br />
+      cout  &lt;&lt; x &lt;&lt; &quot;的&quot; &lt;&lt; y &lt;&lt; &quot;次幂为：&quot; &lt;&lt; pow(x,y) &lt;&lt; endl;<br />
+      }<br />
+    </span></p>
+<p>（4）编写递归函数int fib(int n)，在主程序中输入n的值，调用fib函数计算Fibonacci级数。公式为：fib(n)=fib(n-1)+fib(n-2)，n&gt;2；fib(1) = fib(2) = 1。<br />
+    参考代码<br>
+   		              #include &lt;iostream&gt;<br>
+   		              using namespace std;<br>
+   		              <br>
+   		              int fib(int n);<br>
+   		              <br>
+   		              int main()<br>
+   		              {<br>
+   		              int  n, answer;<br>
+   		              cout  &lt;&lt; &quot;Enter number: &quot;;<br>
+   		              cin &gt;&gt; n;<br>
+   		              cout &lt;&lt; &quot;\n\n&quot;;<br>
+   		              <br>
+   		              answer = fib(n);<br>
+   		              cout  &lt;&lt; answer &lt;&lt; &quot; is the &quot; &lt;&lt; n &lt;&lt; &quot;th  Fibonacci number\n&quot;;<br>
+   		              return  0;<br>
+   		              }<br>
+   		              <br>
+   		              int fib (int n)<br>
+   		              {<br>
+   		              cout  &lt;&lt; &quot;Processing fib(&quot; &lt;&lt; n &lt;&lt; &quot;)... &quot;;<br>
+   		              if  (n &lt; 3 )<br>
+   		              {<br>
+   		              cout  &lt;&lt; &quot;Return 1!\n&quot;;<br>
+   		              return  (1);<br>
+   		              }<br>
+   		              else<br>
+   		              {<br>
+   		              cout  &lt;&lt; &quot;Call fib(&quot; &lt;&lt; n-2 &lt;&lt; &quot;) and fib(&quot;  &lt;&lt; n-1 &lt;&lt; &quot;).\n&quot;;<br>
+   		              return( fib(n-2) + fib(n-1));<br>
+   		              } <br>
+   		              }<br>
+  </span></p>
+<p>（5）使用Debug中的Step Into追踪到函数内部，观察函数的调用过程。
+</p>
+
+<p>1. 编写程序，求菲波那契数列前30项的立方和，即计算： <br />
+    result=13+13+23+33+53+83+133+&hellip;&hellip; <br />
+    并按下面格式输出： <br />
+    result=1^3+1^3+2^3+3^3+5^3+8^3+13^3+&hellip;&hellip; <br />
+    评分标准：该题共30分。 <br />
+    （1）数列前30项求出正确<br />
+    （2）立方和计算结果正确 <br />
+    （3）输出结果格式正确 <br />
+<p>参考代码<br />
+ #include<iostream><br />
+        using namespace std; <br />
+        main() <br />
+        { <br />
+        int f1=1,f2=1,f3,result;<br />
+        cout&lt;&lt;f1*10+3&lt;&lt;&quot;,&quot;&lt;&lt;f2*10+3&lt;&lt;&quot;,&quot;; <br />
+        result=2*(13*13); <br />
+        for(int i=0;i&lt;28;i++) <br />
+        { <br />
+        f3=f1+f2; <br />
+        f1=f2; <br />
+        f2=f3; <br />
+        cout&lt;&lt;f3*10+3 &lt;&lt;&quot;,&quot;; <br />
+        result=f3*f3*f3+result; <br />
+        } <br />
+        cout&lt;&lt;endl; <br />
+        cout&lt;&lt;&quot;result=1^3+1^3+2^3+3^3+8^3+.......=&quot;&lt;&lt;result&lt;&lt;endl; <br />
+        } </span></p>
+<p>2. 编写程序，求①M&times;N矩阵每行元素之和；②M&times;N矩阵每列元素之和；③M&times;N矩阵每行元素之和的最小数；④M&times;N矩阵每列元素之和的最小数。（①先定义int A[100][100]，然后任意输入小于100的整数M和N；②再输入矩阵中每个元素） <br />
+    评分标准：该题共40分。 <br />
+    （1）输入数据正确 <br />
+    （2）求和计算编写正确，并输出结果 <br />
+    （3）求最小元素编写正确，并输出结果 </p>
+<p>参考代码<br />
+ #include<iostream><br />
+        using namespace std; <br />
+        main() <br />
+        { <br />
+        int A[100][100],i,j,m,n,sum1=0,sum2[100],k=1,q=0; <br />
+        cin&gt;&gt;i&gt;&gt;j; <br />
+        for(m=0;m&lt;i;m++) <br />
+        for(n=0;n&lt;j;n++) <br />
+        cin&gt;&gt;A[m][n]; <br />
+        //for(k=1;k&lt;=m;k++) <br />
+        for(m=0;m&lt;i;m++) <br />
+        {  <br />
+
+        for(n=0;n&lt;j;n++) <br />
+        {  <br />
+        sum1=A[m][n]+sum1; <br />
+        } <br />
+        cout&lt;&lt;&quot;第&quot;&lt;&lt;k&lt;&lt;&quot;行的和为:&quot;&lt;&lt;sum1&lt;&lt;endl; <br />
+        sum2[m]=sum1; <br />
+        sum1=0; <br />
+        k++; <br />
+        } <br />
+        while(q&lt;i-1) <br />
+        { <br />
+        if(sum2[q]&lt;sum2[q+1]) <br />
+        sum2[q+1]=sum2[q]; <br />
+        q++; <br />
+        } <br />
+        cout&lt;&lt;&quot;每列元素之和的最小数为:&quot;&lt;&lt;sum2[q]&lt;&lt;endl; <br />
+        k=1; <br />
+        for(n=0;n&lt;j;n++) <br />
+        {  <br />
+        for(m=0;m&lt;i;m++) <br />
+        {  <br />
+        sum1=A[m][n]+sum1; <br />
+        } <br />
+        cout&lt;&lt;&quot;第&quot;&lt;&lt;k&lt;&lt;&quot;列的和为:&quot;&lt;&lt;sum1&lt;&lt;endl; <br />
+        sum2[n]=sum1; <br />
+        sum1=0; <br />
+        k++; <br />
+        } <br />
+        q=0; <br />
+        while(q&lt;j-1) <br />
+        {  <br />
+        if(sum2[q]&lt;sum2[q+1]) <br />
+        sum2[q+1]=sum2[q]; <br />
+        q++; <br />
+        } <br />
+        cout&lt;&lt;&quot;每行元素之和的最小数为:&quot;&lt;&lt;sum2[q]&lt;&lt;endl; <br />
+        } 	 </span></p>
+
+
+<p><strong>【案例</strong><strong>1</strong><strong>】值传递和引用传递的区别</strong><strong> </strong><br />
+    <strong>案例解析</strong>： <br />
+    本案例编写一个函数，一个参数以值形式传递，另一个参数以引用形式传递。 <br />
+    <strong>语法要点：</strong>值传递和引用传递的区别。 <br />
+    <strong>代码注解</strong>： <br />
+    #include&lt;iostream&gt;<br />
+    using namespace std;<br />
+    void fun (int,int&amp;); //函数参数一个值传递，一个引用传递。 <br />
+    int main()<br />
+    {int a = 22, b = 44; <br />
+    cout&lt;&lt;&quot;Initial a = &quot;&lt;&lt;a&lt;&lt;&quot;, b = &quot; &lt;&lt;b&lt;&lt;endl;<br />
+    fun(a,b); <br />
+    cout&lt;&lt;&quot;After fun(a,b),a  = &quot;&lt;&lt;a&lt;&lt;&quot;, b = &quot; &lt;&lt;b&lt;&lt;endl;<br />
+    fun(2*a-3,b);<br />
+    cout&lt;&lt;&quot;After  fun(2*a-3,b),a = &quot;&lt;&lt;a&lt;&lt;&quot;, b = &quot;&lt;&lt;b&lt;&lt;endl;<br />
+    return 0;<br />
+    }<br />
+    void fun(int x,int&amp; y){ x = 88; y =  99;}<br />
+    <strong>调试运行：</strong><strong> </strong><br />
+    Initial a = 22, b = 44<br />
+    After fun(a,b), a = 22, b = 99<br />
+    After fun(2*a-3,b), a = 22, b = 99<br />
+    <strong>思考与提示：</strong><strong> </strong><br />
+    fun(a,b)调用通过值传递将a传递给x，通过引用传递把b传递给y。所以x是一个局部变量，被赋值为a的值22，而y是变量的别名。函数将88赋给x，但是不对a产生影响。但是当函数将99赋给了b，因为y是b的别名，因此当函数调用结束后，a的值仍为其初值22，而b有了一个新的数值99。实参a是只读的，而实参b是可读写的。 <br />
+    <strong>【案例</strong><strong>2</strong><strong>】</strong><strong> </strong><strong>多变的最值函数</strong><strong>?</strong><strong>参数数目不同的重载函数</strong><strong> </strong><br />
+    <strong>案例解析</strong>： <br />
+    本案例编写2个名为min的重载函数，用来求2个整数或3个整数中的最小数。如果输入2个整数，程序就输出这2个整数中的最小值，如果输入3个整数，程序就输出这3个整数中的最小数。</p>
+<p><strong>语法要点：</strong> 重载函数除了允许参数类型不同以外，还允许参数的个数不同。</p>
+<p><strong>代码注解</strong>： <br />
+    #include&lt;iostream&gt;<br />
+    using namespace std;<br />
+    int main()<br />
+    { int min (int a , int b , int c) //函数声明 <br />
+    int min (int a , int b) //函数声明 <br />
+    int i1 , i2 , i3 , I;<br />
+    cout&lt;&lt;”Enter tree  integers: ”;<br />
+    cin&gt;&gt;i1&gt;&gt;12&gt;&gt;13;  //输入3个整数 <br />
+    i = min(i1,i2);<br />
+    cout&lt;&lt;&quot;The min in two integers= &quot;&lt;&lt;i&lt;&lt;endl; //2个整数中最小者 <br />
+    i = min(i1,i2,i3); //3个整数中最小者 <br />
+    cout&lt;&lt;&quot;The min in three  integers= &quot;&lt;&lt;i&lt;&lt;endl; <br />
+    return 0;<br />
+    }<br />
+    int min(int a,int b,int c) //定义求3个整数中的最小者的函数 <br />
+    { int k;<br />
+    k=(a&lt;b)?a:b; <br />
+    k=(k&lt;c)?k:c;<br />
+    return  k;<br />
+    }<br />
+    int min(int a,int b) //定义求2个整数中的最小者的函数 <br />
+    { int k; k=(a&lt;b)?a:b;<br />
+    return k;<br />
+    }</p>
+<p><strong>调试运行：</strong><strong> </strong><br />
+    Enter three integers:8 2 6<br />
+    The min in two integers= 2<br />
+    The min in three integers= 2</p>
+<p><strong>思考与提示：</strong><strong> </strong><br />
+    本例中，2次调用min函数的参数个数不同，系统就根据参数个数找到与之匹配的函数并调用它。 </p>
+
+
+<p><br />
+    Q :函数的实参和形参怎样对应？实参和形参数目必须一致吗？什么情况下可以不同？<br />
+    <br />
+    A：实参和形参的个数和排列顺序应一一对应，并且对应参数应类型匹配（赋值兼容），当有缺省参数时可以不同。<br />
+    <br />
+    <br />
+    Q :函数和内联函数的执行机制有何不同？定义内联函数有何意义？又有何要求？<br />
+    <br />
+    A：内联函数的调用机制与一般函数不同，编译器在编译过程中遇到inline时，为该函数建立一段代码，而后在每次调用时直接将该段代码嵌入到调用函数中，从而将函数调用方式变为顺序执行方式，这一过程称为内联函数的扩展或内联。内联函数的实质是牺牲空间来换取时间。因inline指示符对编译器而言只是一个建议，编译器也可以选择忽略该建议，内联函数只适用于功能简单，代码短小而又被重复使用的函数。函数体中包含复杂结构控制语句，如switch、复杂if嵌套、while语句等，以及无法内联展开的递归函数，都不能定义为内联函数，即使定义，系统也将作为一般函数处理。<br />
+</p>
+<p>Q :函数重载的作用是什么？满足什么条件的函数才可以成为重载函数？重载函数在调用时是怎样进行对应的？<br />
+    <br />
+    A：函数重载可以定义几个功能相似，而参数类型不同使用相同的函数名的函数，以适应不同情况下自动选用不同函数进行操作。函数重载的好处在于，可以用相同的函数名来定义一组功能相同或类似的函数，程序的可读性增强。在定义重载函数时必须保证参数类型不同，仅仅返回值类型不同是不行的。<br />
+    当某个函数中调用到重载函数时，编译器会根据实参的类型去对应地调用相应的函数。<br />
+    匹配过程按如下步骤进行：<br />
+    <br />
+    （1）如果有严格匹配的函数，就调用该函数；<br />
+    <br />
+    （2）参数内部转换后如果匹配，调用该函数；<br />
+    <br />
+    （3）通过用户定义的转换寻求匹配。</p>
+<p>Q 什么叫作嵌套调用？什么叫作递归调用？<br />
+    <br />
+    A：函数允许嵌套调用，如果函数1调用了函数2，函数2再调用函数3，便形成了函数的嵌套调用。函数可以直接或间接地调用自身，称为递归调用。</p>
+
+</body>
+</html>

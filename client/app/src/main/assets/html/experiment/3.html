@@ -1,0 +1,81 @@
+<html>
+<head>
+    <title>表达式</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+             <h2>表达式</h2>
+              <h3>实验任务</h3>
+                输入两个数，输出最大的数。<br>
+                <h3>实验目的</h3>
+                熟悉？：表达式。<br>
+                <h3>实验分析</h3>
+                <p>条件表达式：&lt;表达式1&gt;?&lt;表达式2&gt;：&lt;表达式3&gt;<br>
+                条件表达式实现的功能是：根据条件（表达式1）成立与否（真/假），选择其中一个表达式（表达式2或表达式3）的结果作为整个表达式的结果。通常&lt;表达式1&gt;为关系或逻辑表达式，&lt;表达式2&gt;和&lt;表达式3&gt;一般为算术表达式、赋值表达式、函数表达式或条件表达式。</p>
+                <p> 参考代码<br>
+                  #include&lt;stdio.h&gt;<br>
+main()<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int  a,b,max;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; scanf(&quot;%d%d&quot;,&amp;a,&amp;b);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a&gt;b?(max=a):(max=b);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;max=%d\n&quot;,max);<br>
+}</span>
+                <h3>运用提高</h3>
+                      输入三个数，输出最大的数。<br>
+                      <br>参考代码<br>
+                      #include&lt;stdio.h&gt;<br>
+                      main()<br>
+                      {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double a,b,c,max;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; scanf(&quot;%lf%lf%lf&quot;,&amp;a,&amp;b,&amp;c);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a&gt;b?(max=a):(max=b);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; max&gt;c?(max=max):(max=c);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;max=%lf\n&quot;,max);<br>
+}<br></span>
+                </p>
+                <h3>实验任务</h3>
+              将“china”译成密码<br>
+                <h3>实验目的</h3>
+                （1）熟悉%表达式； <br>
+                  （2）训练程序设计思想。
+                <h3>实验分析</h3>
+                <p>（1）两个整数进行除法（/）运算，其结果仍为整数。例如：3/2的结果为1，舍去小数部分，相当于整除操作。如果整数与实数进行除法运算，则结果为实数。例如：3.0/2的结果为1.5。 <br>
+                  （2）求余运算（%）要求参与运算的两个操作数均为整型，不能为其他类型。例如：8%5，其值为3。                </p>
+                <p> 参考代码
+                  <br>#include&lt;stdio.h&gt;<br>
+main()<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char  c1,c2,c3,c4,c5;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c1='C',c2='h',c3='i',c4='n',c5='a';<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;%c%c%c%c%c\n&quot;,c1,c2,c3,c4,c5);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c1=c1+4;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c2=c2+4;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c3=c3+4;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c4=c4+4;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; c5=c5+4;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; printf(&quot;%c%c%c%c%c\n&quot;,c1,c2,c3,c4,c5);
+                }</span>
+
+                <h3>运用提高</h3>
+                输入两个数，判断两个数是否有倍数关系。<br>
+                <br>
+                参考代码<br>
+#include&lt;stdio.h&gt;<br>
+main()<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int  a,b;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; scanf(&quot;%d%d&quot;,&amp;a,&amp;b);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a%b==0&nbsp;printf(&quot;是\n&quot;):printf(&quot;不是\n&quot;);<br>
+                }
+</p>
+                </span>
+                <p>
+
+                <p align="center">&nbsp;</p>
+                <p align="center">&nbsp;</p>
+                <p align="center">&nbsp;</p>
+</body>
+</html>

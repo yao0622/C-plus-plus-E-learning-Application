@@ -1,0 +1,31 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>自定义数据类型</title>
+</head>
+<body>
+<h3>typedef语句</h3>
+<p>为一个已有的数据类型另外命名<br>
+    语法形式<br>
+    typedef  已有类型名  新类型名表;</p>
+<p>例如<br>
+    typedef double area,volume; <br>
+    typedef int natural; <br>
+    natural i1,i2; <br>
+    area a; <br>
+    volume v; </p>
+<h3>枚举类型?enum </h3>
+<p>只要将需要的变量值一一列举出来，便构成了一个枚举类型。</p>
+<p>枚举类型的声明形式如下：<br>
+    enum  枚举类型名  {变量值列表};</p>
+<p>例如：<br>
+    enum weekday {sun,mon,tue,wed,thu,fri,sat};</p>
+<p>枚举类型应用说明：<br>
+    对枚举元素按常量处理，不能对它们赋值。例如，不能写：sun=0;<br>
+    枚举元素具有缺省值，它们依次为： 0,1,2,......。<br>
+    也可以在声明时另行指定枚举元素的值，如：<br>
+    &nbsp; &nbsp;enum weekday {sun=7,mon=1,tue,wed,thu,fri,sat};<br>
+    枚举值可以进行关系运算。<br>
+    整数值不能直接赋给枚举变量，如需要将整数赋值给枚举变量，应进行强制类型转换。</p>
+</body>
+</html>

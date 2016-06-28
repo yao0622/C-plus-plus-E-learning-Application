@@ -1,0 +1,660 @@
+<html>
+<head>
+    <title>继承与派生</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+<p align="center">&nbsp;</p>
+<h2 align="center">实验7 继承与派生</h2>
+<h2>实验7-1 </a>
+</h2>
+<h3>1实验目的 </h3>
+<p>（1）学习定义和使用类的继承关系，定义派生类。 <br>
+    （2）熟悉不同继承方式下对基类成员的访问控制。 <br>
+    （3）学习利用虚基类解决二义性问题。 </p>
+<h3>2 实现任务 </h3>
+<p>（1）定义一个基类Animal，有私有整型成员变量age，构造其派生类dog，在其成员函数SetAge（int  n）中直接给age赋值，看看会有什么问题，把age 改为公有成员变量，还回有问题吗？编程试之。 <br>
+    （2）定义一个基类BaseClass,有整型变量Number，构造其派生类DerivedClass，观察构造函数和析构函数的执行情况。 <br>
+    （3）定义一个车（vehicle）基类，具有Maxspeed、Weight等成员，Run、Stop等成员函数，由此派生出自行车（bicycle）类、汽车（motorcar）类。自行车（bicycle）类有高度（Height）等属性，汽车（motorcar）类有座位数（SeatNun）等属性。从bicycle和motorcar派生出摩托车（motorbicycle）类，在继承过程中，注意把vehicle设置为虚基类。如果不把vehicle设置为虚基类，会有什么问题？编程试之。 </p>
+<h3>3 实验步骤 </h3>
+<p>（1）编写程序定义基类Animal，成员变量age定义为私有的。构造派生类dog，在其成员函数SetAge（int  n）中直接对age赋值时，会出现类似以下的错误提示： <br>
+    error  C2248 : ‘age’ : cannot access private member declared in class ‘Animal’ <br>
+    error  C2248 : ‘age’ : cannot access private member declared in class ‘Animal’ <br>
+    把age改为公有成员变量后重新编译就可以了。程序名：lab5_1.cpp。 <br>
+    （2）编写程序定义一个基类BaseClass，构造其派生类DerivedClass，在构造函数和析构函数中用cout输出提示信息，观察构造函数和析构函数的执行情况。程序名：lab5_2.cpp。 <br>
+    （3）用debug功能跟踪程序lab5_2的执行过程，观察基类和派生类的构造函数和析构函数的执行情况。 <br>
+    （4）编写程序定义一个车（vehicle）基类，由此派生出自行车（bicycle）类、汽车（motorcar）类，注意把vehicle派生为虚基类。再从bicycle和motorcar派生出摩托车（motorcycle）类，在main()函数中测试这个类。程序名:lab5_3.cpp.<br>
+    编译成功后，把vehicle派生为虚基类，再编译一次，此时系统报错，无法编译成功。这是因为若不把vehicle设置为虚基类，会出现二义性错误，程序不能成功编译。 </p>
+<p align="center">&nbsp;</p>
+
+<h3 align="center"><strong>通话计费 </strong></h3>
+<p align="left"><br>
+    实例内容： <br>
+    编写一个通话计费程序，计费方法是：本地通话每10秒钟0.06元，异地通话每6秒钟0.06元。根据输入的发话地点和收话地点以及通话时间，输出话费费用。<br>
+    算法分析： <br>
+    设计两个基类，分别是通话地点类（Destination类）和通话时长类（Time类）。Destination类包含发话地点和和收话地点两个数据成员，以及输入两个地点和显示两个地点的成员函数。Time类包含时、分、秒和总秒数几个数据成员，以及输入通话时间和显示通话时间的成员函数。由这两个类派生出的Price类，用于根据通话时间和地点计算话费。 <br>
+    需要注意的是，为了使基类的数据成员在派生类中可以被访问，故要将基类的数据成员声明为protected成员。 <br>
+    其对应的源程序代码如下： </p>
+<div align="center">
+    <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td width="532" valign="top"><br>
+                源程序代码：<br>
+                #include &quot;stdio.h&quot;<br>
+                /实例9-1.cpp<br>
+                #include&lt;iostream.h&gt;<br>
+                #include&lt;string.h&gt;<br>
+                #define Max 20<br>
+                class Destination     //定义基类Destination类 <br>
+                { protected:     //定义数据成员为protected<br>
+                char from[Max];<br>
+                char to[Max];<br>
+                public:<br>
+                Destination()     //定义基类的默认构造函数 <br>
+                { strcpy(from,&quot;&quot;);<br>
+                strcpy(to,&quot;&quot;);<br>
+                }<br>
+                Destination(char f[],char t[])   //定义带参数的构造函数 <br>
+                { strcpy(from,f);<br>
+                strcpy(to,t);<br>
+                }<br>
+                ~ Destination()    //定义基类的析构函数 <br>
+                { cout&lt;&lt;&quot;析构Destination类！&quot;&lt;&lt;endl; }<br>
+                void getdata()     //定义基类的成员函数 <br>
+                { cout&lt;&lt;&quot;输入发话地点/收话地点:&quot;;<br>
+                cin&gt;&gt;from&gt;&gt;to;<br>
+                }<br>
+                void disp()     //定义基类的成员函数 <br>
+                { cout&lt;&lt;&quot;计费从 &quot;&lt;&lt;from&lt;&lt;&quot; 到 &quot;&lt;&lt;to; }<br>
+                };<br>
+                class Time     //定义基类Time类 <br>
+                { protected:     //定义数据成员为protected<br>
+                int hour,minute,second;<br>
+                int time;<br>
+                public:  <br>
+                Time()     //定义基类的默认构造函数 <br>
+                { time=0; }<br>
+                Time(int t)     //定义带参数的构造函数 <br>
+                { time=t; }<br>
+                ~ Time()     //定义基类的析构函数 <br>
+                { cout&lt;&lt;&quot;析构Time类！&quot;&lt;&lt;endl; }<br>
+                void getdata()     //定义基类的成员函数 <br>
+                { cout&lt;&lt;&quot;输入通话时间(时/分/秒)：&quot;;<br>
+                cin&gt;&gt;hour&gt;&gt;minute&gt;&gt;second;<br>
+                time=(hour*3600+minute*60+second);<br>
+                }<br>
+                void disp()     //定义基类的成员函数 <br>
+                { cout&lt;&lt;&quot;,通话时间是 &quot;&lt;&lt;time&lt;&lt;&quot; 秒&quot;; }<br>
+                };<br>
+                class Price:public    Destination,public Time //定义派生类Price，公有继承方式 <br>
+                { double price;<br>
+                public:<br>
+                Price():Destination(),Time()   //定义派生类的构造函数 <br>
+                { price=0; }<br>
+                Price(char f[],char t[],double    tt):Destination(f,t),Time(tt) //派生类的构造函数 <br>
+                {}<br>
+                ~ Price()     //定义派生类析构函数 <br>
+                { cout&lt;&lt;&quot;析构Price 类！&quot;&lt;&lt;endl; }<br>
+                void getdata()     //定义派生类的成员函数 <br>
+                { Destination::getdata();<br>
+                Time::getdata();<br>
+                if(strcmp(from,to)==0)   //将收话地点作比较，实现本地通话和异地通话不 <br>
+                //同的计费方式 <br>
+                if(time%10==0)<br>
+                price=(int)(time/10)*0.06;<br>
+                else<br>
+                price=((int)(time/10)+1)*0.06;<br>
+                else <br>
+                if(time%6==0)<br>
+                price=(int)(time/6)*0.06;<br>
+                else<br>
+                price=((int)((time)/6)+1)*0.06;<br>
+                }<br>
+                void disp()     //定义派生类的成员函数 <br>
+                { cout&lt;&lt;&quot; &quot;;<br>
+                Destination::disp();   //调用基类的公有成员函数，同名函数用类名限定 <br>
+                Time::disp();<br>
+                cout&lt;&lt;&quot;,话费是 &quot;&lt;&lt;price&lt;&lt;&quot; 元\n&quot;&lt;&lt;endl;<br>
+                }<br>
+                };<br>
+                void main()<br>
+                { Price A;<br>
+                int i;<br>
+                for(i=0;i&lt;2;i++)    //实现两次输入 <br>
+                { A.getdata();    //调用派生类的成员函数 <br>
+                cout&lt;&lt;&quot;输出结果:&quot;&lt;&lt;endl;<br>
+                A.disp();<br>
+                }<br>
+                } </td>
+        </tr>
+        <tr>
+            <td width="532" valign="top"><p>测试数据与运行结果： <br>
+                输入发话地点/收话地点：北京 北京? <br>
+                输入通话时间（时/分/秒）：1 2 50? <br>
+                输出结果： <br>
+                计费从 北京 到 北京，通话时间是 3770 秒，话费是 22.62 元 </p>
+                <p>输入发话地点/收话地点：北京 沈阳? <br>
+                    输入通话时间（时/分/秒）：0 5 40? <br>
+                    输出结果： <br>
+                    计费从 北京 到 沈阳，通话时间是 340 秒，话费 3.42 元 </p>
+                <p>析构Price类！ <br>
+                    析构Time类！ <br>
+                    析构Destination类！ </p></td>
+        </tr>
+    </table>
+</div>
+<p align="left">&nbsp;</p>
+
+读程序，写出输出结果 </h3>
+<p>
+    1. 程序：<br>
+    //Point.h<br>
+    class Point<br>
+    {   public:<br>
+    Point(); <br>
+    Point(int xx,int yy);<br>
+    ~Point();<br>
+    void Move(int x,int y);<br>
+    int GetX() {return X;}<br>
+    int GetY() {return Y;}<br>
+    private:<br>
+    int  X,Y;<br>
+    };<br>
+    //Point.cpp<br>
+    #include&lt;iostream&gt;<br>
+    #include &quot;Point.h&quot;<br>
+    using namespace std;<br>
+    Point::Point()<br>
+    {   X=Y=0;<br>
+    cout&lt;&lt;&quot;Location is:&quot;&lt;&lt;X&lt;&lt;&quot;,&quot;&lt;&lt;Y&lt;&lt;endl;<br>
+    cout&lt;&lt;&quot;Default Constructor called.&quot;&lt;&lt;endl;<br>
+    }<br>
+    Point::Point(int xx,int yy)<br>
+    {   X=xx;<br>
+    Y=yy;<br>
+    cout&lt;&lt;&quot;Location is:&quot;&lt;&lt;X&lt;&lt;&quot;,&quot;&lt;&lt;Y&lt;&lt;endl;<br>
+    cout&lt;&lt; &quot;Constructor called.&quot;&lt;&lt;endl;<br>
+    }<br>
+    Point ::~Point()<br>
+    {   cout&lt;&lt;&quot;Destructor called.&quot;&lt;&lt;endl;  }<br>
+    void Point ::Move(int x,int y)<br>
+    {     X=x; <br>
+    Y=y;<br>
+    cout&lt;&lt;”Now Location is:”&lt;&lt;X&lt;&lt;”,”&lt;&lt;Y&lt;&lt;endl;<br>
+    }<br>
+    #include&lt;iostream&gt;<br>
+    #include &quot;Point.h&quot;<br>
+    using namespace std;<br>
+    int main()<br>
+    {<br>
+    cout&lt;&lt;&quot;Entering main...&quot;&lt;&lt;endl;<br>
+    Point A[2]={Point(5,6)};<br>
+    for(int i=0;i&lt;2;i++)<br>
+    A[i].Move(i+1,i+2);<br>
+    cout&lt;&lt;&quot;Exiting main...&quot;&lt;&lt;endl;<br>
+    return 0;<br>
+    }<br>
+    输出结果：<br>
+	          <span class="STYLE1">Entering main…<br>
+       Location is:5,6<br>
+       Constructor called.<br>
+       Location is:0,0<br>
+       Default Constructor called.<br>
+       Now Location is:1,2<br>
+       Now Location is:2,3<br>
+       Exiting main…<br>
+       Destructor called.<br>
+    Destructor called.	  </span></span></p>
+
+
+<p>2. 程序：<br>
+    #include &lt;iostream.h&gt;<br>
+    class A<br>
+    {<br>
+    public:<br>
+    A(int a):x(a)<br>
+    {<br>
+    cout&lt;&lt;&quot;执行基类A的构造函数: &quot;&lt;&lt;a&lt;&lt;endl;<br>
+    }<br>
+    ~A() {cout&lt;&lt;&quot;执行基类A的析构函数&quot;&lt;&lt;endl;}<br>
+    private:<br>
+    int x;<br>
+    };<br>
+    class B: public A<br>
+    {<br>
+    private:<br>
+    int y;<br>
+    A pobj;<br>
+    public:<br>
+    B(int a,int b):pobj(b),y(a),A(a)<br>
+    {<br>
+    cout&lt;&lt;&quot;执行派生类B的构造函数: &quot;&lt;&lt;a&lt;&lt;endl;<br>
+    }<br>
+    ~B() { cout&lt;&lt;&quot;执行派生类B的析构函数&quot;&lt;&lt;endl; }<br>
+    };<br>
+    void main()<br>
+    {<br>
+    B obj(1,2);<br>
+    }<br>
+    执行结果：<br>
+	   <br>
+       <span class="STYLE1">    执行基类A的构造函数: 1<br>
+       执行基类A的构造函数: 2<br>
+       执行派生类B的构造函数: 1<br>
+       执行派生类B的析构函数<br>
+       执行基类A的析构函数<br>
+       执行基类A的析构函数 </span></span>	   </p>
+
+<h3>
+    <h3>三、程序设计题       </h3>
+    <p>1、请按照如下步骤要求编程：<br>
+        （1）设计一个Person（人员）抽象类，包括id（编号：整型）、name（姓名：字符串，可以用string类）、sex（性别：字符型）、age（年龄：整数）等信息；成员函数：构造函数、纯虚函数display（）用于显示相关信息。<br>
+        （2）从Person类分别派生出一个Student（学生）类和一个Teacher（教师）类。Student类包括speciality（专业：字符串），设计构造函数，并重写display（）函数，显示Student的信息；Teacher类包括college（学院：字符串）和salary（工资：浮点数），设计构造函数。<br>
+        （3）从Student类分别派生出UnderG（本科生）和Grad（研究生）两个类。UnderG类包含grade（年级：整型）和score（学分：整型）；成员函数包括：构造函数，display（）函数显示本科生的全部信息。Grad类包括length（学制：枚举类型）和tutor（导师：字符串）信息；成员函数包括：构造函数，display（）函数用于显示研究生的全部信息。<br>
+        （4）编写主函数测试上述类。<br>
+        注1：字符串可用字符数组或string类。<br>
+        注2：枚举类型“学制”声明为：enum LengthS {TWO=2,THREE}；。<br>
+        参考答案:   <span class="STYLE1"><br>
+              #include &lt;iostream&gt;<br>
+              #include &lt;string&gt;<br>
+       using namespace std;
+              </span>
+     <p class="STYLE1">enum LengthS{TWO=2,THREE};</p>
+  <p class="STYLE1">class Person{<br>
+      protected:<br>
+      int id;<br>
+      string name;<br>
+      char sex;<br>
+      int age;<br>
+      public:<br>
+      Person(int i, string n, char s, int a):id(i),name(n),sex(s),age(a){}<br>
+      virtual void display()=0;<br>
+      };</p>
+  <p class="STYLE1">class Student: public Person{<br>
+      protected:<br>
+      string speciality;<br>
+      public:<br>
+      Student (int id, string na, char se, int ag, string sp): Person (id, na, se, ag), speciality(sp){}<br>
+      void display();<br>
+      };</p>
+  <p class="STYLE1">void Student:: display()<br>
+      {<br>
+      cout&lt;&lt;&quot;Id: &quot;&lt;&lt;id&lt;&lt;&quot;, Name: &quot;&lt;&lt;name&lt;&lt;&quot;, Sex: &quot;&lt;&lt;sex&lt;&lt;&quot;, Age: &quot;&lt;&lt; age&lt;&lt;&quot;, Speciality: &quot;&lt;&lt; speciality &lt;&lt;endl;<br>
+      }</p>
+  <p class="STYLE1">class Teacher: public Person{<br>
+      private:<br>
+      string college;<br>
+      float salary;<br>
+      public:<br>
+      Teacher(int id, string na, char se, int ag, string co,float sa): Person (id, na, se, ag), college(co),salary(sa){}<br>
+      void display();<br>
+      };</p>
+  <p class="STYLE1">void Teacher:: display()<br>
+      {<br>
+      cout&lt;&lt;&quot;Id: &quot;&lt;&lt;id&lt;&lt;&quot;, Name: &quot;&lt;&lt;name&lt;&lt;&quot;, Sex: &quot;&lt;&lt;sex&lt;&lt;&quot;, Age &quot;&lt;&lt; age&lt;&lt;&quot;, college: &quot;&lt;&lt; college &lt;&lt;&quot;,salary: &quot;&lt;&lt; salary &lt;&lt;endl;<br>
+      }</p>
+  <p class="STYLE1">class UnderG: public Student{<br>
+      private:<br>
+      int grade;<br>
+      int score;<br>
+      public:<br>
+      UnderG(int id, string na, char se, int ag, string sp, int g, int s): Student(id, na, se, ag, sp), grade(g), score(s){}<br>
+      void display();<br>
+      };</p>
+  <p class="STYLE1">void UnderG:: display()<br>
+      {<br>
+      cout&lt;&lt;&quot;Id: &quot;&lt;&lt;id&lt;&lt;&quot;, Name: &quot;&lt;&lt;name&lt;&lt;&quot;, Sex: &quot;&lt;&lt;sex&lt;&lt;&quot;, Age: &quot;&lt;&lt; age&lt;&lt;&quot;, Speciality: &quot;&lt;&lt; speciality &lt;&lt;&quot;, Grade: &quot;&lt;&lt; grade&lt;&lt;&quot;, Score: &quot;&lt;&lt; score &lt;&lt;endl;<br>
+      }</p>
+  <p class="STYLE1">class Grad: public Student{<br>
+      private:<br>
+      LengthS length;<br>
+      string tutor;<br>
+      public:<br>
+      Grad(int id, string na, char se, int ag, string sp, LengthS le, string t): Student(id, na, se, ag, sp), length(le), tutor(t){}<br>
+      void display();<br>
+      };</p>
+  <p class="STYLE1">void Grad:: display()<br>
+      {<br>
+      cout&lt;&lt;&quot;Id: &quot;&lt;&lt;id&lt;&lt;&quot;, Name: &quot;&lt;&lt;name&lt;&lt;&quot;, Sex: &quot;&lt;&lt;sex&lt;&lt;&quot;, Age: &quot;&lt;&lt; age&lt;&lt;&quot;, Speciality: &quot;&lt;&lt; speciality &lt;&lt;&quot;, Length of schooling: &quot;&lt;&lt; length &lt;&lt;&quot;, tutor:&quot;&lt;&lt; tutor &lt;&lt;endl;<br>
+      }</p>
+  <p class="STYLE1">void main()<br>
+      {<br>
+      Person *p;<br>
+      Student s(1,&quot;zhangsan&quot;,'f',20,&quot;computer&quot;);<br>
+      UnderG u(2,&quot;lisi&quot;,'m',21,&quot;math&quot;,3,24);<br>
+      Grad g(3,&quot;wangwu&quot;,'f', 24, &quot;art&quot;,THREE,&quot;sun&quot;);<br>
+      p=&amp;s;<br>
+      p-&gt;display();<br>
+      p=&amp;u;<br>
+      p-&gt;display();<br>
+      p=&amp;g;<br>
+      p-&gt;display();<br>
+      }<br>
+  </p></div>
+
+    <p>例 公有继承举例 <br />
+        class Point { //基类Point类的定义 <br />
+        public: //公有函数成员 <br />
+        void  initPoint(float x = 0, float y = 0) { this-&gt;x = x; this-&gt;y = y;}<br />
+        void  move(float offX, float offY) { x += offX; y += offY; }<br />
+        float  getX() const { return x; }<br />
+        float  getY() const { return y; }<br />
+        private: //私有数据成员 <br />
+        float  x, y;<br />
+        };</p>
+    <p>class Rectangle: public Point { //派生类定义部分 <br />
+        public: //新增公有函数成员 <br />
+        void  initRectangle(float x, float y, float w, float h) {<br />
+        initPoint(x, y); //调用基类公有成员函数 <br />
+        this-&gt;w = w;<br />
+        this-&gt;h = h;<br />
+        }<br />
+        float  getH() const { return h; }<br />
+        float  getW() const { return w; }<br />
+        private: //新增私有数据成员 <br />
+        float  w, h;<br />
+        };</p>
+    <p>#include &lt;iostream&gt;<br />
+        #include &lt;cmath&gt;<br />
+        using namespace std;<br />
+        int main() {<br />
+        Rectangle  rect; //定义Rectangle类的对象 <br />
+        //设置矩形的数据 <br />
+        rect.initRectangle(2,  3, 20, 10); <br />
+        rect.move(3,2); //移动矩形位置 <br />
+        cout  &lt;&lt; &quot;The data of rect(x,y,w,h): &quot; &lt;&lt; endl;<br />
+        //输出矩形的特征参数 <br />
+        cout  &lt;&lt; rect.getX() &lt;&lt;&quot;, &quot;<br />
+        &lt;&lt; rect.getY() &lt;&lt; &quot;,  &quot;<br />
+        &lt;&lt; rect.getW() &lt;&lt; &quot;,  &quot;<br />
+        &lt;&lt; rect.getH() &lt;&lt; endl;<br />
+        return  0;<br />
+        }<br />
+        例 私有继承举例 <br />
+        class Rectangle: private Point { //派生类定义部分 <br />
+        public: //新增公有函数成员 <br />
+        void  initRectangle(float x, float y, float w, float h) {<br />
+        initPoint(x, y); //调用基类公有成员函数 <br />
+        this-&gt;w = w;<br />
+        this-&gt;h = h;<br />
+        }<br />
+        void  move(float offX, float offY) { <br />
+        Point::move(offX, offY);<br />
+        }<br />
+        float  getX() const { return Point::getX(); }<br />
+        float  getY() const { return Point::getY(); }<br />
+        float  getH() const { return h; }<br />
+        float  getW() const { return w; }<br />
+        private: //新增私有数据成员 <br />
+        float  w, h;<br />
+        };</p>
+    <p>#include &lt;iostream&gt;<br />
+        #include &lt;cmath&gt;<br />
+        using namespace std;</p>
+    <p>int main() {<br />
+        Rectangle  rect; //定义Rectangle类的对象 <br />
+        rect.initRectangle(2,  3, 20, 10); //设置矩形的数据 <br />
+        rect.move(3,2); //移动矩形位置 <br />
+        cout  &lt;&lt; &quot;The data of rect(x,y,w,h): &quot; &lt;&lt; endl;<br />
+        cout  &lt;&lt; rect.getX() &lt;&lt;&quot;, &quot; //输出矩形的特征参数 <br />
+        &lt;&lt; rect.getY() &lt;&lt; &quot;,  &quot;<br />
+        &lt;&lt; rect.getW() &lt;&lt; &quot;,  &quot;<br />
+        &lt;&lt; rect.getH() &lt;&lt; endl;<br />
+        return  0;<br />
+        }<br />
+        例 protected  成员举例 <br />
+        class A {<br />
+        protected:<br />
+        int  x;<br />
+        };<br />
+        int main() {<br />
+        A  a;<br />
+        a.x  = 5; //错误 <br />
+        }</p>
+    <p>class A {<br />
+        protected:<br />
+        int  x;<br />
+        };<br />
+        class B: public A{<br />
+        public:<br />
+        void  function();<br />
+        };<br />
+        void B:function() {<br />
+        x  = 5; //正确 <br />
+        }</p>
+
+
+
+    <p>例 类型兼容规则举例 <br />
+        #include &lt;iostream&gt;<br />
+        using namespace std;</p>
+    <p>class Base1 { //基类Base1定义 <br />
+        public:<br />
+        void  display() const {<br />
+        cout &lt;&lt;  &quot;Base1::display()&quot; &lt;&lt; endl;<br />
+        }<br />
+        };</p>
+    <p>class Base2: public Base1 { //公有派生类Base2定义 <br />
+        public:<br />
+        void  display() const {<br />
+        cout &lt;&lt; &quot;Base2::display()&quot;  &lt;&lt; endl;<br />
+        }<br />
+        };</p>
+    <p>class Derived: public Base2 { //公有派生类Derived定义 <br />
+        public:<br />
+        void  display() const {<br />
+        cout &lt;&lt;  &quot;Derived::display()&quot; &lt;&lt; endl;<br />
+        }<br />
+        };</p>
+    <p>void fun(Base1 *ptr) { //参数为指向基类对象的指针 <br />
+        ptr-&gt;display(); //&quot;对象指针-&gt;成员名&quot;<br />
+        }</p>
+    <p>int main() { //主函数 <br />
+        Base1  base1; //声明Base1类对象 <br />
+        Base2  base2; //声明Base2类对象 <br />
+        Derived  derived; //声明Derived类对象 </p>
+    <p> //用Base1对象的指针调用fun函数 <br />
+        fun(&amp;base1); <br />
+        //用Base2对象的指针调用fun函数 <br />
+        fun(&amp;base2);<br />
+        //用Derived对象的指针调用fun函数fun(&amp;derived);</p>
+    <p> return  0;<br />
+        }</p>
+
+
+    <p>例 派生类构造函数举例 <br />
+        #include &lt;iostream&gt;<br />
+        using namespace std;<br />
+        class Base1 { //基类Base1，构造函数有参数 <br />
+        public:<br />
+        Base1(int  i) { cout &lt;&lt; &quot;Constructing Base1 &quot; &lt;&lt; i &lt;&lt; endl; }<br />
+        };<br />
+        class Base2 { //基类Base2，构造函数有参数 <br />
+        public:<br />
+        Base2(int  j) { cout &lt;&lt; &quot;Constructing Base2 &quot; &lt;&lt; j &lt;&lt; endl; }<br />
+        };<br />
+        class Base3 { //基类Base3，构造函数无参数 <br />
+        public:<br />
+        Base3()  { cout &lt;&lt; &quot;Constructing Base3 *&quot; &lt;&lt; endl; }<br />
+        };</p>
+    <p>class Derived: public Base2, public Base1,  public Base3 {<br />
+        //派生新类Derived，注意基类名的顺序 <br />
+        public: //派生类的公有成员 <br />
+        Derived(int  a, int b, int c, int d): Base1(a), member2(d), member1(c), Base2(b)<br />
+        {  }<br />
+        //注意基类名的个数与顺序，//注意成员对象名的个数与顺序 <br />
+        private: //派生类的私有成员对象 <br />
+        Base1  member1;<br />
+        Base2  member2;<br />
+        Base3  member3;<br />
+        };</p>
+    <p>int main() {<br />
+        Derived  obj(1, 2, 3, 4);<br />
+        return  0;<br />
+        }<br />
+        例 派生类析构函数举例 <br />
+        #include &lt;iostream&gt;<br />
+        using namespace std;</p>
+    <p>class Base1 { //基类Base1，构造函数有参数 <br />
+        public:<br />
+        Base1(int  i) { cout &lt;&lt; &quot;Constructing Base1 &quot; &lt;&lt; i &lt;&lt; endl; }<br />
+        ~Base1()  { cout &lt;&lt; &quot;Destructing Base1&quot; &lt;&lt; endl; }<br />
+        };</p>
+    <p>class Base2 { //基类Base2，构造函数有参数 <br />
+        public:<br />
+        Base2(int  j) { cout &lt;&lt; &quot;Constructing Base2 &quot; &lt;&lt; j &lt;&lt; endl; }<br />
+        ~Base2()  { cout &lt;&lt; &quot;Destructing Base2&quot; &lt;&lt; endl; }<br />
+        };</p>
+    <p>class Base3 { //基类Base3，构造函数无参数 <br />
+        public:<br />
+        Base3()  { cout &lt;&lt; &quot;Constructing Base3 *&quot; &lt;&lt; endl; }<br />
+        ~Base3()  { cout &lt;&lt; &quot;Destructing Base3&quot; &lt;&lt; endl; }<br />
+        };</p>
+    <p>class Derived: public Base2, public Base1,  public Base3 {<br />
+        //派生新类Derived，注意基类名的顺序 <br />
+        public: //派生类的公有成员 <br />
+        Derived(int  a, int b, int c, int d): Base1(a), member2(d), member1(c), Base2(b) { }<br />
+        //注意基类名的个数与顺序，注意成员对象名的个数与顺序 <br />
+        private: //派生类的私有成员对象 <br />
+        Base1  member1;<br />
+        Base2  member2;<br />
+        Base3  member3;<br />
+        };</p>
+    <p>int main() {<br />
+        Derived  obj(1, 2, 3, 4);<br />
+        return  0;<br />
+        }<br />
+        例 运行结果 <br />
+        Constructing Base2 2<br />
+        Constructing Base1 1<br />
+        Constructing Base3 *<br />
+        Constructing Base1 3<br />
+        Constructing Base2 4<br />
+        Constructing Base3 *<br />
+        Destructing Base3<br />
+        Destructing Base2<br />
+        Destructing Base1<br />
+        Destructing Base3<br />
+        Destructing Base1<br />
+        Destructing Base2</p>
+
+
+    <p>例 多继承同名隐藏举例(1)<br />
+        #include &lt;iostream&gt;<br />
+        using namespace std;<br />
+        class Base1 { //定义基类Base1<br />
+        public:<br />
+        int  var;<br />
+        void  fun() { cout &lt;&lt; &quot;Member of Base1&quot; &lt;&lt; endl; }<br />
+        };<br />
+        class Base2 { //定义基类Base2<br />
+        public:<br />
+        int  var;<br />
+        void  fun() { cout &lt;&lt; &quot;Member of Base2&quot; &lt;&lt; endl; }<br />
+        };<br />
+        class Derived: public Base1, public Base2 {  //定义派生类Derived<br />
+        public:<br />
+        int  var; //同名数据成员 <br />
+        void  fun() { cout &lt;&lt; &quot;Member of Derived&quot; &lt;&lt; endl; } //同名函数成员 <br />
+        };</p>
+    <p>int main() {<br />
+        Derived  d;<br />
+        Derived  *p = &amp;d;</p>
+    <p> d.var  = 1; //对象名.成员名标识 <br />
+        d.fun(); //访问Derived类成员 <br />
+        <br />
+        d.Base1::var  = 2; //作用域分辨符标识 <br />
+        d.Base1::fun(); //访问Base1基类成员 <br />
+        <br />
+        p-&gt;Base2::var  = 3; //作用域分辨符标识 <br />
+        p-&gt;Base2::fun(); //访问Base2基类成员 </p>
+    <p> return  0;<br />
+        }<br />
+        例 虚基类举例 </p>
+    <p>#include &lt;iostream&gt;<br />
+        using namespace std;</p>
+    <p>class Base0 { //定义基类Base0<br />
+        public:<br />
+        int  var0;<br />
+        void  fun0() { cout &lt;&lt; &quot;Member of Base0&quot; &lt;&lt; endl; }<br />
+        };</p>
+    <p>class Base1: virtual public Base0 { //定义派生类Base1<br />
+        public: //新增外部接口 <br />
+        int  var1;<br />
+        };</p>
+    <p>class Base2: virtual public Base0 { //定义派生类Base2<br />
+        public: //新增外部接口 <br />
+        int  var2;<br />
+        };</p>
+    <p>class Derived: public Base1, public Base2 { //定义派生类Derived <br />
+        public: //新增外部接口 <br />
+        int  var;<br />
+        void  fun() {<br />
+        cout &lt;&lt; &quot;Member of  Derived&quot; &lt;&lt; endl;<br />
+        }<br />
+        };</p>
+    <p>int main() { //程序主函数 <br />
+        Derived  d; //定义Derived类对象d<br />
+        d.var0  = 2; //直接访问虚基类的数据成员 <br />
+        d.fun0(); //直接访问虚基类的函数成员 <br />
+        return  0;<br />
+        }<br />
+        有虚基类时的构造函数举例 <br />
+        #include &lt;iostream&gt;<br />
+        using namespace std;</p>
+    <p>class Base0 { //定义基类Base0<br />
+        public:<br />
+        Base0(int  var) : var0(var) { }<br />
+        int  var0;<br />
+        void  fun0() { cout &lt;&lt; &quot;Member of Base0&quot; &lt;&lt; endl; }<br />
+        };</p>
+    <p>class Base1: virtual public Base0 { //定义派生类Base1<br />
+        public: //新增外部接口 <br />
+        Base1(int  var) : Base0(var) { }<br />
+        int  var1;<br />
+        };</p>
+    <p>class Base2: virtual public Base0 { //定义派生类Base2<br />
+        public: //新增外部接口 <br />
+        Base2(int  var) : Base0(var) { }<br />
+        int  var2;<br />
+        };</p>
+    <p>class Derived: public Base1, public Base2 {<br />
+        //定义派生类Derived<br />
+        public: //新增外部接口 <br />
+        Derived(int  var) : Base0(var), Base1(var), Base2(var) { }<br />
+        int  var;<br />
+        void  fun() { cout &lt;&lt; &quot;Member of Derived&quot; &lt;&lt; endl; }<br />
+        };</p>
+    <p>int main() { //程序主函数 <br />
+        Derived  d(1); //定义Derived类对象d<br />
+        d.var0  = 2; //直接访问虚基类的数据成员 <br />
+        d.fun0(); //直接访问虚基类的函数成员 <br />
+        return  0;<br />
+        }</p>
+
+    <p><strong>Q</strong>：基类的私有成员被派生类继承后可以被派生类中的成员函数访问吗？<br>
+        <strong>A</strong>：基类的私有成员被派生类继承后变为不可访问的成员，派生类中的所有成员函数均无法访问它们。</p>
+    <p> <br>
+        <strong>Q</strong>：若需要在派生类中引用基类的某些成员，应该怎么办？<br>
+        <strong>A</strong>：应该将基类的这些成员声明为protected。 </p>
+    <p><br>
+        <strong>Q</strong>：将基类成员声明为protected，有什么好处？<br>
+        <strong>A</strong>：成员声明为protected既可以实现某些成员的隐藏，又可以方便地继承。</p>
+    <p> <br>
+        <strong>Q</strong>：什么样的派生类是简单的派生类？<br>
+        <strong>A</strong>：如果派生类只有一个基类，且数据成员中不包含子对象，称为简单的派生类。 </p>
+    <p><br>
+        <strong>Q</strong>：所有直接基类中调用虚基类构造函数的操作会执行吗？<br>
+        <strong>A</strong>：不会的，所有直接基类中调用虚基类构造函数的操作都将被系统忽略，而且在最后的派生类中调用虚基类的构造函数。 </p>
+    <p><br>
+        <strong>Q</strong>：派生类在什么时候需要声明构造函数？<br>
+        <strong>A</strong>：如果对基类初始化时，需要调用基类的带有形参表的构造函数时，派生类就必须声明构造函数。 </p>
+    <p><br>
+        <strong>Q</strong>：为什么我们看到的很多类并没有显式的声明过它们的构造函数？<br>
+        <strong>A</strong>：因为编译系统会自动为每个类生成一个默认的析构函数，并在对象生命周期结束时调用。而且它会隐含地调用派生类对象成员所在类的析构函数和调用基类的析构函数。 </p>
+
+</body>
+</html>

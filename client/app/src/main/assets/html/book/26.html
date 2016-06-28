@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>结构体和联合体</title>
+</head>
+<body>
+<h3>结构体</h3>
+<h4>结构体的概念</h4>
+<p>结构体是一种特殊形态的类，可以有数据成员和函数成员<br>
+    与类的唯一区别是：结构体中成员的缺省访问属性为public</p>
+<h4>声明结构体</h4>
+<p>struct  结构体名称<br>
+    {<br>
+    &nbsp;&nbsp;公有成员<br>
+    protected: <br>
+    &nbsp; &nbsp;保护成员<br>
+    private: <br>
+    &nbsp; &nbsp;私有成员 <br>
+    };</p>
+
+<h4>举例：</h4>
+<p>struct student   //学生信息结构体<br>
+    {<br>
+    &nbsp; &nbsp;int num;  //学号<br>
+    &nbsp; &nbsp;char name[20];  //姓名<br>
+    &nbsp; &nbsp;char gender;  //性别<br>
+    &nbsp; &nbsp;int age;  //年龄<br>
+    &nbsp; &nbsp;float score;  //成绩<br>
+    &nbsp; &nbsp;char addr[30];  //住址<br>
+    }</p>
+<h4>结构变量说明 </h4>
+<p>结构名  结构变量名；</p>
+<h4>注意：</h4>
+<p>结构变量的存储类型概念、它的寿命、可见性及使用范围与普通变量完全一致。<br>
+    结构变量说明在结构类型声明之后，二者也可同时进行。<br>
+    结构变量占内存大小可用 sizeof 运算求出：<br>
+    sizeof(运算量)</p>
+<h4>结构变量的初始化和使用 </h4>
+<p>初始化：说明结构变量的同时可以直接设置初值。 <br>
+    结构体成员的引用形式：结构变量名. 成员名 </p>
+
+<h3>联合体</h3>
+<p>联合体是一种特殊形态的类<br>
+    默认访问属性是public<br>
+    联合体的全部数据成员共享同一组内存单元</p>
+<h4>声明形式：</h4>
+<p>union 联合名<br>
+    {<br>
+    &nbsp; &nbsp;数据类型   成员名 1；<br>
+    &nbsp; &nbsp;数据类型   成员名 2；<br>
+    &nbsp; &nbsp;……；<br>
+    &nbsp; &nbsp;数据类型   成员名 n； <br>
+    };</p>
+<h4>联合体类型变量说明的语法形式</h4>
+<p>联合名  联合变量名；</p>
+<h4>引用形式：</h4>
+<p>联合名. 成员名</p>
+<h4>例：</h4>
+<p>union Mark <br>
+    {char  grade; <br>
+    &nbsp; &nbsp;bool  pass; <br>
+    &nbsp; &nbsp;int percent; <br>
+    }; </p>
+<h4>无名联合</h4>
+<p>无名联合没有标记名，只是声明一个成员项的集合，这些成员项具有相同的内存地址，可以由成员项的名字直接访问。</p>
+<h5>例：</h5>
+<p>union<br>
+    {int i; <br>
+    &nbsp;float f; <br>
+    }</p>
+<p>在程序中可以这样使用：<br>
+    i=10; <br>
+    f=2.2;</p>
+</body>
+</html>

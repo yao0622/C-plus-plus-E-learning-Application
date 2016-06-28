@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bookTittleList">
+        <item>C++课程简介</item>
+        <item>教学大纲</item>
+
+        <item>第一章 概述</item>
+        <item>计算机程序设计语言的发展</item>
+        <item>面向对象的方法</item>
+        <item>面向对象的软件开发</item>
+        <item>程序开发的基本概念</item>
+
+        <item>第二章 C＋＋简单程序设计</item>
+        <item>C++语言概述</item>
+        <item>基本数据类型和表达式</item>
+        <item>数据的输入与输出</item>
+        <item>算法的基本控制结构</item>
+        <item>自定义数据类型</item>
+
+        <item>第三章 函数</item>
+        <item>函数的定义与使用</item>
+        <item>内联函数</item>
+        <item>带默认形参值的函数</item>
+        <item>函数重载</item>
+        <item>C++系统函数</item>
+
+        <item>第四章 类与对象</item>
+        <item>面向对象程序设计的基本特点</item>
+        <item>类和对象</item>
+        <item>构造函数和析构函数</item>
+        <item>类的组合</item>
+        <item>UML图形标识</item>
+        <item>结构体和联合体</item>
+
+
+        <item>第五章 数据的共享与保护</item>
+        <item>标识符的作用域与可见性</item>
+        <item>对象的生存期</item>
+        <item>类的静态成员</item>
+        <item>类的友元</item>
+        <item>共享数据的保护</item>
+        <item>多文件结构和和编译预处理命令</item>
+
+        <item>第六章 数组、指针与字符串</item>
+        <item>数组</item>
+        <item>指针</item>
+        <item>动态内存分配</item>
+        <item>用vector创建数组对象</item>
+        <item>深复制与浅复制</item>
+        <item>字符串</item>
+
+
+        <item>第七章 继承与派生</item>
+        <item>类的继承与派生</item>
+        <item>访问控制</item>
+        <item>类型兼容规则</item>
+        <item>派生类的构造和析构函数</item>
+        <item>派生类成员的标识与访问</item>
+
+        <item>第八章 多态性与模板</item>
+        <item>多态性概述</item>
+        <item>运算符重载</item>
+        <item>虚函数</item>
+        <item>纯虚函数与抽象类</item>
+        <item>函数模板与类模板</item>
+
+        <item>第九章 流类库与输入/输出</item>
+        <item>I/O流的概念及流类库结构</item>
+        <item>输出流</item>
+        <item>输入流</item>
+        <item>输入/输出流</item>
+
+        <item>第十章 异常处理</item>
+        <item>异常处理的基本思想</item>
+        <item>C＋＋异常处理的实现</item>
+        <item>异常处理中的构造与析构</item>
+    </string-array>
+
+    <string-array name="experimentList">
+        <item>实验大纲</item>
+        <item>熟悉实验环境</item>
+        <item>表达式</item>
+        <item>简单程序设计</item>
+        <item>基本控制流程</item>
+        <item>简单函数</item>
+        <item>函数</item>
+        <item>类和对象</item>
+        <item>数据的共享与保护</item>
+        <item>数组、指针与字符串</item>
+
+
+    </string-array>
+
+    <string-array name="videoTittleList">
+        <item>01Cplusplus语言与OO思想介绍</item>
+        <item>02从一个小程序说起（1）</item>
+        <item>03从一个小程序说起（2）</item>
+        <item>04从另一个小程序接着说</item>
+        <item>05输出输入小结</item>
+        <item>06函数的重载</item>
+        <item>07复杂的数据类型(1)</item>
+        <item>08复杂的数据类型(2)-指针</item>
+        <item>09复杂的数据类型(3)_指针02</item>
+        <item>10复杂的数据类型(4)_指针和数组</item>
+        <item>11复杂的数据类型(5)_对象的基础：结构</item>
+        <item>12传值、传址和传引用</item>
+        <item>13联合、枚举和类型别名</item>
+        <item>14(1)给大家介绍对象</item>
+        <item>14(2)闭门造车</item>
+        <item>15构造器和析构器讲解</item>
+        <item>16this指针和类的继承</item>
+        <item>17继承机制中的构造器和析构器</item>
+        <item>18访问控制</item>
+        <item>19覆盖方法和重载方法</item>
+        <item>20一种特殊的友情</item>
+        <item>21静态属性和静态方法1</item>
+        <item>22静态属性和静态方法2</item>
+        <item>23虚方法</item>
+        <item>24抽象方法</item>
+        <item>25运算符重载1</item>
+        <item>26运算符重载2</item>
+        <item>27重载《操作符</item>
+        <item>28多继承</item>
+        <item>29虚继承</item>
+        <item>30错误处理和调试1</item>
+        <item>31错误处理和调试2</item>
+        <item>32assert函数和捕获异常</item>
+        <item>33动态内存管理</item>
+        <item>34动态数组</item>
+        <item>35从函数或方法返回内存</item>
+        <item>36副本构造器</item>
+        <item>37高级强制类型转换</item>
+        <item>38避免内存泄漏</item>
+        <item>39命名空间和模块化编程1</item>
+        <item>40命名空间和模块化编程2</item>
+        <item>41命名空间和模块化编程3</item>
+        <item>42链接和作用域1</item>
+        <item>43链接和作用域2</item>
+        <item>44函数模板</item>
+        <item>45类模板</item>
+        <item>46内联模板</item>
+        <item>47容器和算法1</item>
+        <item>48容器和算法2</item>
+    </string-array>
+
+    <string-array name="pptTittleList">
+        <item>第一章 C++程序设计引言</item>
+        <item>第二章 C++简单程序设计</item>
+        <item>第三章 函数</item>
+        <item>第四章 类与对象</item>
+        <item>第五章 数据的共享与保护</item>
+        <item>第六章 数组指针与字符串</item>
+        <item>第七章 继承与派生</item>
+        <item>第八章 多态性</item>
+        <item>第九章 群体类和群体数据的组织</item>
+        <item>第十章 C++标准模板库</item>
+        <item>第十一章 流类库与输入/输出</item>
+        <item>第十二章 异常处理</item>
+        <item>第十三章 MFC库与Windows程序开发概述</item>
+        <item>作业一</item>
+        <item>作业二</item>
+        <item>作业三</item>
+        <item>C++程序设计实验</item>
+        <item>C++分组大作业</item>
+        <item>C++实验指导书</item>
+    </string-array>
+
+</resources>

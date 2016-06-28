@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.yaofa.client">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".Login"
+            android:label="@string/login">
+        </activity>
+        <activity android:name=".Register"
+            android:label="@string/register">
+        </activity>
+        <activity android:name=".Main"
+            android:label="主菜单">
+        </activity>
+        <activity android:name=".BookList"
+            android:label="@string/mainBook">
+        </activity>
+        <activity android:name=".Book"
+            android:label="大纲显示界面">
+        </activity>
+        <activity android:name=".VideoList"
+            android:label="小甲鱼视频列表">
+        </activity>
+        <activity android:name=".Video"
+            android:screenOrientation="landscape"
+            android:label="视频显示界面">
+        </activity>
+        <activity android:name=".ExamShow"
+            android:label="在线测试">
+        </activity>
+        <activity android:name=".PptList"
+            android:label="ppt下载列表">
+        </activity>
+        <activity android:name=".ExperimentList"
+            android:label="实验大纲列表">
+        </activity>
+        <activity android:name=".Experiment"
+            android:label="实验显示界面列表">
+        </activity>
+        <activity android:name=".ResList"
+            android:label="资源列表">
+        </activity>
+    </application>
+
+
+    <!-- 允许应用程序获取网络信息状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 授权访问网络 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 在SD卡中创建与删除文件的权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!-- 向SD卡写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 允许SD卡读数据 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+</manifest>

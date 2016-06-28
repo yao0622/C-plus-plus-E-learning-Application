@@ -1,0 +1,191 @@
+<html>
+<head>
+    <title>基本控制结构</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<h2>基本控制结构</h2>
+<h3>例1</h3>
+<p>输入一个年份，判断是否闰年。<br>
+    #include &lt;iostream> <br>
+    using namespace std; <br>
+    int main(void) <br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;int year; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;  bool IsLeapYear; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;   cout << "Enter the year: ";<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;   cin >> year; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;IsLeapYear = ((year % 4 == 0 &&<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;  year % 100 != 0)||(year % 400 == 0)); <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;   if (IsLeapYear) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   cout <&lt; year << " is a leap year"<&lt; endl; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;else <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  cout <&lt; year << " is not a leap year"<&lt; endl; <br>
+    } </p>
+<p>运行结果：<br>
+    Enter the year: 2000 <br>
+    2000 is a leap year </p>
+
+
+<h3>例2</h3>
+<p>输入两个整数，比较两个数的大小。 <br>
+    #include&nbsp;&lt;iostream><br>
+    using namespace std; <br>
+    int main()<br>
+    {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;    int x,y; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;    cout<<"Enter x and y:"; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;    cin>>x>>y; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;    if (x!=y) <br>
+    &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;        if (x>y) <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;    cout<<"x>y"<&lt;endl; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;        else<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;      cout<<"x&lt;y"<&lt;endl; <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;    else<br>
+    &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;        cout<<"x=y"<&lt;endl; <br>
+    }</p>
+<p>运行结果1：<br>
+    Enter x and y:5 8<br>
+    x&lt;y</p>
+
+<p>运行结果2：<br>
+    Enter x and y:8 8<br>
+    x=y</p>
+<p>运行结果3：<br>
+    Enter x and y:12 8<br>
+    x>y</p>
+
+
+<h3>例3</h3>
+<p>输入一个0~6的整数，转换成星期输出。<br>
+    #include &nbsp;&lt;iostream><br>
+    using namespace std; <br>
+    int main(void) <br>
+    {&nbsp;int day; <br>
+    &nbsp; &nbsp;cin >> day; <br>
+    &nbsp; &nbsp;switch (day) <br>
+    &nbsp; &nbsp;{	<br>
+    &nbsp; &nbsp; &nbsp; &nbsp;case 0: &nbsp;cout << "Sunday" <&lt; endl; &nbsp;break; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;case 1: &nbsp;cout << "Monday" <&lt; endl; &nbsp;break; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;case 2: &nbsp;cout << "Tuesday" <&lt; endl; &nbsp;break; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;case 3: &nbsp;cout << "Wednesday" <&lt; endl; &nbsp;break; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;case 4: &nbsp;cout << "Thursday" <&lt; endl; &nbsp;break; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;case 5: &nbsp;cout << "Friday" <&lt; endl; &nbsp; break; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;case 6: &nbsp;cout << "Saturday" <&lt; endl; &nbsp; break; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;default: &nbsp; cout << "Day out of range Sunday .. Saturday" <&lt; endl; &nbsp;break; <br>
+    &nbsp; &nbsp; }<br>
+    } </p>
+
+<h3>例4</h3>
+<p>求自然数1~10之和<br>
+    分析：本题需要用累加算法，累加过程是一个循环过程，可以用while语句实现。<br>
+    #include&nbsp;&lt;iostream><br>
+    using namespace std; <br>
+    int main()<br>
+    {<br>
+    &nbsp; &nbsp;   int i(1), sum(0); <br>
+    &nbsp; &nbsp;   while(i<=10) <br>
+    &nbsp; &nbsp;   {<br>
+    &nbsp; &nbsp; &nbsp; &nbsp;       sum+=i;  //相当于sum=sum+i; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;       i++;<br>
+    &nbsp; &nbsp;   }<br>
+    &nbsp; &nbsp;   cout<<"sum="<&lt;sum<&lt;endl; <br>
+    }</p>
+<p>运行结果：<br>
+    sum=55 </p>
+
+<h3>例5</h3>
+<p>    输入一个整数，将各位数字反转后输出。<br>
+    #include &nbsp;&lt;iostream> <br>
+    using namespace std; <br>
+    int main(void) <br>
+    {<br>
+    &nbsp; &nbsp; int n, right_digit; <br>
+    &nbsp; &nbsp; cout << "Enter the number: ";<br>
+    &nbsp; &nbsp; cin >> n; <br>
+    &nbsp; &nbsp; cout << "The number in reverse order is  ";<br>
+    &nbsp; &nbsp; do<br>
+    &nbsp; &nbsp; {<br>
+    &nbsp; &nbsp; &nbsp; &nbsp; right_digit = n % 10; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp; cout <&lt; right_digit; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp; n /= 10;  //相当于n=n/10 <br>
+    &nbsp; &nbsp; } <br>
+    &nbsp; &nbsp; while (n != 0); <br>
+    &nbsp; &nbsp; cout<&lt;endl;		<br>
+    } </p>
+<p>运行结果：<br>
+    Enter the number: 365<br>
+    The number in reverse order is  563</p>
+
+<h3>例6</h3>
+<p>输入一个整数，求出它的所有因子。<br>
+    #include &lt;iostream> <br>
+    using namespace std; <br>
+    int main(void) <br>
+    { <br>
+    &nbsp; &nbsp;int n, k; <br>
+    &nbsp; &nbsp;cout << "Enter a positive integer: ";<br>
+    &nbsp; &nbsp;cin >> n; <br>
+    &nbsp; &nbsp;cout << "Number&nbsp; &nbsp;" <&lt; n << "&nbsp; &nbsp; &nbsp; Factors&nbsp; &nbsp;";<br>
+    &nbsp; &nbsp;for (k=1; k <= n; k++)<br>
+    &nbsp; &nbsp; &nbsp; &nbsp;if (n % k == 0) <br>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cout <&lt; k << "&nbsp; &nbsp;";<br>
+    &nbsp; &nbsp;cout <&lt; endl; <br>
+    } </p>
+<p>运行结果1： <br>
+    Enter a positive integer: 36<br>
+    Number&nbsp; &nbsp;36&nbsp; &nbsp; &nbsp;Factors&nbsp; &nbsp;1&nbsp; &nbsp;2&nbsp; &nbsp;3&nbsp; &nbsp;4&nbsp; &nbsp;6&nbsp; &nbsp;9&nbsp; &nbsp;12&nbsp; &nbsp;18&nbsp; &nbsp;36  </p>
+<p>运行结果2：<br>
+    Enter a positive integer: 7<br>
+    Number&nbsp; &nbsp;7&nbsp; &nbsp; &nbsp;Factors&nbsp; &nbsp;1&nbsp; &nbsp;7</p>
+
+<h3>例7</h3>
+<p>读入一系列整数，统计出正整数个数i和负整数个数j,读入0则结束。<br>
+    分析：<br>
+    需要读入一系列整数，但是整数个数不定，要在每次读入之后进行判断，因此使用while循环最为合适。循环控制条件应该是n!=0。由于要判断数的正负并分别进行统计，所以需要在循环内部嵌入选择结构。</p>
+<p>#include&nbsp;&lt;iostream><br>
+    using namespace std; <br>
+    int main()<br>
+    {&nbsp;int&nbsp; i=0, j=0, n; <br>
+    &nbsp; &nbsp;cout<<"请输入若干整数(输入0则结束)：";<br>
+    &nbsp; &nbsp;cin>>n; <br>
+    &nbsp; &nbsp;while(  n!=0  ) <br>
+    &nbsp; &nbsp;{ &nbsp; if(n>0) i++;<br>
+    &nbsp; &nbsp; &nbsp; &nbsp;if(n<0) j++;<br>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;cin>>n    ; <br>
+    &nbsp; &nbsp;}<br>
+    &nbsp; &nbsp;cout<<"正整数个数："<&lt;i<<"&nbsp; &nbsp; &nbsp;负整数个数："<&lt;j<&lt;endl; <br>
+    }</p>
+
+<h3>例8</h3>
+<p>设某次体育比赛的结果有四种可能：胜（win）、负（lose）、平局（tie）、比赛取消（cancel），编写程序顺序输出这四种情况。<br>
+    分析：由于比赛结果只有四种可能，所以可以声明一个枚举类型，声明一个枚举类型的变量来存放比赛结果。</p>
+<p>#include &lt;iostream><br>
+    using namespace std; <br>
+    enum game_result {WIN, LOSE, TIE, CANCEL};<br>
+    int main()<br>
+    {&nbsp;game_result result; <br>
+    &nbsp; &nbsp;   enum game_result omit = CANCEL; <br>
+    &nbsp; &nbsp;int count; <br>
+    &nbsp; &nbsp;   for (count = WIN ; count <= CANCEL ; count++) <br>
+    &nbsp; &nbsp;   {&nbsp; result = (game_result)count; <br>
+    &nbsp; &nbsp; &nbsp;      if (result == omit) <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;      {&nbsp;   cout << "The game was cancelled\n";      }<br>
+    &nbsp; &nbsp; &nbsp;      else <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;   {&nbsp; cout << "The&nbsp;game&nbsp; was&nbsp; played ";<br>
+    &nbsp; &nbsp; &nbsp; &nbsp;  if (result == WIN) &nbsp; &nbsp;  cout << "and&nbsp; we &nbsp;won!"; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;  if (result == LOSE) &nbsp; &nbsp; cout << "and &nbsp;we &nbsp;lost."; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;  cout << "\n";<br>
+    &nbsp; &nbsp; &nbsp; &nbsp; }<br>
+    &nbsp; &nbsp;  }<br>
+    &nbsp; &nbsp;  return 0; <br>
+    }</p>
+<p>运行结果<br>
+    The game was played and we won! <br>
+    The game was played and we lost. <br>
+    The game was played<br>
+    The game was cancelled</p>
+</body>
+</html>

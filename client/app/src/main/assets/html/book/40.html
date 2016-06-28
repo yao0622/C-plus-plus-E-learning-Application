@@ -1,0 +1,57 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>字符串</title>
+</head>
+<body>
+<p>C++的基本类型中没有字符串变量，可以利用字符数组和标准库中预定义的string类来处理字符串<br>
+    &nbsp;&nbsp;（1）用字符数组存储和处理字符串 <br>
+    &nbsp;&nbsp;字符串在内存中是按串中字符的排列次序顺序存放的，每个字符占一个字节，末尾加“\0”。<br>
+    &nbsp;&nbsp;字符串常量就是一个char型数组的首地址，可以将字符串常量赋给指向常量的指针。例如：const char *STRING = “This is a string”;<br>
+    &nbsp;&nbsp;字符串变量的存储方式类似，由程序员创建的字符数组存储，但是要注意字符数组的长度应该>=（字符串长度+1）；<br>
+    &nbsp;&nbsp;用字符数组表示字符串的缺点 <br>
+    &nbsp;&nbsp;?执行连接、拷贝、比较等操作，都需要显式调用库函数，很麻烦 <br>
+    &nbsp;&nbsp;?当字符串长度很不确定时，需要用new动态创建字符数组，最后要用delete释放，很繁琐 <br>
+    &nbsp;&nbsp;?字符串实际长度大于为它分配的空间时，会产生数组下标越界的错误 <br>
+    &nbsp;&nbsp;（2）string类
+    &nbsp;&nbsp;为了克服字符数组的缺点，C++预定义了string类，它提供了对字符串进行处理所需要的操作，使用string类要包含头文件string，string类封装了串的属性并提供了一系列允许访问这些属性的函数。<br>
+    &nbsp;&nbsp;String类中的构造函数、几个常用的成员函数和操作：<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;常用构造函数 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?string(); //缺省构造函数，建立一个长度为0的串<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?string(const char *s);  //用指针s所指向的字符串常量初始化string类的对象 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?string(const string& rhs);  //拷贝构造函数 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;例： <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?string s1;	  //建立一个空字符串 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?string s2 = “abc”; //用常量建立一个初值为”abc”的字符串 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?string s3 = s2;	  //执行拷贝构造函数，用s2的值作为s3的初值<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;常用操作符 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s + t&nbsp;&nbsp;将串s和t连接成一个新串<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s = t&nbsp;&nbsp;用t更新s<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s == t&nbsp;&nbsp;判断s与t是否相等<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s != t&nbsp;&nbsp;判断s与t是否不等<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s < t&nbsp;&nbsp;判断s是否小于t（按字典顺序比较） <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s <= t&nbsp;&nbsp;判断s是否小于或等于t （按字典顺序比较） <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s > t&nbsp;&nbsp;判断s是否大于t （按字典顺序比较） <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s >= t&nbsp;&nbsp;判断s是否大于或等于t （按字典顺序比较） <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?s[i]&nbsp;&nbsp;访问串中下标为i的字符 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;例： <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?string s1 = “abc”, s2 = “def”;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?string s3 = s1 + s2;	//结果是”abcdef”<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?bool s4 = (s1 < s2);	//结果是true<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?char s5 = s2[1];	//结果是’e’ <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;常用成员函数<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;string append （const char *s）;//将字符串s添加在本串尾<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;string assign （const char *s）;//赋值，将s所指向的字符串赋给本对象<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;int compare （const string &str）const;//比较本串与str串的大小，当本串<str串时，//返回负数；当本串>str串时，返回正数；当本串=str串时，返回0；</p>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;输入整行字符串 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?用cin的>>操作符输入字符串，会以空格作为分隔符，空格后的内容会在下一回输入时被读取 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?用string头文件中的getline可以输入整行字符串，例如： <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getline(cin, s2);<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;以其它字符作为分隔符输入字符串 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?输入字符串时，可以使用其它分隔符作为字符串结束的标志（例如逗号、分号）<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?把分隔符作为getline的第3个参数即可，例如： <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;getline(cin, s2, ','); </p>
+<p>&nbsp;</p>
+</body>
+</html>

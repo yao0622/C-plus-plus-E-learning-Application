@@ -1,0 +1,111 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>类和对象</title>
+</head>
+<body>
+<h3>c++中的类</h3>
+<p>类是具有相同属性和行为的一组对象的集合，它为属于该类的全部对象提供了统一的抽象描述，其内部包括属性和行为两个主要部分。</p>
+<p>利用类可以实现数据的封装、隐藏、继承与派生。</p>
+<p>利用类易于编写大型复杂程序，其模块化程度比C中采用函数更高。</p>
+<h4>类的声明形式</h4>
+<p>类是一种用户自定义类型，声明形式：</p>
+<p>class 类名称<br>
+    { <br>
+    &nbsp;public: <br>
+    &nbsp; &nbsp;公有成员（外部接口）<br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;私有成员 <br>
+    &nbsp;protected: <br>
+    &nbsp; &nbsp;保护型成员 <br>
+    } </p>
+<h4>公有类型成员</h4>
+<p>在关键字public后面声明，它们是类与外部的接口，任何外部函数都可以访问公有类型数据和函数。 </p>
+<h4>私有类型成员</h4>
+<p>在关键字private后面声明，只允许本类中的函数访问，而类外部的任何函数都不能访问。</p>
+<p>如果紧跟在类名称的后面声明私有成员，则关键字private可以省略。 </p>
+<h4>保护类型</h4>
+<p>与private类似，其差别表现在继承与派生时对派生类的影响不同，第七章讲。</p>
+
+<h4>举例：钟表类</h4>
+<p>class  Clock<br>
+    {<br>
+    &nbsp; public: <br>
+    &nbsp; &nbsp;  void SetTime(int NewH, int NewM, int NewS); <br>
+    &nbsp; &nbsp; void ShowTime();<br>
+    &nbsp; private: <br>
+    &nbsp; &nbsp; int Hour, Minute, Second; <br>
+    };</p>
+<p>void Clock :: SetTime(int NewH, int NewM, int NewS) <br>
+    {<br>
+    &nbsp; &nbsp; Hour=NewH; <br>
+    &nbsp; &nbsp; Minute=NewM; <br>
+    &nbsp; &nbsp; Second=NewS; <br>
+    }</p>
+<p>void Clock :: ShowTime()<br>
+    {<br>
+    &nbsp; &nbsp; cout<&lt;Hour<<":"<&lt;Minute<<":"<&lt;Second; <br>
+    }</p>
+
+<h4>成员数据</h4>
+<p>与一般的变量声明相同，但需要将它放在类的声明体中。</p>
+<h4>成员函数</h4>
+<p>在类中说明原形，可以在类外给出函数体实现，并在函数名前使用类名加以限定。也可以直接在类中给出函数体，形成内联成员函数。<br>
+    允许声明重载函数和带默认形参值的函数。</p>
+<h4>内联成员函数</h4>
+<p>为了提高运行时的效率，对于较简单的函数可以声明为内联形式。<br>
+    内联函数体中不要有复杂结构（如循环语句和switch语句）。</p>
+<h4>在类中声明内联成员函数的方式：</h4>
+<p>方式一：将函数体放在类的声明中。</p>
+<p>方式二：使用inline关键字。</p>
+
+<h4>内联成员函数举例（1）</h4>
+<p>class Point<br>
+    {<br>
+    &nbsp; public: <br>
+    &nbsp; &nbsp; void Init(int initX,int initY) <br>
+    &nbsp; &nbsp; {<br>
+    &nbsp; &nbsp; &nbsp; X=initX; <br>
+    &nbsp; &nbsp; &nbsp; Y=initY; <br>
+    &nbsp; &nbsp; }<br>
+    &nbsp; &nbsp; int GetX() {return X;} <br>
+    &nbsp; &nbsp; int GetY() {return Y;} <br>
+    &nbsp; private: <br>
+    &nbsp; &nbsp; int X,Y; <br>
+    };</p>
+<h4>内联成员函数举例（2）</h4>
+<p>class Point<br>
+    {<br>
+    &nbsp;public: <br>
+    &nbsp; &nbsp;void Init(int initX,int initY); <br>
+    &nbsp; &nbsp;int GetX()； <br>
+    &nbsp; &nbsp;int GetY()；<br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;int X,Y; <br>
+    }; </p>
+<p>inline void Point::Init(int initX,int initY) <br>
+    {<br>
+    &nbsp; &nbsp;X=initX; <br>
+    &nbsp; &nbsp;Y=initY; <br>
+    }<br>
+    inline int Point::GetX()<br>
+    {<br>
+    &nbsp; &nbsp;return X; <br>
+    }<br>
+    inline int Point::GetY()<br>
+    {<br>
+    &nbsp; &nbsp;return Y; <br>
+    }</p>
+
+<h3>对象</h3>
+<p>类的对象是该类的某一特定实体，即类类型的变量。</p>
+<h4>声明形式：</h4>
+<p>类名     对象名；</p>
+<h4>例：</h4>
+<p>Clock  myClock;</p>
+
+<h3>类中成员的访问方式</h3>
+<p>类中成员互访：:直接使用成员名</p>
+<p>类外访问：使用“对象名.成员名”方式访问 public 属性的成员</p>
+</body>
+</html>

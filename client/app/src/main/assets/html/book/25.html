@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>UML图形标识</title>
+</head>
+<body>
+<h3>UML简介</h3>
+<p>UML语言（统一建模语言）是一种可视化的的面向对象建模语言。</p>
+<h4>UML的重要内容是各种类型的图形：</h4>
+<p>软件模型的静态结构<br>
+    软件模型的动态行为<br>
+    模块组织和管理</p>
+<h4>UML中的9种图</h4>
+<p>类图（Class diagram）<br>
+    对象图（Object diagram）<br>
+    用例图（Use case diagram）<br>
+    顺序图（Sequence diagram）<br>
+    协作图（Collaboration diagram）<br>
+    状态图（Statechart diagram）<br>
+    活动图（Activity diagram）<br>
+    组件图（Compomnent diagram）<br>
+    实施图（Deployment diagram）</p>
+
+<h3>类图</h3>
+<h4>举例：Clock类的完整表示</h4>
+<img src=images/classgraph1.jpg width=300>
+<h4>Clock类的简洁表示</h4>
+<img src=images/classgraph2.jpg width=220>
+<h4>类成员表示方法</h4>
+<h5>数据成员：</h5>
+<p>[访问控制属性] 名称 [重数][: 类型][-默认值][{约束特征}]</p>
+<p>访问控制属性：<br>
+    +（public），-（private），#（protected）</p>
+<p>例如：<br>
+    -hour: int<br>
+    +size: area = (100, 100)<br>
+<h5>函数成员：</h5>
+<p>[访问控制属性] 名称 [(参数表)][: 返回类型][{约束特性}]</p>
+<p>例如：<br>
+    +setTime(newH: int=0, newM: int=0, newS: int=0): void</p>
+<h3>对象图</h3>
+<img src=images/objectgraph.jpg width=300>
+
+<h3>几种关系的图形标识</h3>
+<h4>依赖关系：一个事物的变化可能会影响到另一个事物</h4>
+<img src=images/dependency.jpg width=300>
+
+<p>图中的“类A”是源，“类B”是目标，表示“类A”使用了“类B”，或称“类A”依赖“类B”
+    几种关系的图形标识</p>
+<h4>作用关系??关联：两个类的对象之间相互作用</h4>
+<img src=images/association.jpg width=300>
+<p>图中的“重数A”决定了类B的每个对象与类A的多少个对象发生作用，同样“重数B”决定了类A的每个对象与类B的多少个对象发生作用。</p>
+<h4>包含关系??聚集和组合</h4>
+<img src=images/aggregation.jpg width=320>
+<p>聚集表示类之间的关系是整体与部分的关系，“包含”、“组成”、“分为……部分”等都是聚集关系。</p>
+<p>共享聚集：部分可以参加多个整体<br>
+    组合：部分与整体共存，整体不存在了，部分也随之消失</p>
+<h4>继承关系??泛化</h4>
+<img src=images/general.jpg width=300>
+
+<h3>注释</h3>
+<p>在UML图形上，注释表示为带有褶角的矩形，然后用虚线连接到UML的其他元素上，它是一种用于在图中附加文字注释的机制。</p>
+<img src=images/commend.jpg width=160>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<html xmlns:o="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>流类库与输入/输出</title>
+</head>
+<body>
+<img src="images/knowlege-9.jpg" width="448" height="172" />
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><b><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>理论目标</span></b></p>
+
+    <p class=MsoNormal align=left style='margin-bottom:13.5pt;text-align:left;
+line-height:13.5pt'><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:#333333'>C++</span><span style='font-family:"微软雅黑","sans-serif";
+color:#333333'>标准库中有一个面向对象的输入输出软件包，即<span lang=EN-US>I/O</span>流类库。流是<span
+            lang=EN-US>I/O</span>流的中心概念。在<span lang=EN-US>C++</span>中数据的输入输出就是通过<span
+            lang=EN-US>I/O</span>流实现的。</span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>当程序与外界环境进行信息交换时，存在着两个对象，一个是程序中的对象，另一个是文件对象。流是一种抽象，它负责在数据的生产者和数据的消费者之间建立联系，并管理数据的流动。</span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>程序建立一个流对象，并指定这个流对象与某个文件对象建立连接，程序操作流对象，流对象通过文件系统对所连接的文件对象产生作用。读操作在流数据抽象中被称为（从流中）提取，写操作被称为（向流中）插入。</span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><b><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>本章的主要学习目标包括</span></b><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>： </span></p>
+
+    <p class=MsoListParagraph align=left style='margin-left:21.0pt;text-align:left;
+text-indent:-21.0pt;line-height:13.5pt'><span lang=EN-US style='font-family:
+Wingdings;color:#333333'>l<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>理解<span lang=EN-US>I/O</span>流的概念，及流类库结构。理解提取，插入的概念，掌握流所涉及的范围；了解<span
+            lang=EN-US>I/O</span>类库中的各种类名及其功能。</span></p>
+
+    <p class=MsoNormal style='margin-left:21.0pt;text-indent:-21.0pt'><span
+            lang=EN-US style='font-family:Wingdings;color:black'>l<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"微软雅黑","sans-serif";color:black'>掌握输入输出的格式控制和<span
+            lang=EN-US>ios</span>成员函数。了解<span lang=EN-US>ostream</span>，<span lang=EN-US>ofstream</span>和<span
+            lang=EN-US>ostringstream</span>的用法；掌握常用的输出流成员函数；掌握输入流相关运算符和函数。</span></p>
+
+    <p class=MsoNormal style='margin-left:21.0pt;text-indent:-21.0pt'><span
+            lang=EN-US style='font-family:Wingdings;color:black'>l<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"微软雅黑","sans-serif";color:black'>掌握输入输出流运算符的重载。理解重载的原因，掌握重载的的形式。</span></p>
+
+    <p class=MsoNormal style='margin-left:21.0pt;text-indent:-21.0pt'><span
+            lang=EN-US style='font-family:Wingdings;color:black'>l<span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></span><span style='font-family:"微软雅黑","sans-serif";color:black'>理解文件流的特点。掌握文件流的打开关闭及读写操作，掌握文件指针的应用。</span></p>
+
+    <p class=MsoListParagraph align=left style='text-align:left;text-indent:0cm;
+line-height:13.5pt'><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:#333333'>&nbsp;</span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><b><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>实践目标</span></b></p>
+
+    <p class=MsoListParagraph align=left style='margin-left:21.0pt;text-align:left;
+text-indent:-21.0pt;line-height:13.5pt'><span lang=EN-US style='font-family:
+Wingdings;color:#333333'>l<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>熟练掌握流的定义、输入输出方法；</span></p>
+
+    <p class=MsoListParagraph align=left style='margin-left:21.0pt;text-align:left;
+text-indent:-21.0pt;line-height:13.5pt'><span lang=EN-US style='font-family:
+Wingdings;color:#333333'>l<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>熟练掌握输入输出函数的使用方法；</span></p>
+
+    <p class=MsoListParagraph align=left style='margin-left:21.0pt;text-align:left;
+text-indent:-21.0pt;line-height:13.5pt'><span lang=EN-US style='font-family:
+Wingdings;color:#333333'>l<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>掌握文件流的使用；</span></p>
+
+    <p class=MsoListParagraph align=left style='margin-left:21.0pt;text-align:left;
+text-indent:-21.0pt;line-height:13.5pt'><span lang=EN-US style='font-family:
+Wingdings;color:#333333'>l<span style='font:7.0pt "Times New Roman"'>&nbsp; </span></span><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>学会使用<span lang=EN-US>I/O</span>流类库实现文件输入<span
+            lang=EN-US>/</span>输出及格式控制。</span></p>
+
+    <p class=MsoListParagraph align=left style='margin-left:21.0pt;text-align:left;
+text-indent:0cm;line-height:13.5pt'><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:#333333'>&nbsp;</span></p>
+</div>
+
+div class=WordSection1 style='layout-grid:15.6pt'>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan;mso-outline-level:3'><b><span style='mso-bidi-font-size:
+10.5pt;font-family:"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:black;
+mso-font-kerning:0pt'>知识点：<span lang=EN-US><o:p></o:p></span></span></b></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>1</span>）流和流类库的概念与定义（包括：<span lang=EN-US>I/O</span>流，流类库的结构和使用）<span
+        lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>2</span>）<span lang=EN-US>I/O</span>流类库（包括：输入流类、输出流类、输入输出流类、流缓冲区类）<span
+        lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>3</span>）重要的输出流（包括：<span class=SpellE><span lang=EN-US>cout</span></span>、<span
+        class=SpellE><span lang=EN-US>cerr</span></span>、<span lang=EN-US>clog</span>）<span
+        lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>4</span>）重要的输入流类（包括：<span class=SpellE><span lang=EN-US>istream</span></span>、<span
+        class=SpellE><span lang=EN-US>ifstream</span></span>、<span class=SpellE><span
+        lang=EN-US>istringstream</span></span>）<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>5</span>）重要的<span lang=EN-US>I/O</span>流类（包括：<span
+        class=SpellE><span lang=EN-US>fstream</span></span>、<span class=SpellE><span
+        lang=EN-US>stringstream</span></span>）<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>6</span>）输入流的成员函数（包括：<span lang=EN-US>get</span>函数、<span
+        class=SpellE><span lang=EN-US>getline</span></span>函数）<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>7</span>）输入<span lang=EN-US>/</span>输出的格式控制<span
+        lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>8</span>）流运算符的重载<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>9</span>）文件的特点<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>10</span>）文件的打开与关闭<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>11</span>）文件的读写操作（包括：对<span lang=EN-US>ASCII</span>文件的操作和对二进制文件的操作）<span
+        lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>12</span>）文件指针的使用<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan;mso-outline-level:3'><b><span style='mso-bidi-font-size:
+10.5pt;font-family:"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:black;
+mso-font-kerning:0pt'>重点：<span lang=EN-US><o:p></o:p></span></span></b></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>1</span>）重要的输出流<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>2</span>）重要的输入流类<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>3</span>）重要的<span lang=EN-US>I/O</span>流类<span
+        lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>4</span>）输入<span lang=EN-US>/</span>输出流的成员函数<span
+        lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>5</span>）输入<span lang=EN-US>/</span>输出的格式控制<span
+        lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>6</span>）文件指针的使用<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+auto;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan;mso-outline-level:3'><b><span style='mso-bidi-font-size:
+10.5pt;font-family:"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:black;
+mso-font-kerning:0pt'>难点：<span lang=EN-US><o:p></o:p></span></span></b></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>1</span>）理解流的引用<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>2</span>）掌握重要的输出流<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>3</span>）掌握重要的输入流类<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>4</span>）掌握文件的特点及打开和关闭的方法<span lang=EN-US><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=left style='mso-margin-top-alt:auto;margin-bottom:
+13.5pt;text-align:left;line-height:16.0pt;mso-line-height-rule:exactly;
+mso-pagination:widow-orphan'><span style='mso-bidi-font-size:10.5pt;font-family:
+"微软雅黑","sans-serif";mso-bidi-font-family:宋体;color:#333333;mso-font-kerning:
+0pt'>（<span lang=EN-US>5</span>）掌握文件指针的使用 <span lang=EN-US><o:p></o:p></span></span></p>
+
+</div>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif";color:black'>输入<span
+            lang=EN-US>/</span>输出流的概念</span></b></p>
+
+    <p class=MsoNormal style='text-indent:21.0pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif";color:black'>C++</span><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>完全支持<span lang=EN-US>C</span>的输入输出系统，但由于<span
+            lang=EN-US>C</span>的输入输出系统不支持类和对象，所以<span lang=EN-US>C++</span>又提供了自己的输入输出系统，并通过重载运算符“<span
+            lang=EN-US>&lt;&lt;</span>”和“<span lang=EN-US>&gt;&gt;</span>”来支持类和对象的输入输出。<span
+            lang=EN-US>C++</span>的输入输出系统是以字节流的形式实现的。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif";color:black'>C++</span><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>中的流是指数据从一个对象传递到另一个对象的操作。从流中读取数据称为提取操作，向流内添加数据称为插入操作。流在使用前要建立，使用后要删除。如果数据的传递是在设备之间进行，这种流就称为<span
+            lang=EN-US>I/O</span>流。<span lang=EN-US>C++</span>专门内置了一些供用户使用的类，在这些类中封装了可以实现输入输出操作的函数，这些类统称为<span
+            lang=EN-US>I/O</span>流类。流具有方向性：与输入设备相联系的流称为输入流，与输出设备相联系的流称为输出流，与输入输出设备相联系的流称为输入输出流。</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif";color:black'>标准流类对象</span></b></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif";color:black'>C++</span><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>将一些常用的流类对象，如键盘输入、显示器输出、程序运行出错输出、打印机输出等，实现定义并内置在系统中，供用户直接使用。这些系统内置的用于设备间传递数据的对象称为标准流类对象，共有四个：</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>⑴<span lang=EN-US>cin</span>对象与标准输入设备相关联的标准输入流。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>⑵<span lang=EN-US>cout</span>对象与标准输出设备相关联的标准输出流。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>⑶<span lang=EN-US>cerr</span>对象与标准错误输出设备相关联的非缓冲方式的标准输出流。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>⑷<span lang=EN-US>clog</span>对象与标准错误输出设备相关联的缓冲方式的标准输出流。</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif";color:black'>流类库</span></b></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US
+                                                         style='font-family:"微软雅黑","sans-serif";color:black'>C++</span><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>的流类库是用派生方法建立起来的输入输出类库，它有两个平行的基类<span
+            lang=EN-US>streambuf</span>和<span lang=EN-US>ios</span>，其它的流类都是从这两个基类直接或间接派生的。使用这些流类库时，必须包含相应的头文件。</span></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US
+                                                         style='font-family:"微软雅黑","sans-serif";color:black'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:black'>streambuf</span></b><b><span style='font-family:"微软雅黑","sans-serif";
+color:black'>类</span></b></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>带有缓冲区的流类库，其作用是：</span></p>
+
+    <p class=MsoNormal style='text-indent:21.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>⑴提供物理设备的接口、缓冲或处理流的通用方式，几乎不需要任何格式。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>⑵体工队缓冲区的低级操作，如设置缓冲区，对缓冲区指针进行操作，从缓冲区取字符，向缓冲区存储字符等。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>⑶用作流类库中的基类，派生以下三个流类：</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>①<span lang=EN-US>filebuf</span>类</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>使用文件来保存缓冲区中的字符序列。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>②<span lang=EN-US>strstreambuf</span>类</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>扩展类<span lang=EN-US>streambuf</span>的功能，提供在内存进行提取和插入操作的缓冲区管理。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>③<span lang=EN-US>conbuf</span>类</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>扩展类<span lang=EN-US>streambuf</span>的功能，用于处理输出，提供控制光标、设置颜色、定义活动窗口、清屏、清一行等功能，为输出操作提供缓冲区管理。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>该类使用的缓冲区由一个字符序列和输入缓冲区指针与输出缓冲区指针组成，指针指向字符被取出或插入的位置。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>通常情况下，均使用这三个派生类，很少直接使用<span lang=EN-US>streambuf</span>类。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif";color:black'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:black'>ios</span></b></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif";color:black'>ios</span><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>类及其派生类为用户提供了使用流类的接口，它们均由一个指针指向<span
+            lang=EN-US>streambuf</span>类。<span lang=EN-US>ios</span>类及其派生类使用<span
+            lang=EN-US>streambuf</span>及其派生类来完成对错误的格式化输入输出的检查，支持对<span lang=EN-US>streambuf</span>类的缓冲区进行<span
+            lang=EN-US>I/O</span>时的格式化或非格式化转换。</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>流是一个抽象的概念，实际进行<span lang=EN-US>I/O</span>操作时，必须将流与一种具体的物理设备联系起来。例如将流和键盘联系起来，当从该流中提取数据时，就是从键盘输入数据。用户也可以用<span
+            lang=EN-US>istream</span>、<span lang=EN-US>ostream</span>等类声明自己的流对象，例如：</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif";color:black'>Istream is; ostream os;</span></p>
+
+    <p class=MsoNormal style='text-indent:24.0pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>使用流类库的程序，不但可以识别标准的<span lang=EN-US>I/O</span>设备，还可以重载运算符“<span
+            lang=EN-US>&lt;&lt;</span>”和“<span lang=EN-US>&gt;&gt;</span>”，是程序识别用户自定义的类型，从而极大地提高了程序的可靠性和灵活性。</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:black'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif";color:black'>输入输出的格式控制</span></b></p>
+
+    <p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif";color:black'>C++</span><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>仍可使用<span lang=EN-US>C</span>中的<span
+            lang=EN-US>printf()</span>和<span lang=EN-US>scanf()</span>进行格式化控制，同时又提供了两种格式化控制的方法，一是使用<span
+            lang=EN-US>ios</span>类中的有关个是控制的成员函数，而是使用被称为格式控制符的特殊类型的函数。</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif";color:black'>用<span
+            lang=EN-US>ios</span>类的成员函数进行格式控制</span></p>
+
+    <p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>此种成员函数进行格式控制主要是通过对格式状态字、域宽、填充字符和输出精度的操作来完成的。</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:black'>1.</span><span style='font-family:"微软雅黑","sans-serif";color:black'>状态字</span></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>也称状态标志字，其类型为<span lang=EN-US>long int</span>。它是在<span lang=EN-US>ios</span>类的<span
+            lang=EN-US>public</span>部分定义了一个枚举，此枚举类型的每个成员分别定义状态字的一个位，每个位称为状态标志位。</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:black'>2.</span><span style='font-family:"微软雅黑","sans-serif";color:black'>用<span
+            lang=EN-US>ios</span>类的成员函数进行格式控制</span></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US
+                                                         style='font-family:"微软雅黑","sans-serif";color:black'>ios</span><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>类提供了几个用于控制输入输出格式的成员函数，其中的参数<span
+            lang=EN-US>flags</span>是状态控制字，存放在<span lang=EN-US>ios</span>类中的数据成员<span
+            lang=EN-US>long x_flags</span>中。</span></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US
+                                                         style='font-family:"微软雅黑","sans-serif";color:black'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif";color:black'>使用格式控制符进行格式控制</span></b></p>
+
+    <p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>显然，使用成员函数控制输入输出格式时，每个函数的调用都要写一条语句，它们还不能直接嵌入到输入输出语句中，使用很不方便。为此，<span
+            lang=EN-US>C++</span>由提供了另外一种输入输出格式的控制方法，这就是使用称为格式控制符的特殊函数。</span></p>
+
+    <p class=MsoNormal style='text-indent:10.5pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif";color:black'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif";color:black'>用户自定义数据类型的输入输出</span></b></p>
+
+    <p class=MsoNormal style='text-indent:10.5pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>用户自定义数据类型的输入输出，是通过重载运算符“<span lang=EN-US>&lt;&lt;</span>”和“<span
+            lang=EN-US>&gt;&gt;</span>”实现的。</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:black'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif";color:black'>文件的输入输出</span></b></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span style='font-family:"微软雅黑","sans-serif";
+color:black'>文件是一系列字符数据的有序集合，按组织形式可分为文本文件和二进制文件两种。<span lang=EN-US>C++</span>的文件把数据看作是一连串的字符，不考虑纪录的界限，认为它是一个字符流或二进制流，称它为流式文件，增加了处理的灵活性。</span></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US
+                                                         style='font-family:"微软雅黑","sans-serif";color:black'>C++</span><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>中，要进行文件的输入输出，必须先创建一个流，再把这个流与文件相关联，即打开文件，才能进行输入输出操作，完成后要关闭文件。</span></p>
+
+    <p class=MsoNormal style='text-indent:15.75pt'><span lang=EN-US
+                                                         style='font-family:"微软雅黑","sans-serif";color:black'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif";color:black'>文件指针的使用</span></b></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:black'>&nbsp;&nbsp; </span></b><span style='font-family:"微软雅黑","sans-serif";
+color:black'>磁盘文件中有一个用来指示当前位置的文件指针，每读入一个字节，指针就后移一个字节。通过对文件指针的控制，是用户可以随机访问二进制文件中任意位置上的数据。</span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><b><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>宽字符、宽字符串与宽流</span></b></p>
+
+    <p class=MsoNormal align=left style='text-align:left;text-indent:15.75pt;
+line-height:13.5pt'><span style='font-family:"微软雅黑","sans-serif";color:black'>宽字符是<span
+            lang=EN-US>wchar_t</span>类型，</span><span style='font-family:"微软雅黑","sans-serif";
+color:black'>一般占<span lang=EN-US>2</span>个字节，可以直接存下一个汉字。宽字符的文字以“<span
+            lang=EN-US>L”</span>开头。宽字符串是<span lang=EN-US>wstring</span>类型与<span lang=EN-US>string</span>同源。宽流：以宽字符为基本单位的流。宽字符和宽字符串需要通过宽流输入输出，宽流与普通流一一对应，彼此同源。</span></p>
+</div>
+</body>
+</html>

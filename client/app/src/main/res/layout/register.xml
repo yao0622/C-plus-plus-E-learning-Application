@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:background="@drawable/register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/registerPhoneRelative"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电话："
+            android:textSize="@dimen/label_font_size"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/registerPhoneTextView" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="18304011351"
+            android:id="@+id/registerPhoneEditText"
+            android:layout_toEndOf="@+id/registerPhoneTextView"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/registerPhoneRelative"
+        android:layout_width="match_parent"
+        android:id="@+id/registerNameRelative"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户名："
+            android:textSize="@dimen/label_font_size"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/registerNameTextView" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="zhangshan"
+            android:id="@+id/registerNameEditText"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/registerNameTextView" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/registerPasswordRelative"
+        android:layout_below="@+id/registerNameRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码："
+            android:textSize="@dimen/label_font_size"
+            android:id="@+id/registerPasswordTextView" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="23"
+            android:inputType="textPassword"
+            android:id="@+id/registerPasswordEditText"
+            android:layout_toEndOf="@+id/registerPasswordTextView" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/registerConfirmPasswordRelative"
+        android:layout_below="@+id/registerPasswordRelative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认密码："
+            android:textSize="@dimen/label_font_size"
+            android:id="@+id/registerConfirmPasswordTextView" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="23"
+            android:inputType="textPassword"
+            android:id="@+id/registerConfirmPasswordEditText"
+            android:layout_toEndOf="@+id/registerConfirmPasswordTextView" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:text="@string/register"
+        android:textSize="20dp"
+        android:layout_below="@+id/registerConfirmPasswordRelative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

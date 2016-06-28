@@ -1,0 +1,161 @@
+<html>
+<head>
+    <title>简单程序设计</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<h2>简单程序设计</h2>
+<p>一、实验目的：  </p>
+<p>（1）学会编写简单的C++程序；<br/>（2）复习基本数据类型变量和常量的应用；<br />
+    （3）复习运算符和表达式的应用；<br/>
+    （4）复习结构化程序设计基本控制结构的运用；<br /> （5）练习使用简单的输入输出；<br />（6）学会使用简单的Debug调试功能。
+<p>二、实验内容  </p>
+<p>（1）用do-while语句编程，求自然数1-10之和。
+    <br />
+    （2）用for语句代替do-while语句，完成相同的功能。<br />
+    （3）编程计算图形的面积。计算圆形、长方形、正方形的面积，运行时先提示用户选择图形的类型，然后要求用户对圆形输入半径值，对长方形输入长和宽，对正方形输入边长的值，计算出面积后显示出来。<br />
+    （4）使用Debug调试功能观察（3）中程序运行中变量的值变化情况。</p>
+<p>三、实验步骤</p>
+<p>（1）建立一个控制台应用程序项目，向其中添加一个C++源文件，输入程序代码，检查输入是否有错误，编译并运行程序，观察输出； </p>
+参考代码<br>
+                   #include&lt;iostream&gt;<br>
+using namespace std;<br>
+        		  int main()<br>
+        		    {<br>
+        		    int i(1), sum(0);<br>
+        		    do {<br>
+        		    sum+=i;<br>
+        		    i++;<br>
+        		    }while(i&lt;=10);<br>
+        		    cout&lt;&lt;&quot;sum=&quot;&lt;&lt;sum&lt;&lt;endl;<br>
+}<br>
+                   </span>
+</p>
+<p>（2）新建一个项目，将（1）中的do-while语句用for语句代替，完成与（1）中程序相同的功能； <br>
+   参考代码<br>
+#include&lt;iostream&gt;<br>
+using namespace std;<br>
+        		int main()<br>
+        		  {<br>
+        		  int  i, sum=0;<br>
+        		  for(i=0; i&lt;=10; i++)<br>
+        		  sum+=i;<br>
+        		  cout &lt;&lt;  &quot;sum=&quot; &lt;&lt; sum &lt;&lt; endl;<br>
+        		  }<br></span></p>
+<p>（3）建立第三个项目，编程计算图形的面积。程序中声明一个整型变量表示图形的类型，使用switch语句判断图形的类型，计算出面积值后用cout语句显示出来；         		  </p>
+参考代码<br>
+                   #include &lt;iostream&gt;<br>
+        		  using namespace std;<br>
+        		const float PI = 3.1416;<br>
+        		int main()<br>
+        		  {<br>
+        		  int  iType;<br>
+        		  float  radius, a, b, area;<br>
+        		  <br>
+        		  cout  &lt;&lt; &quot;图形的类型为?(1-圆形 2-长方形 3-正方形):&quot;;<br>
+        		  cin  &gt;&gt; iType;<br>
+        		  switch(iType)<br>
+        		  {<br>
+        		  case  1:<br>
+        		  cout  &lt;&lt; &quot;圆的半径为：&quot;;<br>
+        		  cin &gt;&gt; radius;<br>
+        		  area = PI * radius * radius;<br>
+        		  cout&lt;&lt;&quot;面积为：&quot;&lt;&lt;area&lt;&lt;endl;<br>
+        		  break;<br>
+        		  case  2:<br>
+        		  cout  &lt;&lt; &quot;矩形的长为：&quot;;<br>
+        		  cin  &gt;&gt; a;<br>
+        		  cout  &lt;&lt; &quot;矩形的宽为：&quot;;<br>
+        		  cin  &gt;&gt; b;<br>
+        		  area  = a * b;<br>
+        		  cout&lt;&lt;&quot;面积为：&quot;&lt;&lt;area&lt;&lt;endl;<br>
+        		  break;<br>
+        		  case  3:<br>
+        		  cout  &lt;&lt; &quot;正方形的边长为：&quot;;<br>
+        		  cin  &gt;&gt; a;<br>
+        		  area  = a * a;<br>
+        		  cout&lt;&lt;&quot;面积为：&quot;&lt;&lt;area&lt;&lt;endl;<br>
+        		  break;<br>
+        		  default:<br>
+        		  cout  &lt;&lt; &quot;不是合法的输入值!&quot;&lt;&lt;endl;<br>
+        		  }<br>
+}<br>
+                   </span>
+</p>
+<p>（4）学习简单的Debug功能。</p>
+
+<h3>1. 筛选素数  步长为2的for循环</h3>
+<h5>案例解析：</h5>
+<p> 本案例采用步长为2的for循环判断一个输入的数字是否为素数<br />
+    语法要点：在for循环中，通过控制循环变量，不公可以进行步长为1的循环，还能执行其他步长的循环。</p>
+<h5>  代码注解：</h5>
+<p>
+    #include &lt;iostream&gt;<br />
+    #include &lt;cstdlib&gt;<br />
+    using namespace std;<br />
+    int main()<br />
+    {? long  n;<br />
+    cout  &lt;&lt; &quot;Enter a positive integer: &quot;; cin &gt;&gt; n;<br />
+    if  (n &lt; 2)<br />
+    cout &lt;&lt; n &lt;&lt; &quot; is not prime.&quot; &lt;&lt; endl;<br />
+    else  if (n &lt; 4)<br />
+    cout &lt;&lt; n &lt;&lt; &quot; is prime.&quot; &lt;&lt; endl;<br />
+    else  if (n%2 == 0)<br />
+    cout &lt;&lt; n &lt;&lt; &quot; = 2*&quot; &lt;&lt; n/2 &lt;&lt; endl;<br />
+    else<br />
+    { for  (int i=3; i &lt;= n/2; i += 2)//步长为2<br />
+    if (n%i == 0) <br />
+    {cout &lt;&lt; n &lt;&lt; &quot; = &quot; &lt;&lt; i &lt;&lt;  &quot;*&quot; &lt;&lt; n/i &lt;&lt; endl;  exit(0);} <br />
+    cout  &lt;&lt; n &lt;&lt; &quot; is prime.&quot; &lt;&lt; endl;<br />
+    }<br />
+    return  0;<br />
+    }</p>
+<h5>调试运行：</h5>
+<p>  Enter a positive integer:12345<br />
+    12345 = 3*4115</p>
+<h3>2. 判断2个有理数是否相同？四舍五入带来的逻辑错误</h3>
+<h5>案例解析：</h5>
+<p>
+    本案例要求使用浮点类型的数据进行关系运算，说明由浮点数的近似存储带来的逻辑错误。<br />
+    语法要点：浮点数在计算机中是以近似值存储的，比如8有时会存储为7.99999….<br />
+    或8.00…001。另外不有运算时的四舍五入带来的问题，比如1/7会被存储为0.142857，但是这个数实际上并不等于1/7。此种情况下，如果进行相等关系判断，则会出现逻辑错误，这在数值计算中是十分严重的错误。</p>
+<h5>代码注解</strong>：</h5>
+<p> #include &lt;iostream&gt; <br />
+    using namespace std;<br />
+    int main()<br />
+    { double x = 10/7.0; cout  &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; endl; <br />
+    if  (x == 1.142857142857) cout &lt;&lt;  &quot;x == 10/7.0\n&quot;; //存在四舍五入带来的逻辑错误<br />
+    else  cout &lt;&lt; &quot;x does not equal 10/7.0\n&quot;; <br />
+    double  z = 7.0*x - 10; cout &lt;&lt; &quot;z =  &quot; &lt;&lt; z &lt;&lt; endl; <br/>
+    if  (z == 0) cout &lt;&lt; &quot;z == 0.\n&quot;; //存在四舍五入带来的逻辑错误<br />
+    else  cout &lt;&lt; &quot;z does not equal 0.\n&quot;; <br />
+    return  0;<br />
+    }</p>
+<h5>调试运行</strong>：</h5>
+<p> x = 1.42857<br />
+    x does not equal 10/7.0<br />
+    z = 0<br />
+    z == 0.</p>
+<p><strong>Q</strong><strong>：</strong>C++中有哪几种常量，给出实例<strong> </strong><br/>
+    <strong>A</strong>：<br/>
+    1、整型常量：13、023、0x13、13L<br />
+    2、浮点常量：-87.3、-0.7e+12、12f、67.L<br />
+    3、字符常量：’A’、’9’、’?’<br />
+    4、字符串常量：&quot;Hello&quot;<br />
+    5、标识常量：MAX、PI、NULL<br />
+    6、换码序列：\a、\n、\r</p>
+<p><strong>Q</strong>：简述auto、register、static三个关键字在程序中的用途。<br/>
+    <strong>A</strong>：<br/>
+    auto：自动型或堆栈型，采用堆栈方式存储空间，声明的变量只能在某个程序范围内使用，当程序运行超出该变量的作用域时，释放空间。<br />
+    register：寄存器型，将所声明的变量放入CPU的寄存器存储空间中，加快程序运行速度，只能用于声明int和char。<br />
+    extern：外部参照引用型，声明的变量是想引用在其他文件中函数体外部声明的变量（不太常用）。<br/>
+    static：静态存储类型，可在函数体内外声明，在内声明时与auto的区别，static存储类型的变量在内存中以固定地址存放。另外，静态数据成员在声明时必须在前面加关键字static。</p>
+<p><strong>Q</strong>：在C++语言中，控制语句主要有哪些？<br/>
+    <strong>A</strong>：<br/>
+    分支语句：if、if-else和switch<br/>
+    循环语句：for、while、do-while<br/>
+    辅助控制:break、contineu、return、goto</p>
+</body>
+</html>

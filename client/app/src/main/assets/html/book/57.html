@@ -1,0 +1,253 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>输入/输出流</title>
+</head>
+<body>
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>宽字符、宽字符串与宽流</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>普通字符和字符串的缺陷</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>一个汉字被拆成两个字符</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>例：<span
+            lang=EN-US>string s = “</span>这是一个中文字符串<span lang=EN-US>”;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>s.size()</span><span
+            style='font-family:"微软雅黑","sans-serif"'>：返回<span lang=EN-US>18</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>s.substr(3,2)</span><span
+            style='font-family:"微软雅黑","sans-serif"'>：得到的结果是“且”</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>s.find(“</span><span
+            style='font-family:"微软雅黑","sans-serif"'>且<span lang=EN-US>”)</span>：返回<span
+            lang=EN-US>3</span></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>宽字符：<span
+            lang=EN-US>wchar_t</span>类型</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>一般占<span
+            lang=EN-US>2</span>个字节，可以直接存下一个汉字</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>宽字符的文字以“<span
+            lang=EN-US>L”</span>开头，例：</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>wchar_t
+c = L’</span><span style='font-family:"微软雅黑","sans-serif"'>人<span lang=EN-US>’;</span></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>宽字符串：<span
+            lang=EN-US>wstring</span>类型</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>与<span
+            lang=EN-US>string</span>同源</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>typedef
+basic_string&lt;char&gt; string;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>typedef
+basic_string&lt;wchar_t&gt; wstring;</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>例</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>wstring
+s = L&quot;</span><span style='font-family:"微软雅黑","sans-serif"'>这是一个中文字符串<span
+            lang=EN-US>&quot;;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>s.size()</span><span
+            style='font-family:"微软雅黑","sans-serif"'>：返回<span lang=EN-US>9</span></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>宽流</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>以宽字符为基本单位的流</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>wistream</span><span
+            style='font-family:"微软雅黑","sans-serif"'>、<span lang=EN-US>wifstream</span>、<span
+            lang=EN-US>wistringstream</span>、<span lang=EN-US>wostream</span>、<span
+            lang=EN-US>wofstream</span>、<span lang=EN-US>wostringstream</span>、<span
+            lang=EN-US>wios……</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>wcin</span><span
+            style='font-family:"微软雅黑","sans-serif"'>、<span lang=EN-US>wcout</span>、<span
+            lang=EN-US>wcerr</span>、<span lang=EN-US>wclog</span></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>宽字符和宽字符串需要通过宽流输入输出</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>宽流与普通流一一对应，彼此同源</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>typedef
+basic_ifstream&lt;char&gt; ifstream;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>typedef
+basic_ifstream&lt;wchar_t&gt; wifstream;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>为宽文件流配置编码方案</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>文件以字节为单位，编码方案决定了宽字符和字节的对应关系</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>例：<span
+            lang=EN-US>L“ABCD”</span>占<span lang=EN-US>4</span>个字节，<span lang=EN-US>L“</span>甲乙丙丁<span
+            lang=EN-US>”</span>占<span lang=EN-US>8</span>个字节，这由编码方案体现</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>配置方法：</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>用“代码页”编号构造<span
+            lang=EN-US>locale</span>对象</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>执行流的<span
+            lang=EN-US>imbue</span>成员函数</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>示例</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>locale
+loc(&quot;.936&quot;); //</span><span style='font-family:"微软雅黑","sans-serif"'>创建本地化配置方案对象</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>wcout.imbue(loc);
+//</span><span style='font-family:"微软雅黑","sans-serif"'>设置<span lang=EN-US>wcout</span>对象的编码方案</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>wcout
+&lt;&lt; L&quot;</span><span style='font-family:"微软雅黑","sans-serif"'>这是一个中文字符串<span
+            lang=EN-US>&quot; &lt;&lt; endl; //</span>输出字符串</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>对象的串行化</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>串行化：将对象写入文件，使得在适当的时候对象能从文件中读出并恢复</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>直接用<span
+            lang=EN-US>write</span>将对象内容输出、用<span lang=EN-US>read</span>将对象恢复的问题</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>对象中存在指针时，指针所指对象内容不会被保存；</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>对象的成员本身可能是存在指针的对象；</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>对象不仅是数据的集合，还包括一系列行为，用<span
+            lang=EN-US>read</span>只能恢复数据，不能触发相应行为</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>串行化的基本方法</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>手工串行化的基本方法</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>手工编写<span
+            lang=EN-US>save</span>和<span lang=EN-US>load</span>函数</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>按照相同的顺序保存<span
+            lang=EN-US>/</span>恢复数据成员</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>碰到指针时，首先保存指针是否为空的标志，如非空，将指针对象的内容保存，<span
+            lang=EN-US>load</span>做相反操作</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>完全手工编写串行化函数的困境</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>save</span><span
+            style='font-family:"微软雅黑","sans-serif"'>和<span lang=EN-US>load</span>对成员的操作顺序完全相同，存在逻辑上的重复处理指针等操作过于繁琐</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>boost::serialization</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>用<span
+            lang=EN-US>Serialization</span>库将下列结构体串行化：</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>struct
+SalaryInfo {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>string
+name;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>double
+salary;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>TaxInfo
+*tax;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>};</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>只需增加一个成员函数模板（需要<span
+            lang=EN-US>TaxInfo</span>也实现了同样的成员函数模板）：</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>template
+&lt;class Archive&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>void
+SalaryInfo::serialize(Archive &amp; ar, unsigned int version) {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ar
+&amp; name &amp; salary &amp; tax;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>serialize</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>函数</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>serialize</span><span
+            style='font-family:"微软雅黑","sans-serif"'>是模板，串行化和恢复都通过这一段源代码<span lang=EN-US>“&amp;”</span>被<span
+            lang=EN-US>Serialization</span>重载了，能够处理各种基本数据类型、标准库类型<span lang=EN-US>“&amp;”</span>碰到指针时，如果指针的目的类型也有<span
+            lang=EN-US>serialize</span>成员函数，则用该函数将指针内容串行化<span lang=EN-US>/</span>恢复</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>文档类</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>用于实际执行串行化操作</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>支持<span
+            lang=EN-US>5</span>种串行化格式</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>普通文本：<span
+            lang=EN-US>text_oachive/text_iachive</span></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>宽文本：<span
+            lang=EN-US>text_woachive/text_wiachive</span></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>普通字符<span
+            lang=EN-US>XML</span>：<span lang=EN-US>xml_oachive/xml_iachive</span></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>宽字符<span
+            lang=EN-US>XML</span>：<span lang=EN-US>xml_woachive/xml_wiachive</span></span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>二进制：<span
+            lang=EN-US>binary_oachive/binary_iachive</span></span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>文档类的使用</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>保存对象：用“<span
+            lang=EN-US>&lt;&lt;”</span></span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ofstream
+ofs(&quot;salary.txt&quot;, ios_base::out);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>text_oarchive
+oa(ofs);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>oa
+&lt;&lt; s1;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>读取对象：用“<span
+            lang=EN-US>&gt;&gt;”</span></span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ifstream
+ifs(&quot;salary.txt&quot;, ios_base::in);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>text_iarchive
+ia(ifs);&nbsp;&nbsp; </span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>SalaryInfo
+s2;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ia
+&gt;&gt; s2;</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Serialization</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>的其它功能</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>可以进行版本控制</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>全面支持对<span
+            lang=EN-US>STL</span>容器的串行化</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>允许将<span
+            lang=EN-US>serialize</span>分开定义为两个不同的模板（<span lang=EN-US>save</span>和<span
+            lang=EN-US>load</span>）进行“对象追踪”，如有两个指针指向同一对象，它能保证这个对象只被串行化一次，而且恢复时也只生成一个对象</span></p>
+
+    <p class=MsoNormal style='text-indent:82.3pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+</div>
+</body>
+</html>

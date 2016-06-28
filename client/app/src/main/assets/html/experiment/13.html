@@ -1,0 +1,890 @@
+<html xmlns:o="http://www.w3.org/1999/xhtml">
+<head>
+    <title>流类库与输入输出</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <h2 class=MsoNormal align=center style='text-align:left;line-height:13.5pt'>实验九 流类库与输入输出 </h2>
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><b><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>实验任务</span></b></p>
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>编程实现下面要求：打印有符号数和无符号数<span
+            lang=EN-US>200</span>；以数据符号左对齐、数据本身右对齐方式输出整数<span lang=EN-US>9999</span>，域宽为<span
+            lang=EN-US>15</span>；将十进制整数<span lang=EN-US>300</span>以<span lang=EN-US>0x</span>开头的十六进制格式输出；用前导符号<span
+            lang=EN-US>$</span>格式打印<span lang=EN-US>9.876</span>，域宽为<span lang=EN-US>8</span>。</span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><b><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>实验目的</span></b></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333'>掌握一般类型数据的输入输出格式控制方法。</span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><b><span
+            style='font-family:"微软雅黑","sans-serif";color:black'>实验分析</span></b></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333;background:white'>常用的输入输出格式：</span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333;background:white'>整数：<span
+            lang=EN-US>%d</span></span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333;background:white'>实数：<span
+            lang=EN-US>%f</span>、<span lang=EN-US>%lf</span></span></p>
+
+    <p class=MsoNormal align=left style='text-align:left;line-height:13.5pt'><span
+            style='font-family:"微软雅黑","sans-serif";color:#333333;background:white'>字符：<span
+            lang=EN-US>%c</span>、<span lang=EN-US>getchar()</span></span><span lang=EN-US
+                                                                               style='font-family:"微软雅黑","sans-serif";color:#333333'> </span></p>
+
+    <p class=MsoNormal align=left style='margin-bottom:13.5pt;text-align:left;
+line-height:13.5pt'><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+color:#333333'>参考代码</span></a>
+                 <br>
+
+#include&lt;iostream&gt;<br>
+
+#include&lt;iomanip&gt;<br>
+
+using namespace std;<br>
+
+int main()<br>
+
+{cout&lt;&lt;&quot;打印无符号数和有符号数200&quot;&lt;&lt;endl;<br>
+int x=200;<br>
+
+cout&lt;&lt;setw(6)&lt;&lt;x;<br>
+
+cout.setf(ios::showpos);&nbsp;<br>
+cout&lt;&lt;setw(6)&lt;&lt;x&lt;&lt;endl;<br>
+
+cout&lt;&lt;&quot;以数据符号左对齐、数据本身右对齐方式输出整数,域宽为15&quot;&lt;&lt;endl;<br>
+
+cout.setf(ios::internal);&nbsp;cout.width(15);<br>
+
+cout&lt;&lt;9999&lt;&lt;endl;<br>
+
+cout&lt;&lt;&quot;将十进制整数300以0x开头的十六进制格式输出&quot;&lt;&lt;endl;<br>
+
+cout.setf(ios::showbase);&nbsp;cout&lt;&lt;hex&lt;&lt;300&lt;&lt;endl;<br>
+
+cout&lt;&lt;&quot;>用前导符号$格式打印，域宽为8&quot;&lt;&lt;endl;<br>
+
+cout.setf(ios::right);&nbsp;cout.fill('$');<br>
+
+cout.unsetf(ios::showpos);<br>
+
+cout&lt;&lt;setw(8)&lt;&lt;9.876&lt;&lt;endl;<br>
+return0;<br>
+
+}</span></p>
+
+</div>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>学生信息系统</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>该系统包含班级，姓名，学号的基本信息</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>问题陈述</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>利用<span
+            lang=EN-US>C++</span>标准库文件<span lang=EN-US>&lt;iostream&gt;</span>输出自己的班级、姓名、学号</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>程序代码：</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include&lt;iostream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>using
+namespace std;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>class
+student</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>{</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>private:</span></p>
+
+    <p class=MsoNormal style='text-indent:31.5pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif"'>char name[20];</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+char grade[20];</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+char number[20];</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>public:</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+int consturct();</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+int output(student stu);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+// ~student();</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>};</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+student::consturct ()</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>{</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;cout&lt;&lt;&quot;</span><span
+            style='font-family:"微软雅黑","sans-serif"'>学生姓名<span lang=EN-US>&quot;&lt;&lt;endl;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;cin&gt;&gt;name
+;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;cout&lt;&lt;&quot;</span><span
+            style='font-family:"微软雅黑","sans-serif"'>学生班级<span lang=EN-US>&quot;&lt;&lt;endl;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;cin&gt;&gt;grade;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;
+cout&lt;&lt;&quot;</span><span style='font-family:"微软雅黑","sans-serif"'>学生学号<span
+            lang=EN-US>&quot;&lt;&lt;endl;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;cin&gt;&gt;number;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;return
+0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+student::output(student stu)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>{</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+cout&lt;&lt;&quot;</span><span style='font-family:"微软雅黑","sans-serif"'>学生的姓名：<span
+            lang=EN-US>&quot;&lt;&lt;endl;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+cout&lt;&lt;stu.name&lt;&lt;endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+cout&lt;&lt;&quot;</span><span style='font-family:"微软雅黑","sans-serif"'>学生的班级：<span
+            lang=EN-US>&quot;&lt;&lt;endl;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+cout&lt;&lt;stu.grade&lt;&lt;endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+cout&lt;&lt;&quot;</span><span style='font-family:"微软雅黑","sans-serif"'>学生的学号：<span
+            lang=EN-US>&quot;&lt;&lt;endl;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+cout&lt;&lt;stu.number&lt;&lt;endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+return 0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+main()</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>{</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; student
+con_student;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con_student.consturct();</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout&lt;&lt;&quot;</span><span
+            style='font-family:"微软雅黑","sans-serif"'>您的输入<span lang=EN-US>:&quot;&lt;&lt;endl;</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; con_student.output(con_student);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+</div>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>设置对其方式</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iostream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iomanip&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;string&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>using
+namespace std;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+main() {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double
+values[] = { 1.23, 35.36, 653.7, 4358.24 };</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; string
+names[] = { &quot;Zoot&quot;, &quot;Jimmy&quot;, &quot;Al&quot;,
+&quot;Stan&quot; };</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for
+(int i=0;i&lt;4;i++)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout
+&lt;&lt; setiosflags(ios_base::left)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+setw(6) &lt;&lt; names[i]</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+resetiosflags(ios_base::left)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+setw(10) &lt;&lt; values[i] &lt;&lt; endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+0;</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>输出结果<span
+            lang=EN-US>:</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Zoot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.23</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Jimmy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+35.36</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Al&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+653.7</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Stan&nbsp;&nbsp;&nbsp;&nbsp;
+4358.24</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+</div>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>1.</span><span
+            style='font-family:"微软雅黑","sans-serif"'>使用<span lang=EN-US>width</span>控制输出宽度</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iostream&gt;&nbsp;&nbsp; </span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>using
+namespace std;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+main() {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double
+values[] = { 1.23, 35.36, 653.7, 4358.24 };</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for(int
+i = 0; i &lt; 4; i++) {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;cout.width(10);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;cout
+&lt;&lt; values[i] &lt;&lt; endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>输出结果<span
+            lang=EN-US>:</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.23</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;
+35.36</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;
+653.7</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;
+4358.24</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>2.</span><span
+            style='font-family:"微软雅黑","sans-serif"'>设置对齐方式</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iostream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iomanip&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;string&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>using
+namespace std;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+main() {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double
+values[] = { 1.23, 35.36, 653.7, 4358.24 };</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; string
+names[] = { &quot;Zoot&quot;, &quot;Jimmy&quot;, &quot;Al&quot;,
+&quot;Stan&quot; };</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for
+(int i=0;i&lt;4;i++)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout
+&lt;&lt; setiosflags(ios_base::left)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+setw(6) &lt;&lt; names[i]</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+resetiosflags(ios_base::left)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+setw(10) &lt;&lt; values[i] &lt;&lt; endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>输出结果<span
+            lang=EN-US>:</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Zoot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.23</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Jimmy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+35.36</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Al&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+653.7</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Stan&nbsp;&nbsp;&nbsp;&nbsp;
+4358.24</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>3.</span><span
+            style='font-family:"微软雅黑","sans-serif"'>控制输出精度</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iostream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iomanip&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;string&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>using
+namespace std;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+main() {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double
+values[] = { 1.23, 35.36, 653.7, 4358.24 };</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; string
+names[] = { &quot;Zoot&quot;, &quot;Jimmy&quot;, &quot;Al&quot;,
+&quot;Stan&quot; };</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for
+(int i=0;i&lt;4;i++)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout
+&lt;&lt; setiosflags(ios_base::left)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+setw(6) &lt;&lt; names[i]</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+resetiosflags(ios_base::left)</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt;
+setw(10) &lt;&lt; setprecision(1) &lt;&lt; values[i]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;&lt; endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>输出结果：</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Zoot&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Jimmy&nbsp;&nbsp;&nbsp;&nbsp;
+4e+001</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Al&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+7e+002</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>Stan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+4e+003</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt;text-indent:0cm'><b><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'>4.</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>向文件输出</span></b></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>#include &lt;fstream&gt;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>using namespace std;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>struct Date { </span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> int mondy, day, year;&nbsp; </span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>};</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>int main() {</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> Date dt = { 6, 10, 92 };</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> ofstream file(&quot;date.dat&quot;,
+ios_base::binary);</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> file.write(reinterpret_cast&lt;char
+*&gt;(&amp;dt), sizeof(dt));</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> file.close();</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> return 0;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt;text-indent:0cm'><b><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'>5.</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>字符串输出流应用</span></b></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>#include &lt;iostream&gt;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>#include &lt;sstream&gt;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>#include &lt;string&gt;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>using namespace std;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>template &lt;class T&gt;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>inline string toString(const T &amp;v)
+{</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> ostringstream os;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>创建字符串输出流</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> os &lt;&lt; v;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>将变量<span lang=EN-US>v</span>的值写入字符串流</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> return os.str();&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>返回输出流生成的字符串</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>int main() {</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> string str1 = toString(5);</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> cout &lt;&lt; str1 &lt;&lt; endl;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> string str2 = toString(1.2);</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> cout &lt;&lt; str2 &lt;&lt; endl;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'> return 0;</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span style='font-family:
+"微软雅黑","sans-serif"'>输出结果：</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>5</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt'><span lang=EN-US
+                                                               style='font-family:"微软雅黑","sans-serif"'>1.2</span></p>
+
+    <p class=MsoListParagraph style='margin-left:18.0pt;text-indent:0cm'><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+</div>
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>1.</span><span style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>从文件读二进制记录<span lang=EN-US><o:p></o:p></span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>#include &lt;iostream&gt;</span><span lang=EN-US
+                                                                 style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>#include &lt;fstream&gt;</span><span lang=EN-US
+                                                                style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>#include &lt;cstring&gt;</span><span lang=EN-US
+                                                                style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>using namespace std;</span><span lang=EN-US
+                                                            style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>struct SalaryInfo {</span><span lang=EN-US
+                                                           style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>unsigned
+id;</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>double
+salary;</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>};</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>int main() {</span><span lang=EN-US
+                                                    style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SalaryInfo
+employee1 = { 600001, 8000 };</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>ofstream
+os(&quot;payroll&quot;, ios_base::out | ios_base::binary);</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>os.write(reinterpret_cast&lt;char
+*&gt;(&amp;employee1), sizeof(employee1));</span><span lang=EN-US
+                                                       style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>os.close();</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>ifstream is(&quot;payroll&quot;, ios_base::in |
+ios_base::binary);</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>if
+(is) {</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>SalaryInfo
+employee2;</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>is.read(reinterpret_cast&lt;char
+*&gt;(&amp;employee2), <br>
+<span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>sizeof(employee2));</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>cout
+&lt;&lt; employee2.id &lt;&lt; &quot; &quot; &lt;&lt; employee2.salary &lt;&lt;
+endl;</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}
+else {</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>cout
+&lt;&lt; &quot;ERROR: Cannot open file 'payroll'.&quot; &lt;&lt; endl;</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>}</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>is.close();</span><span
+            lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>return
+0;</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif";
+mso-bidi-font-weight:bold'>}</span><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'><o:p></o:p></span></p>
+
+    <p class=MsoNormal><span lang=EN-US><o:p>&nbsp;</o:p></span></p>
+
+</div>
+
+
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>1.</span><span
+            style='font-family:"微软雅黑","sans-serif"'>设置位置指针</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iostream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;fstream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>using
+namespace std;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+main() {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+values[] = { 3, 7, 0, 5, 4 };</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ofstream
+os(&quot;integers&quot;, ios_base::out | ios_base::binary);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; os.write(reinterpret_cast&lt;char
+*&gt;(values), sizeof(values));</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; os.close();</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ifstream
+is(&quot;integers&quot;, ios_base::in | ios_base::binary);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if
+(is) {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is.seekg(3
+* sizeof(int));</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+v;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is.read(reinterpret_cast&lt;char
+*&gt;(&amp;v), sizeof(int));</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout
+&lt;&lt; &quot;The 4th integer in the file 'integers' is &quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&lt;&lt; v &lt;&lt; endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
+else</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout
+&lt;&lt; &quot;ERROR: Cannot open file 'integers'.&quot; &lt;&lt; endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>2.</span><span
+            style='font-family:"微软雅黑","sans-serif"'>字符串输入流应用</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iostream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;sstream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;string&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>using
+namespace std;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>template
+&lt;class T&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>inline
+T fromString(const string &amp;str) {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; istringstream
+is(str);&nbsp; //</span><span style='font-family:"微软雅黑","sans-serif"'>创建字符串输入流</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T
+v;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is
+&gt;&gt; v;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>从字符串输入流中读取变量<span lang=EN-US>v</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+v;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>返回变量<span lang=EN-US>v</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+main() {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+v1 = fromString&lt;int&gt;(&quot;5&quot;);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout
+&lt;&lt; v1 &lt;&lt; endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; double
+v2 = fromString&lt;double&gt;(&quot;1.2&quot;);</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cout
+&lt;&lt; v2 &lt;&lt; endl;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>输出结果：</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>5</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>1.2</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>3.</span><span
+            style='font-family:"微软雅黑","sans-serif"'>宽流的应用</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;iostream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;string&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;fstream&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>#include
+&lt;locale&gt;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>using
+namespace std;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>int
+main() {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; locale
+loc(&quot;.936&quot;);&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>创建本地化配置方案</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wcout.imbue(loc);&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>为<span lang=EN-US>wcout</span>设置编码方案</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wifstream
+in(</span><span style='font-family:"微软雅黑","sans-serif"'>“<span lang=EN-US>article.txt</span>”<span
+            lang=EN-US>);//</span>创建文件宽输入流，打开文件</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in.imbue(loc);&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>为<span lang=EN-US>in</span>设置编码方案</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wstring
+line; //</span><span style='font-family:"微软雅黑","sans-serif"'>用来存储一行内容</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; unsigned
+number = 0;&nbsp;&nbsp;&nbsp;&nbsp; //</span><span style='font-family:"微软雅黑","sans-serif"'>记录行号</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while
+(getline(in, line)) {</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; number++;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //</span><span
+            style='font-family:"微软雅黑","sans-serif"'>行号加<span lang=EN-US>1</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if
+(line.find_first_of(L'</span><span style='font-family:"微软雅黑","sans-serif"'>人<span
+            lang=EN-US>') != wstring::npos)</span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; wcout
+&lt;&lt; number &lt;&lt; L</span><span style='font-family:"微软雅黑","sans-serif"'>“<span
+            lang=EN-US>: </span>”<span lang=EN-US> &lt;&lt; line &lt;&lt; endl; </span></span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return
+0;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>}</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+</div>
+
+
+</body>
+</html>

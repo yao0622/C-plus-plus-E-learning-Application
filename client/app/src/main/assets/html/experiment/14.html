@@ -1,0 +1,337 @@
+<html>
+<head>
+    <title>流类库与输入输出</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+<h2 align="center">实验10 异常处理</h2>
+<h2 align="center">实验10-1</h2>
+<h3>实验任务：</h3>
+分别运行下面的代码，写出并分析运行的结果。<br>
+代码1<br>
+#include &lt;iostream&gt;<br>
+using namespace std;<br>
+
+int main()<br>
+{<br>
+&nbsp;&nbsp;cout<<"开始\n";<br>
+&nbsp;&nbsp;try<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cout<<"进入try块\n";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;throw 999;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cout<<"该语句不应执行";<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;catch(int i)<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cout<<"捕捉的异常为：";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;i&lt;&lt;endl;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;cout<<"结束";<br>
+&nbsp;&nbsp;return 0;<br>
+}<br>
+
+代码2<br>
+#include &lt;iostream&gt;<br>
+using namespace std;<br>
+
+int main()<br>
+{<br>
+&nbsp;&nbsp;cout<<"开始\n";<br>
+&nbsp;&nbsp;try<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cout<<"进入try块\n";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;throw 999;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cout<<"该语句不应执行";<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;catch(double i)<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cout<<"捕捉的异常为：";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;i&lt;&lt;endl;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;cout<<"结束";<br>
+&nbsp;&nbsp;return 0;<br>
+}<br>
+
+
+<h3>实验目的</h3>
+（1）体会异常处理的过程； <br>
+（2）掌握3个关键字try，catch和throw的用法。               <br>
+
+
+<h3>实验分析</h3>
+（1）异常处理的机制；<br>
+
+（2）异常处理关键字的语法。<br>
+
+
+1.实验10-1代码1参考结果：<br>
+开始<br>
+进入try块<br>
+捕捉的异常为：999<br>
+结束<br>
+
+</span></p>
+
+2.实验10-1代码2参考结果：<br>
+<p>开始<br>
+    进入try块<br></p>
+
+然后出现运行错误！<br>
+分析：catch(double i)语句不会捕捉到整数异常。因为异常类型必须与catch语句中指定的类型相匹配，否则不能捕捉到相应的异常。</span>              </p>
+
+
+
+<h2 align="center">实验10-2             </h2>
+<h3>实验任务:</h3>
+编写一个异常处理类DivideByZeroException，其中提供异常处理信息。在主函数中用try检测除数为零的异常情况，然后在除法运算函数quotient()中用throw抛出异常，最后用catch捕捉并处理除数为零的异常。<br>
+<h3>实验目的</h3>
+（1）熟练掌握异常处理的3个关键字的try，catch和throw。<br>
+（2）掌握异常处理类的编程方法；<br>
+<h3>实验分析</h3>
+<p>（1）异常处理的执行过程。 <br>
+    （2）异常处理类的运行机制。 <br>
+<p> 3.实验10-2参考结果：
+             <br>
+              #include&lt;stdio.h&gt;<br>
+#include &lt;iostream&gt;<br>
+using namespace std;<br>
+class DivideByZeroException<br>
+{<br>
+public:<br>
+	&nbsp;&nbsp;DivideByZeroException():message("除零异常")<br>
+	&nbsp;&nbsp;{}<br>
+	&nbsp;&nbsp;const char *what() const {return message;}<br>
+private:<br>
+	&nbsp;&nbsp;const char *message;<br>
+};<br>
+
+double quotient(int numerator, int denominator)<br>
+{<br>
+	&nbsp;&nbsp;if(denominator==0)<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;throw DivideByZeroException();<br>
+	&nbsp;&nbsp;return static_cast<double>(numerator)/denominator;<br>
+                      }<br>
+
+                      int main()<br>
+                      {<br>
+                      &nbsp;&nbsp;int number1,number2;<br>
+                      &nbsp;&nbsp;double result;<br>
+                      &nbsp;&nbsp;cout<<"输入两个整数：";<br>
+                      &nbsp;&nbsp;while(cin>>number1>>number2)<br>
+                      &nbsp;&nbsp;{<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;try<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;{
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result=quotient(number1,number2);<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;"The quotient is:"&lt;&lt;result&lt;&lt;endl;<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;}
+                      &nbsp;&nbsp;&nbsp;&nbsp;catch(DivideByZeroException ex)<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;{
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;"异常为："&lt;&lt;ex.what()&lt;&lt;'\n';<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;}
+                      &nbsp;&nbsp;&nbsp;&nbsp;cout&lt;&lt;"\n输入两个整数：";<br>
+                      &nbsp;&nbsp;}
+                      &nbsp;&nbsp;cout&lt;&lt;endl;<br>
+                      &nbsp;&nbsp;return 0;<br>
+                      }
+  </span></p>
+
+<p>设计一个异常抽象类Exception，在此基础上派生一个OutOfMemory类响应内存不足，一个RangeError类响应输入的数不在指定范围内，实现并测试这几个类。<br>
+    #include <iostream><br>
+
+        using namespace std;<br>
+
+        class Exception<br>
+        {<br>
+        public:<br>
+        &nbsp;&nbsp;Exception(){}<br>
+        &nbsp;&nbsp;virtual ~Exception(){}<br>
+        &nbsp;&nbsp;virtual void PrintError()=0;<br>
+        };<br>
+        <br>
+        class OutOfMemory:public Exception<br>
+        {<br>
+        public:<br>
+        &nbsp;&nbsp;OutOfMemory(){}<br>
+        &nbsp;&nbsp;OutOfMemory(){}<br>
+        &nbsp;&nbsp;virtual void PrintError();<br>
+        };<br>
+        <br>
+        void OutOfMemory::PrintError()<br>
+        {<br>
+        &nbsp;&nbsp;cout<<"Out of Memory!\n";<br>
+        }<br>
+        <br>
+        class RangeError:public Exception<br>
+        {<br>
+        public:<br>
+        &nbsp;&nbsp;RangeError(unsigned number) {BadNum=number;}<br>
+        &nbsp;&nbsp;RangeError(){}<br>
+        &nbsp;&nbsp;virtual void PrintError();<br>
+        &nbsp;&nbsp;virtual unsigned long GetNumber() {return BadNum;}<br>
+        &nbsp;&nbsp;virtual void SetNumber(unsigned long number) {BadNum=number;}<br>
+        private:<br>
+        &nbsp;&nbsp;unsigned long BadNum;<br>
+        };<br>
+        <br>
+        void RangeError::PrintError()<br>
+        {<br>
+        &nbsp;&nbsp;cout<<"Number out of range. You used " <<GetNumber()<<"!\n";<br>
+        }<br>
+        <br>
+        void fn1();<br>
+        unsigned int *fn2();<br>
+        void fn3(unsigned int *);<br>
+        <br>
+        int main()<br>
+        {<br>
+        &nbsp;&nbsp;try<br>
+        &nbsp;&nbsp;{<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;fn1();<br>
+        &nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;catch (Exception& theException)<br>
+        &nbsp;&nbsp;{<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;theException.PrintError();<br>
+        &nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;return 0;<br>
+        }<br>
+        <br>
+        unsigned int *fn2()<br>
+        {<br>
+        &nbsp;&nbsp;unsigned int *n=new unsigned int;<br>
+        &nbsp;&nbsp;if(n==0)<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;throw OutOfMemory();<br>
+        &nbsp;&nbsp;return n;<br>
+        }<br>
+        <br>
+        void fn1()<br>
+        {<br>
+        &nbsp;&nbsp;unsigned int *p=fn2();<br>
+        <br>
+        &nbsp;&nbsp;fn3(p);<br>
+        &nbsp;&nbsp;cout<<"The number is:"<<*p<<endl;<br>
+        &nbsp;&nbsp;delete p;<br>
+        }<br>
+
+        void fn3(unsigned int *p)<br>
+        {<br>
+        &nbsp;&nbsp;long Number;<br>
+        &nbsp;&nbsp;cout<<"Enter an integer(0--1000):";<br>
+        &nbsp;&nbsp;cin>>Number;<br>
+        &nbsp;&nbsp;if(Number>1000||Number<0)<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;throw RangeError(Number);<br>
+        &nbsp;&nbsp;*p=Number;<br>
+        }
+
+
+        <h3>程序设计题</h3>
+<p>编写程序，求给定数的平方根，由于平方根不能为负值，请采用异常处理机制检测负数的情况。<br>
+    参考答案:<br>
+#include <iostream><br>
+            #include <cmath><br>
+                using namespace std;<br>
+                double dsqrt(double d)<br>
+                {<br>
+                &nbsp;&nbsp;if(d<0)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;throw 1;<br>
+                &nbsp;&nbsp;return sqrt(d);<br>
+                }<br>
+                <br>
+                int main()<br>
+                {<br>
+                &nbsp;&nbsp;int x;<br>
+                &nbsp;&nbsp;while(1)<br>
+                &nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cout<<"Please input a positive integer:";<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cin>>x;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;try<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout<<dsqrt(x)<<endl;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;catch(int)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout<<"It's a negtive integer"<<endl;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;if(x<0)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+                &nbsp;&nbsp;}<br>
+                &nbsp;&nbsp;return 0;<br>
+                }
+</span></p>
+</p>
+
+
+<p>本案例编写一个简单的异常处理函数，用try，throw和catch检测除数为零的异常情况，表示并处理除数为零的异常。<br>
+    #include <iostream><br>
+        using namespace std;<br>
+        int divide(int x, int y) {<br>
+        &nbsp;&nbsp;if (y == 0)<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;throw x;<br>
+        &nbsp;&nbsp;return x / y;<br>
+        }<br>
+        int main() {<br>
+        &nbsp;&nbsp;try {<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;cout << "5 / 2 = " << divide(5, 2) << endl;<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;cout << "8 / 0 = " << divide(8, 0) << endl;<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;cout << "7 / 1 = " << divide(7, 1) << endl;<br>
+        &nbsp;&nbsp; &nbsp;&nbsp;cout << e << " is divided by zero!" << endl;<br>
+        &nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;cout << "That is ok." << endl;<br>
+        &nbsp;&nbsp;return 0;<br>
+        }<br>
+        程序运行结果如下：<br>
+        5 / 2 = 2<br>
+        8 is divided by zero!<br>
+        That is ok.<br>
+
+
+        <h3>本案例编写带析构语义的类的C++异常处理。</h3>
+        #include <iostream><br>
+            #include <string><br>
+                using namespace std;<br>
+                class MyException {<br>
+                public:<br>
+                &nbsp;&nbsp;MyException(const string &message) : message(message) {}<br>
+                &nbsp;&nbsp;MyException() {}<br>
+                &nbsp;&nbsp;const string &getMessage() const { return message; }<br>
+                private:<br>
+                &nbsp;&nbsp;string message;<br>
+                };<br>
+                class Demo {<br>
+                public:<br>
+                &nbsp;&nbsp;Demo() { cout << "Constructor of Demo" << endl; }<br>
+                &nbsp;&nbsp;Demo() { cout << "Destructor of Demo" << endl; }<br>
+                };<br>
+                void func() throw (MyException) {<br>
+                &nbsp;&nbsp;Demo d;<br>
+                &nbsp;&nbsp;cout << "Throw MyException in func()" << endl;<br>
+                &nbsp;&nbsp;throw MyException("exception thrown by func()");<br>
+                }<br>
+                int main() {<br>
+                &nbsp;&nbsp;cout << "In main function" << endl;<br>
+                &nbsp;&nbsp;try {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;func();<br>
+                &nbsp;&nbsp;} catch (MyException& e) {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cout << "Caught an exception: " << e.getMessage() << endl;<br>
+                &nbsp;&nbsp;} <br>
+                &nbsp;&nbsp;cout << "Resume the execution of main()" << endl;<br>
+                &nbsp;&nbsp;return 0;<br>
+                }<br>
+                程序运行时输出:<br>
+                In main function<br>
+                Constructor of Demo<br>
+                Throw MyException in func()<br>
+                Destructor of Demo<br>
+                Caught an exception: exception thrown by func()<br>
+                Resume the execution of main()<br>
+
+<p><strong>Q</strong>：在C++异常处理机制中，在异常向上级调用者传递过程中，如果程序没有处理这个异常，最终系统会死机吗？<br>
+    <strong>A</strong>：不会，如果程序始终没有处理这个异常，最终异常会被传递到C++运行系统，运行库函数terminate将被自动调用，其缺省功能是调用abort终止程序，但不会造成死机。</p>
+<p><strong>Q</strong>：程序必须进行异常接口声明吗？如果没有异常接口声明，程序是否就不会抛掷异常？<br>
+    <strong>A</strong>：不是，如果没有异常接口声明，程序可以抛掷任何类型的异常。但是在函数的声明中列出这个函数可能抛掷的所有异常类型，可以使用户能够方便地知道所使用的函数会抛掷哪些异常，加强程序的可读性。</p>
+<p><strong>Q</strong>：在异常处理机制中，出现异常后，已经创建的对象能被自动析构吗？<br>
+    <strong>A</strong>：能。C++异常处理的真正功能，不仅在于它能处理各种不同类型的异常，还在于它具有为异常抛掷前构造的所有局部对象自动调用析构函数的能力。</p>
+</body>
+</html>

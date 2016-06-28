@@ -1,0 +1,36 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>共享数据的保护</title>
+</head>
+<body>
+<h3>常对象</h3>
+<p>必须进行初始化,不能被更新。<br>
+    const 类型说明符 对象名；<br>
+    const int n=10;</p>
+<h3>常对象举例</h3>
+<p>class A{<br>
+    public: <br>
+    &nbsp; &nbsp;A(int i, int j): x(i), y(j){ }<br>
+    &nbsp; &nbsp; …<br>
+    private: <br>
+    &nbsp; &nbsp;int x, y; <br>
+    };</p>
+<p>const A a(3,4);  //a是常对象，不能被更新</p>
+<h3>用const修饰的类成员</h3>
+<h4>常成员函数</h4>
+<p>使用const关键字说明的函数。<br>
+    常成员函数不更新对象的数据成员，也不能调用类中的非常成员函数。</p>
+<p>常成员函数说明格式：类型说明符  函数名（参数表）const;</p>
+<p>这里，const是函数类型的一个组成部分，因此在实现部分也要带const关键字。<br>
+    const关键字可以被用于参与对重载函数的区分 <br>
+    通过常对象只能调用它的常成员函数。</p>
+<h4>常数据成员</h4>
+<p>使用const说明的数据成员。</p>
+
+<h3>常引用</h3>
+<p>被引用的对象不能被更新。<br>
+    const  类型说明符  &引用名</p>
+<p>常引用做形参，不会更改实参</p>
+</body>
+</html>

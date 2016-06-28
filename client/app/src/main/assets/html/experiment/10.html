@@ -1,0 +1,621 @@
+<html>
+<head>
+    <title>数组、指针与字符串</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<h2 align="center">数组、指针与字符串</h2>
+<h3>实验目的</h3>
+<p>
+    (1）学习使用数组；<br>
+    (2）学习字符串数据的组织和处理；<br>
+    (3）学习标准C++库的使用；<br>
+    (4）掌握指针的使用方法；<br>
+    (5）练习通过Debug观察指针的内容及其所指的对象的内容；<br>
+    (6）联系通过动态内存分配实现动态数组，并体会指针在其中的作用；<br>
+    (7）分别使用字符数组和标准C++库练习处理字符串的方法。<br>
+</p>
+<h3>实验任务</h3>
+<pre>（1）编写并测试3*3矩阵转置函数，使用数组保存3*3矩阵。
+（2）使用动态内存分配生成动态数组来重新完成上题，使用指针实现函数的功能。
+（3）编程实现两字符串的连接。要求使用字符数组保存字符串，不要使用系统函数。
+（4）使用string类定义字符串对象，重新实现上一小题。
+（5）定义一个Employee类，其中包括姓名、街道地址、城市和邮编等属性，以及change_name()和display()等函数。Display()显示姓名、街道地址、城市和邮编等属性，change_name()改变对象的姓名属性。实现并测试这个类。
+（6）定义包含5个元素的对象数组，每个元素都是Employee类型的对象。
+（7）（选做）修改实验4中的选做实验中的people（人员）类。具有的属性如下：姓名char name[11]、编号char number[7]、性别char sex[3]、生日birthday、身份证号char id[16]。其中“出生日期”定义为一个“日期”类内嵌对象。用成员函数实现对人员信息的录入和显示。要求包括：构造函数和析构函数、拷贝构造函数、内联成员函数、聚集。在测试程序中定义people类的对象数组，录入数据并显示。
+</pre>
+<h3>实验步骤</h3>
+<pre>
+1. 编写矩阵转置函数，输入参数为3*3整形数组，使用循环语句实现矩阵元素的行列对调，注意在循环语句中究竟需要对哪些元素进行操作，编写main（）函数实现输入、输出。程序名：lab6_1.cpp。
+2. 改写矩阵转置函数，参数为整型指针，使用指针对数组元素进行操作，在main（）函数中使用new操作符分配内存生成动态数组。通过Debug观察指针的内容及其所指的对象中的内容。程序名：lab6_2.cpp。
+3. 编程实现两字符串的连接。定义字符数组保存字符串，在程序中提示用户输入两个字符串，实现两个字符串的连接，最后用cout语句显示输出。程序名：lab6_3.cpp。用cin实现输入，注意，字符串的结束标志是ASCII码0，使用循环语句进行字符串见的字符拷贝。
+4. 使用string类定义字符串对象，编程实现两字符串的连接。在string类中已重载了运算符“+=”实现字符串的连接，可以使用这个功能。程序名：lab6_4.cpp。
+5. 在employee.h文件中定义Employee类。Employee类具有姓名、街道地址、城市和邮编等私有数据成员，都可以用字符型数组来表示，在成员函数中，构造函数用来初始化所有成员数组，对字符数组的赋值可以使用字符串拷贝函数strcpy(char *,char * name);display()中使用cout显示姓名、街道地址、城市和邮编等属性，change_name()改变类中表示姓名属性的字符数组类型的数据成员。在主程序中定义这个类的对象并对起进行操作。程序名：lab6_5.cpp。
+6. 使用上一小题中定义的Employee类定义对象数组emp[5]，使用循环语句把数据显示出来。程序名：lab6_6.cpp。
+
+
+ 参考答案
+<pre>
+<h3>Lab6_1.cpp</h3>
+#include <iostream.h>
+    void move (int matrix[3][3])
+    {
+    int i, j, k;
+    for(i=0; i<3; i++)
+    for (j=0; j<i; j++)
+    {
+    k = matrix[i][j];
+    matrix[i][j] = matrix[j][i];
+    matrix[j][i] = k;
+    }
+    }
+
+    void main()
+    {
+    int i, j;
+    int data[3][3];
+    cout << "输入矩阵的元素" << endl;
+    for(i=0; i<3; i++)
+    for (j=0; j<3; j++)
+    {
+    cout << "第" << i+1 << "行第" << j+1
+    <<"个元素为：";
+    cin >> data[i][j];
+    }
+    cout << "输入的矩阵的为：" << endl;
+    for(i=0; i<3; i++)
+    {
+    for (j=0; j<3; j++)
+    cout << data[i][j] << " ";
+    cout << endl;
+    }
+    move(data);
+    cout << "转置后的矩阵的为：" << endl;
+    for(i=0; i<3; i++)
+    {
+    for (j=0; j<3; j++)
+    cout << data[i][j] << " ";
+    cout << endl;
+    }
+    }
+
+    <h3>Lab6_2.cpp</h3>
+    #include <iostream.h>
+    void move (int *matrix)
+    {
+    int i, j, k;
+    for(i=0; i<3; i++)
+    for (j=0; j<i; j++)
+    {
+    k = *(matrix + i*3 + j);
+    *(matrix + i*3 + j) = *(matrix + j*3 + i);
+    *(matrix + j*3 + i) = k;
+    }
+    }
+
+    void main()
+    {
+    int i, j;
+    int *p = new int[3*3];
+    cout << "输入矩阵的元素" << endl;
+    for(i=0; i<3; i++)
+    for (j=0; j<3; j++)
+    {
+    cout << "第" << i+1 << "行第" << j+1
+    <<"个元素为：";
+    cin >> p[i*3 + j];
+    }
+    cout << "输入的矩阵的为：" << endl;
+    for(i=0; i<3; i++)
+    {
+    for (j=0; j<3; j++)
+    cout << p[i*3 + j] << " ";
+    cout << endl;
+    }
+    move(p);
+    cout << "转置后的矩阵的为：" << endl;
+    for(i=0; i<3; i++)
+    {
+    for (j=0; j<3; j++)
+    cout << p[i*3 + j] << " ";
+    cout << endl;
+    }
+    }
+
+    <h3>Lab6_3.cpp</h3>
+    #include <iostream.h>
+    void main()
+    {
+    int i=0,j=0;
+    char s1[200],s2[100];
+    cout << "请输入第一个字符串：";
+    cin >> s1;
+    cout << "请输入第二个字符串：";
+    cin >>s2;
+    while(s1[i])
+    i++;
+    while(s2[j])
+    s1[i++] = s2[j++];
+    s1[i] = '\0';
+    cout << "连接后的字符串为：" << s1 << endl;
+    }
+
+    <h3>Lab6_4.cpp</h3>
+    #include <iostream>
+    #include <string>
+    using namespace std;
+
+    void main()
+    {
+    string s1;
+    string s2;
+    cout << "请输入第一个字符串：";
+    cin >> s1;
+    cout << "请输入第二个字符串：";
+    cin >>s2;
+    s1 += s2;
+    cout << "连接后的字符串为：" << s1 << endl;
+    }
+
+    <h3>Lab6_5.cpp</h3>
+    #include "employee.h"
+    void main(void)
+    {
+    Employee e1("张三","平安大街3号", "北京", "100000");
+    e1.display();
+    cout << endl;
+    e1.change_name("李四");
+    e1.display();
+    cout << endl;
+    }
+
+    <h3>Lab6_6.cpp</h3>
+    #include "employee.h"
+    void main(void)
+    {
+    Employee emp[5] =
+    { Employee("张三","平安大街3号", "北京", "100000"),
+    Employee("李四","王府井大街20号", "北京", "100000"),
+    Employee("赵刚","中山路112号", "重庆", "400000"),
+    Employee("陈芳","南京路234号", "上海", "200000"),
+    Employee("周欣","人民东路476号", "重庆", "400000")};
+    for(int i=0;i<5;i++)
+    emp[i].display();
+
+</pre>
+</span></p>
+
+
+    <pre>
+Q：在C++程序中，数组在内存中是怎样存储的？
+A：在内存中数组占有一段连续的存储空间。
+Q：数组可以用来表示多个类型不同的变量吗？
+A：不能。数组元素的类型必须一致。
+Q：如何引用数组元素？可以一次引用整个数组吗？
+A：通过数组的下标来引用数组元素。不能一次引用整个数组，数组元素只能逐个被引用。对数组中所有元素逐个引用时，通常可使用循环结构。
+Q：在数组的定义和初值化同时进行时，可以不指定数组的长度（即数组元素的个数）么？A：可以。 给全部元素赋初值时可以不指定数组的长度。
+Q：二维数组在计算机中是如何存放的？
+A：在计算机中二维数组的元素按行的顺序存放。如数组a[m][n]，存放顺序为：a[0][0]，a[0][1]，…，a[0][n－1]，a[1][0]，a[1][n－1]，…，a[m-1][0],…，a[m-1][n-1]。
+Q：数组作为函数参数，使用数组名还是数组元素？
+A：数组元素和数组名都可以作为函数的参数，以实现函数间数据的传递和共享。
+用数组元素作为调用函数时的实参，与使用该类型的一个变量（或对象）作实参是完全相同的。如果使用数组名做函数的参数，则实参和形参都应该是数组名，且类型相同。
+Q：指针可以进行哪些数学运算？
+A：指针是一种数据类型，与其他数据类型一样，指针变量也可以参与部分运算，包括算术运算、关系运算和赋值运算。
+Q：指针处理数组有什么优点？
+A：指针加减运算的特点使得指针特别适合处理存储在一段连续内存空间中的同类数据，而数组恰好是具有一定顺序关系的若干同类型变量的集合体，数组元素的存储在物理上也是连续的，数组名就是数组存储的首地址，这样便可以使用指针来对数组及其元素进行方便而快速的操作。
+Q：指针数组和数组指针有什么区别？
+A：指针数组指的是一个数组的每一个元素都是指针变量，且指针变量都指向相同的数据类型。声明语法为：数据类型 *数组名[下标表达式]；
+由于多维数组都可以分解成一维数组，因此通常将指针定义为行指针变量，使它的加法单位为若干个数组元素。指向多维数组行指针的指针变量称为数组指针。
+声明语法为：数据类型 (*变量名称)[一维数组长度];
+Q：动态内存分配的主要优点是什么？
+A：在C++中，动态内存分配技术可以保证程序在运行过程中按照实际需要申请适量的内存，使用结束后予以释放，可以避免程序运行过程中的内存浪费。
+Q：在字符数组中，‘\0’代表什么？
+A：在C++语言中，规定了一个“字符串结束标记”，以字符’\0’代表。‘\0’代表ASCII码为0的字符，是一个空操作符，表示什么也不干。字符串在实际存储时，系统会自动的在其尾部添加一个结束标志’\0’。
+</pre>
+
+<h3>数组的声明与引用</h3>
+<pre>
+#include <iostream>
+    using namespace std;
+    int main() {
+    int a[10], b[10];
+    for(int i = 0; i < 10; i++) {
+    a[i] = i * 2 - 1;
+    b[10 - i - 1] = a[i];
+    }
+    for(int i = 0; i < 10; i++) {
+    cout << "a[" << i << "] = " << a[i] << "  ";
+    cout << "b[" << I << "] = " << b[i] << endl;
+    }
+    return 0;
+    }
+</pre>
+<p>
+    程序中，定义了两个10个元素的一维数组a和b，使用for循环队他们赋值，在引用b的元素时采用了算术表达式作为下标。
+</p>
+<h3>循环从键盘读入若干组选择题答案，计算并输出每组答案的正确率，直到输入ctrl+z为止。
+    每组连续输入5个答案，每个答案可以是'a'..'d'。
+</h3>
+<pre>
+#include <iostream>
+    using namespace std;
+    int main()
+    { const char key[ ]={'a','c','b','a','d'};
+    char c;
+    int ques=0,numques=5,numcorrect=0;
+    cout<<"Enter the "<&lt;numques&lt;<" question tests:"<&lt;endl;
+    while(cin.get(c))
+    { if(c != '\n')
+    if(c == key[ques])
+    { numcorrect++; cout << " "; }
+    else cout&lt;<"*";
+    else
+    { cout&lt;<" Score "<&lt;float(numcorrect)/numques*100<<"%";
+    ques = 0;
+    numcorrect = 0;
+    cout &lt;&lt; endl;
+    continue;
+    }
+    ques++;
+    }
+    return 0;
+    }
+
+    运行结果：
+    acbba
+    **  Score  60%
+    acbad
+    Score  100%
+    abbda
+    * **  Score  40%
+    bdcba
+    *****  Score  0%
+</pre>
+ <h3>使用数组名作为函数参数</h3>
+<pre>
+主函数中初始化一个矩阵并将每个元素都输出，然后调用子函数，分别计算每一行的元素之和，将和直接存放在每行的第一个元素中，返回主函数之后输出各行元素的和。
+
+#include <iostream>
+    using namespace std;
+    void rowSum(int a[][4], int nRow) {
+    for (int i = 0; i < nRow; i++) {
+    for(int j = 1; j < 4; j++)
+    a[i][0] += a[i][j];
+    }
+    }
+    int main() {	//主函数
+    int table[3][4] = {{1, 2, 3, 4},
+    {2, 3, 4, 5}, {3, 4, 5, 6}};
+    //声明并初始化数组
+    //输出数组元素
+    for (int i = 0; i < 3; i++)	{
+    for (int j = 0; j < 4; j++)
+    cout &lt;&lt; table[i][j] &lt;&lt; "   ";
+    cout &lt;&lt; endl;
+    }
+    rowSum(table, 3);	//调用子函数，计算各行和
+    //输出计算结果
+    for (int i = 0; i < 3; i++)
+    cout << "Sum of row " <<&lt;i &lt;< " is " <&lt; table[i][0] &lt;&lt; endl;
+    return 0;
+    }
+
+    运行结果：
+    1   2   3   4
+    2   3   4   5
+    3   4   5   6
+    Sum of row 0 is 10
+    Sum of row 1 is 14
+    Sum of row 2 is 18
+</pre>
+<h3>对象数组应用举例<h3>
+<pre>
+程序主函数首先声明一个Point类类型的数组，用来存放需要拟合的点。在数组声明的同时，队数组进行了初始化，这种初始化是逐个调用Point类的构造函数来完成的。接着调用Point类的友元函数lineFit进行线性回归计算，最后输出回归系数a，b和线性系数r。
+lineFit函数的第一个参数是一个常量数组，它使得在lineFit函数中，数组points的每一个元素都被当做常对象，因而不会改变其内容。
+//Point.h
+#ifndef _POINT_H
+#define _POINT_H
+class Point {	//类的定义
+public:	//外部接口
+	Point();
+	Point(int x, int y);
+	~Point();
+	void move(int newX,int newY);
+	int getX() const { return x; }
+	int getY() const { return y; }
+	static void showCount();	//静态函数成员
+private:	//私有数据成员
+	int x, y;
+};
+#endif	//_POINT_H
+//Point.cpp
+#include <iostream>
+    #include "Point.h"
+    using namespace std;
+    Point::Point() {
+    x = y = 0;
+    cout << "Default Constructor called." << endl;
+    }
+    Point::Point(int x, int y) : x(x), y(y) {
+    cout << "Constructor called." << endl;
+    }
+    Point::~Point() {
+    cout << "Destructor called." << endl;
+    }
+    void Point::move(int newX,int newY) {
+    cout << "Moving the point to (" << newX << ", " << newY << ")" << endl;
+    x = newX;
+    y = newY;
+    }
+    //6-3.cpp
+    #include "Point.h"
+    #include <iostream>
+    using namespace std;
+    int main() {
+    cout &lt;< "Entering main..." <&lt; endl;
+    Point a[2];
+    for(int i = 0; i < 2; i++)
+    a[i].move(i + 10, i + 20);
+    cout &lt;< "Exiting main..." <&lt; endl;
+    return 0;
+    }
+
+    运行结果：
+    Entering main...
+    Default Constructor called.
+    Default Constructor called.
+    Moving the point to (10, 20)
+    Moving the point to (11, 21)
+    Exiting main...
+    Destructor called.
+    Destructor called.
+</pre>
+
+    <p>&nbsp;</p>
+
+    <h3>指针的声明、赋值与使用</h3>
+<pre>
+#include <iostream>
+    using namespace std;
+    int main() {
+    int i;			//定义int型数i
+    int *ptr = &i;	      //取i的地址赋给ptr
+    i = 10;			//int型数赋初值
+    cout<< "i = " <&lt;i <&lt; endl;//输出int型数的值
+    cout<< "*ptr = " << *ptr <&lt; endl;//输出int型指针所指地址的内容
+    return 0;
+    }
+    程序运行的结果是：
+    i = 10
+    *ptr = 10
+    程序说明：程序首先定义了一个int类型变量i，然后定义了一个int类型指针ptr，并用取地址操作符求出i的地址作为指针ptr的初值，再给int类型变量i赋初值10。
+</pre>
+    <h3>void类型指针的使用</h3>
+<pre>
+#include <iostream>
+    using namespace std;
+    int main() {
+    //void voidObject;错，不能声明void类型的变量
+    void *pv;	//对，可以声明void类型的指针
+    int i = 5;
+    pv = &i;	//void类型指针指向整型变量
+    int *pint = static_cast<int *>(pv);
+    //void类型指针赋值给int类型指针
+    cout << "*pint = " <&lt;*pint <&lt;endl;
+    return 0;
+    }
+    程序运行的结果是：
+    *pint=5
+</pre>
+    <h3>void类型指针的使用</h3>
+<pre>
+#include <iostream>
+    using namespace std;
+    int main() {
+    //void voidObject;//错，不能声明void类型的变量
+    void *pv;	//对，可以声明void类型的指针
+    int i = 5;
+    pv = &i;	//void类型指针指向整型变量
+    int *pint = static_cast<int *>(pv);
+    //void类型指针赋值给int类型指针
+    cout << "*pint = " <&lt; *pint <&lt; endl;
+    return 0;
+    }
+</pre>
+    <p>&nbsp;</p>
+
+
+    <h3>动态创建对象举例</h3>
+<pre>
+#include <iostream>
+    using namespace std;
+    class Point {
+    public:
+    Point() : x(0), y(0) {
+    cout<&lt;"Default Constructor called."<&lt;endl;
+    }
+    Point(int x, int y) : x(x), y(y) {
+    cout&lt;< "Constructor called."<&lt;endl;
+    }
+    ~Point() { cout<<"Destructor called."<&lt;endl; }
+    int getX() const { return x; }
+    int getY() const { return y; }
+    void move(int newX, int newY) {
+    x = newX;
+    y = newY;
+    }
+    private:
+    int x, y;
+    };
+    int main() {
+    cout <&lt;"Step one: " <&lt;endl;
+    Point *ptr1 = new Point;//调用缺省构造函数
+    delete ptr1;	//删除对象，自动调用析构函数
+
+    cout << "Step two: " <&lt;endl;
+    ptr1 = new Point(1,2);
+    delete ptr1;
+
+    return 0;
+    }
+
+    运行结果：
+    Step One:
+    Default Constructor called.
+    Destructor called.
+    Step Two:
+    Constructor called.
+    Destructor called.
+
+</pre>
+    <h3>动态创建对象数组举例</h3>
+<pre>
+#include<iostream>
+    using namespace std;
+    class Point {   //类的声明同例6-16，略 };
+    int main() {
+    Point *ptr = new Point[2];	//创建对象数组
+    ptr[0].move(5, 10);//通过指针访问数组元素的成员
+    ptr[1].move(15, 20);//通过指针访问数组元素的成员
+    cout << "Deleting..." <&lt; endl;
+    delete[] ptr;	//删除整个对象数组
+    return 0;
+    }
+    运行结果：
+    Default Constructor called.
+    Default Constructor called.
+    Deleting...
+    Destructor called.
+    Destructor called.
+</pre>
+    <h3>动态数组类<h3>
+<pre>
+#include <iostream>
+    #include <cassert>
+    using namespace std;
+    class Point {   //类的声明同例6-16 …  };
+    class ArrayOfPoints {	//动态数组类
+    public:
+    ArrayOfPoints(int size) : size(size) {
+    points = new Point[size];
+    }
+    ~ArrayOfPoints() {
+    cout << "Deleting..." << endl;
+    delete[] points;
+    }
+    Point &element(int index) {
+    assert(index >= 0 && index < size);
+    return points[index];
+    }
+    private:
+    Point *points;	//指向动态数组首地址
+    int size;		//数组大小
+    };
+    int main() {
+    int count;
+    cout <&lt; "Please enter the count of points: ";
+    cin >> count;
+    ArrayOfPoints points(count);	//创建对象数组
+    //通过访问数组元素的成员
+    points.element(0).move(5, 0);
+    //通过类访问数组元素的成员
+    points.element(1).move(15, 20);
+    return 0;
+    }
+    运行结果如下：
+    Please enter the number of points:2
+    Default Constructor called.
+    Default Constructor called.
+    Deleting...
+    Destructor called.
+    Destructor called
+
+</pre>
+        <p>&nbsp;</p>
+
+        <h3>vector应用举例</h3>
+<pre>
+#include <iostream>
+    #include <vector>
+    using namespace std;
+    //计算数组arr中元素的平均值
+    double average(const vector<double> &arr) {
+    double sum = 0;
+    for (unsigned i = 0; i < arr.size(); i++)
+    sum += arr[i];
+    return sum / arr.size();
+    }
+    int main() {
+    unsigned n;
+    cout << "n = ";
+    cin >> n;
+    vector<double> arr(n);	//创建数组对象
+        cout << "Please input " << n << " real numbers:" << endl;
+        for (unsigned i = 0; i < n; i++)
+        cin >> arr[i];
+        cout << "Average = " << average(arr) << endl;
+        return 0;
+        }
+        本例中，在主函数里创建了动态数组对象arr，然后通过键盘输入的方式为数组元素赋值，再调用average函数计算数组元素的平均值。
+
+</pre>
+
+        <h3>string类应用举例</h3>
+<pre>
+#include <string>
+    #include <iostream>
+    using namespace std;
+    //根据value的值输出true或false，title为提示文字
+    inline void test(const char *title, bool value) {
+    cout <&lt; title &lt;< " returns " <&lt;(value ? "true" : "false") <&lt; endl;
+    }
+    int main() {
+    string s1 = "DEF";
+    cout << "s1 is " <&lt; s1 <&lt; endl;
+    string s2;
+    cout << "Please enter s2: ";
+    cin >> s2;
+    cout << "length of s2: " <&lt; s2.length() <&lt;endl;
+    //比较运算符的测试
+    test("s1 <= \"ABC\"", s1 <= "ABC");
+    test("\"DEF\" <= s1", "DEF" <= s1);
+    //连接运算符的测试
+    s2 += s1;
+    cout << "s2 = s2 + s1: " <&lt; s2 <&lt; endl;
+    cout << "length of s2: " <&lt;s2.length() <&lt; endl;
+    return 0;
+    }
+    运行结果：
+    s1 is DEF
+    Please enter s2 :123
+    Length of s2 :3
+    s1<=”ABC”return false
+    “DEF”<=s1 returns true
+    s2= s2+s1:123DEF
+    length of s2 :6
+</pre>
+
+        <h3>用getline输入字符串</h3>
+<pre>
+include <iostream>
+    #include <string>
+    using namespace std;
+    int main() {
+    for (int i = 0; i < 2; i++)	{
+    string city, state;
+    getline(cin, city, ',');
+    getline(cin, state);
+    cout << "City:" <&lt; city << “  State:" <&lt;state <&lt;endl;
+    }
+    return 0;
+    }
+    运行结果
+    Beijing,China
+    City: Beijing   State: China
+    San Francisco,the United States
+    City: San Francisco   State: the United States
+</pre>
+</body>
+</html>

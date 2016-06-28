@@ -1,0 +1,52 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>构造函数和析构函数</title>
+</head>
+<body>
+<h3>构造函数</h3>
+<p>构造函数的作用是在对象被创建时使用特定的值构造对象，或者说将对象初始化为一个特定的状态。<br>
+    在对象创建时由系统自动调用。<br>
+    如果程序中未声明，则系统自动产生出一个默认形式的构造函数<br>
+    允许为内联函数、重载函数、带默认形参值的函数</p>
+<h3>构造函数举例</h3>
+<p>class Clock<br>
+    {<br>
+    public: <br>
+    &nbsp; &nbsp;Clock (int NewH, int NewM, int NewS);//构造函数 <br>
+    &nbsp; &nbsp;void SetTime(int NewH, int NewM, int NewS); <br>
+    &nbsp; &nbsp;void ShowTime();<br>
+    private: <br>
+    &nbsp; &nbsp;int Hour,Minute,Second; <br>
+    };</p>
+<h3>构造函数的实现：</h3>
+<p>Clock::Clock(int NewH, int NewM, int NewS) <br>
+    {<br>
+    &nbsp; &nbsp;Hour= NewH; <br>
+    &nbsp; &nbsp;Minute= NewM; <br>
+    &nbsp; &nbsp;Second= NewS; <br>
+    }</p>
+<h3>建立对象时构造函数的作用：</h3>
+<p>int main()<br>
+    {<br>
+    &nbsp; &nbsp;Clock  c (0,0,0); //隐含调用构造函数，将初始值作为实参。<br>
+    &nbsp; &nbsp;c.ShowTime();<br>
+    }</p>
+<h3>复制构造函数</h3>
+<p>复制构造函数是一种特殊的构造函数，其形参为本类的对象引用。 <p>
+
+<h3>调用复制构造函数的三种情形：</h3>
+<p>（1）当用类的一个对象去初始化该类的另一个对象时系统自动调用复制构造函数实现复制赋值。<br>
+    （2）若函数的形参为类对象，调用函数时，实参赋值给形参，系统自动调用复制构造函数。<br>
+    （3）当函数的返回值是类对象时，系统自动调用复制构造函数。</p>
+
+<h3>隐含的复制构造函数</h3>
+<p>如果程序员没有为类声明复制构造函数，则编译器在必要时自己生成一个隐含的复制构造函数。<br>
+    这个构造函数执行的功能是：把初始值对象的每个数据成员的值，都复制到新建立的对象中（同类对象的复制）。</p>
+
+<h3>析构函数</h3>
+<p>完成对象被删除前的一些清理工作。<br>
+    在对象的生存期结束的时刻系统自动调用它，然后再释放此对象所属的空间。<br>
+    如果程序中未声明析构函数，编译器将自动产生一个默认的析构函数。</p>
+</body>
+</html>

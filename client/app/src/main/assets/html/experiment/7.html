@@ -1,0 +1,306 @@
+<html>
+<head>
+    <title>函数</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<h2>函数</h2>
+<h3>例1、编写一个求x的n次方的函数</h3>
+<h4>程序：</h4>
+<p>#include&nbsp;&lt;iostream> <br>
+    using namespace std; <br>
+    double&nbsp;power (double x, int n); <br>
+    int main()<br>
+    {<br>
+    &nbsp; &nbsp;cout << "5 to the power 2 is " <&lt; power(5,2) <&lt; endl; <br>
+    }</p>
+<p>double&nbsp; &nbsp;power (double x, int n) <br>
+    {<br>
+    &nbsp; &nbsp;double val = 1.0; <br>
+    &nbsp; &nbsp;while (n--)<br>
+    &nbsp; &nbsp; &nbsp; &nbsp;val = val*x; <br>
+    &nbsp; &nbsp;return(val); <br>
+    }</p>
+
+<h4>运行结果：</h4>
+<p>5 to the power 2 is 25</p>
+
+<h3>例2、数制转换</h3>
+<p>题目：输入一个8位二进制数，将其转换为十进制数输出。<br>
+    求2的乘方，可以调用函数power (x, n)</p>
+<h4>程序：</h4>
+<p>#include &nbsp;&lt;iostream><br>
+    using namespace std; <br>
+    double power (double x, int n); <br>
+    int main()<br>
+    {<br>
+    &nbsp; &nbsp;int  i; <br>
+    &nbsp; &nbsp;int  value = 0; <br>
+    &nbsp; &nbsp;char ch; <br>
+    &nbsp; &nbsp;cout << "Enter an 8 bit binary number  ";<br>
+    &nbsp; &nbsp;for (i = 7; i >= 0; i--)<br>
+    &nbsp; &nbsp;{<br>
+    &nbsp; &nbsp; &nbsp; &nbsp;	cin >> ch; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;if (ch == '1') <br>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	value += int(power(2,i)); <br>
+    &nbsp; &nbsp;}<br>
+    &nbsp; &nbsp;cout <<"Decimal value is  "<&lt;value<&lt;endl; <br>
+    } </p>
+<p>double power (double x, int n) <br>
+    {<br>
+    &nbsp; &nbsp;double val = 1.0; <br>
+    &nbsp; &nbsp;while (n--)  val *= x; <br>
+    &nbsp; &nbsp;return(val); <br>
+    } </p>
+
+<h3>例3、</h3>
+<p>寻找并输出11~999之间的数m，它满足m、m的平方和m的立方均为回文数。<br>
+    回文：各位数字左右对称的整数。<br>
+    例如：11满足上述条件<br>
+    11*11=121，11*11*11=1331。</p>
+<h4>分析：</h4>
+<p>10取余的方法，从最低位开始，依次取出该数的各位数字。按反序重新构成新的数，比较与原数是否相等，若相等，则原数为回文。</p>
+<h4>程序：</h4>
+<p>#include&nbsp;&lt;iostream><br>
+    using namespace std; <br>
+    int main()<br>
+    {<br>
+    &nbsp; &nbsp;bool symm(long n); <br>
+    &nbsp; &nbsp;long m; <br>
+    &nbsp; &nbsp;for(m=11; m<1000; m++)<br>
+    &nbsp; &nbsp;if (symm(m)&&symm(m*m)&&symm(m*m*m)) <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;cout<<"m="<&lt;m<<"&nbsp; &nbsp;m*m="<&lt;m*m <<"&nbsp; &nbsp;m*m*m="<&lt;m*m*m<&lt;endl; <br>
+    }</p>
+<p>bool symm(long n) <br>
+    { <br>
+    &nbsp; &nbsp;long i, m; <br>
+    &nbsp; &nbsp;i=n ; &nbsp;m=0 ; <br>
+    &nbsp; &nbsp;while(i) <br>
+    &nbsp; &nbsp;{ <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;m=m*10+i%10; <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;i=i/10   ; <br>
+    &nbsp; &nbsp;} <br>
+    &nbsp; &nbsp;return ( m==n ); <br>
+    } </p>
+<h4>运行结果：</h4>
+<p>m=11&nbsp; &nbsp;m*m=121&nbsp; &nbsp;m*m*m=1331<br>
+    m=101&nbsp; &nbsp;m*m=10201&nbsp; &nbsp;m*m*m=1030301<br>
+    m=111&nbsp; &nbsp;m*m=12321&nbsp; &nbsp;m*m*m=1367631</p>
+
+<h3>例4、求n!</h3>
+<p>分析：计算n!的公式是一个递归形式的公式，应该用递归函数实现。</p>
+<h4>程序：</h4>
+<p>#include &lt;iostream><br>
+    using namespace std; <br>
+    long fac(int n) <br>
+    {<br>
+    &nbsp; &nbsp;long f; <br>
+    &nbsp; &nbsp;if (n<0) <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;cout<<"n<0,data error!"<<endl; <br>
+    &nbsp; &nbsp;else if (n==0) f=1; <br>
+    &nbsp; &nbsp;else f=fac(n-1)*n; <br>
+    &nbsp; &nbsp;return(f); <br>
+    }</p>
+<p>int main()<br>
+    {<br>
+    &nbsp; &nbsp; long fac(int n); <br>
+    &nbsp; &nbsp;int n; <br>
+    &nbsp; &nbsp;long y; <br>
+    &nbsp; &nbsp;cout<<"Enter a positive integer:"; <br>
+    &nbsp; &nbsp;cin>>n; <br>
+    &nbsp; &nbsp;y=fac(n); <br>
+    &nbsp; &nbsp;cout<&lt;n<<"!="<&lt;y<&lt;endl; <br>
+    }</p>
+<h4>运行结果：</h4>
+<p>Enter a positive integer:8<br>
+    8!=40320 </p>
+
+<h3>例5、汉诺塔问题</h3>
+<p>有三根针A、B、C。A针上有N个盘子，大的在下，小的在上，要求把这N个盘子从A针移到C针，在移动过程中可以借助B针，每次只允许移动一个盘，且在移动过程中在三根针上都保持大盘在下，小盘在上。</p>
+<h4>分析：</h4>
+<p>将n 个盘子从A针移到C针可以分解为下面三个步骤：<br>
+    ①将A 上n-1个盘子移到 B针上（借助C针）; <br>
+    ②把A针上剩下的一个盘子移到C针上; <br>
+    ③将n-1个盘子从B针移到C针上（借助A针）; </p>
+<p>事实上，上面三个步骤包含两种操作：<br>
+    ①将多个盘子从一个针移到另一个针上，这是一个递归的过程。hanoi函数实现。<br>
+    ②将1个盘子从一个针上移到另一针上。用move函数实现。</p>
+<h4>程序：</h4>
+<p>#include&lt;iostream><br>
+    using namespace std; <br>
+    void move(char getone,char putone) <br>
+    { cout<&lt; getone <&lt;"-->"<&lt;putone<&lt;endl; }<br>
+    void hanoi(int n,char one,char two,char three) <br>
+    {&nbsp;void move(char getone,char putone); <br>
+    &nbsp; &nbsp;if (n==1) move (one,three); <br>
+    &nbsp; &nbsp;else<br>
+    &nbsp; &nbsp;{ &nbsp;hanoi (n-1,one,three,two); <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;move(one,three); <br>
+    &nbsp; &nbsp; &nbsp; &nbsp;hanoi(n-1,two,one,three); <br>
+    &nbsp; &nbsp;}<br>
+    }</p>
+<p>int main()<br>
+    {<br>
+    &nbsp; &nbsp;void hanoi(int n,char one,char two,char three); <br>
+    &nbsp; &nbsp;int m; <br>
+    &nbsp; &nbsp;cout<<"Enter the number of diskes:"; <br>
+    &nbsp; &nbsp;cin>>m; <br>
+    &nbsp; &nbsp;cout<<"the steps to moving "<&lt;m<<" diskes:"<<&lt;ndl; <br>
+    &nbsp; &nbsp;hanoi(m,'A','B','C'); <br>
+    }</p>
+<h4>运行结果：</h4>
+<p>Enter the number of diskes:3<br>
+    the steps to moving 3 diskes: <br>
+    A-->C<br>
+    A-->B<br>
+    C-->B<br>
+    A-->C<br>
+    B-->A<br>
+    B-->C<br>
+    A-->C</p>
+
+
+<h3>例6、输入两个整数交换后输出</h3>
+<h4>程序：</h4>
+<p>#include&lt;iostream><br>
+    using namespace std; <br>
+    void Swap(int& a, int& b); </p>
+<p>int main()<br>
+    {&nbsp;int x(5), y(10); <br>
+    &nbsp; &nbsp;cout<<"x="<&lt;x<<"    y="<&lt;y<&lt;endl; <br>
+    &nbsp; &nbsp;Swap(x,y); <br>
+    &nbsp; &nbsp;cout<<"x="<&lt;x<<"    y="<&lt;y<&lt;endl; <br>
+    &nbsp; &nbsp;return 0; <br>
+    }</p>
+<p>void Swap(int& a, int& b) <br>
+    {&nbsp;int t; <br>
+    &nbsp; &nbsp;t=a; <br>
+    &nbsp; &nbsp;a=b; <br>
+    &nbsp; &nbsp;b=t; <br>
+    }</p>
+<p >程序设计</p>
+<p >1.使用重载函数编程序分别把两个数和三个数从大到小排列。 </p>
+<p>参考代码：<br>
+#include&lt;iostream><br />
+using namespace std;<br />
+void f(int,int,int);<br />
+void f(int,int);<br />
+int main(){<br />
+	int a,b,c;<br />
+	cin&gt;&gt;a&gt;&gt;b;<br />
+	f(a,b);<br />
+	cin&gt;&gt;a&gt;&gt;b&gt;&gt;c;<br />
+	f(a,b,c);<br />
+	return 0;<br />
+}<br />
+void f(int a,int b,int c){<br />
+	int t;<br />
+	if(a&lt;b){<br />
+		t=a;a=b;b=t;<br />
+	}<br />
+	if(a&lt;c){<br />
+		t=a;a=c;c=t;<br />
+	}<br />
+	if(b&lt;c){<br />
+		t=b;b=c;c=t;<br />
+	}<br />
+	cout&lt;<a&lt;&lt;&quot;,&quot;&lt;<b&lt;&lt;&quot;,&quot;&lt;<c&lt;<endl;<br />
+}<br />
+void f(int a,int b){<br />
+	if(a>b)cout&lt;&lt;a&lt;&lt;&quot;,&quot;&lt;&lt;b&lt;&lt;endl;<br />
+	else cout&lt;&lt;b&lt;&lt;&quot;,&quot;&lt;&lt;a&lt;&lt;endl;<br />
+}
+			  </span></p>
+<p >2.设计一函数，判断一整数是否为素数。并完成下列程序设计. </p>
+<p >(1)求3-200之间的所有素数 </p>
+<p >(2)在4-200之间，验证歌德巴赫猜想:任何一个充分大的偶数都可以表示为两个素数之和。输出4=2+26=3+3。。。。。200=3+197 </p><p>
+    参考代码：<br />
+ #include&lt;iostream.h><br />
+#include
+&lt;math.h><br />
+bool IsPrime(long);<br />
+void main()<br />
+{<br />
+	long i,j,k;<br />
+	const int N=200;<br />
+	for(i=3;i&lt;=N;i=i+2)<br />
+		if(IsPrime(i))<br />
+			cout&lt;&lt;i&lt;&lt;&quot;,&quot;;<br />
+			cout&lt;&lt;endl;<br />
+	for(i=6;i&lt;=N;i+=2)<br />
+	{<br />
+		k=i/2;<br />
+		for(j=2;j&lt;=k;j++)<br />
+			if (IsPrime(j) &amp;&amp; IsPrime(i-j))<br />
+			{<br />
+				cout&lt;&lt;i&lt;&lt;&quot;=&quot;&lt;&lt;j&lt;&lt;&quot;+&quot;&lt;&lt;i-j&lt;&lt;endl;<br />
+				break;<br />
+			}<br />
+	}<br />
+}<br />
+<br />
+bool IsPrime(long n)<br />
+{<br />
+	long i,k;<br />
+	k=(int)sqrt(n);i=1;<br />
+	while (++i&lt;=k)<br />
+		if (n%i==0)<br />
+			return false;<br />
+	return true;<br />
+} </span></p>
+
+
+<h3>重载函数应用举例</h3>
+<p>编写三个名为add的重载函数，分别实现两整数相加、两实数相加和两个复数相加的功能。</p>
+<h4>程序：</h4>
+<p>#include&lt;iostream><br>
+    using namespace std; </p>
+<p>struct complex<br>
+    {<br>
+    &nbsp; &nbsp;double real; <br>
+    &nbsp; &nbsp;double imaginary; <br>
+    };</p>
+<p>int main()<br>
+    {<br>
+    &nbsp; &nbsp;int m, n; <br>
+    &nbsp; &nbsp;double x, y; <br>
+    &nbsp; &nbsp;complex c1, c2, c3; <br>
+    &nbsp; &nbsp;int add(int m, int n); <br>
+    &nbsp; &nbsp;double add(double x, double y); <br>
+    &nbsp; &nbsp;complex add(complex c1, complex c2); <br>
+    &nbsp; &nbsp;cout<<"Enter two integer: ";<br>
+    &nbsp; &nbsp;cin>>m>>n; <br>
+    &nbsp; &nbsp;cout<<"integer "<&lt;m<<'+'<&lt;n<<"="<&lt;add(m,n)<&lt;endl; <br>
+    &nbsp; &nbsp;cout<<"Enter two real number: ";<br>
+    &nbsp; &nbsp;cin>>x>>y; <br>
+    &nbsp; &nbsp;cout<<"real number "<&lt;x<<'+'<&lt;y<<"= "<&lt;add(x,y)<&lt;endl; <br>
+    &nbsp; &nbsp;cout<<"Enter the first complex number: ";<br>
+    &nbsp; &nbsp;cin>>c1.real>>c1.imaginary; <br>
+    &nbsp; &nbsp;cout<<"Enter the second complex number: ";<br>
+    &nbsp; &nbsp;cin>>c2.real>>c2.imaginary; <br>
+    &nbsp; &nbsp;c3=add(c1,c2); <br>
+    &nbsp; &nbsp;cout<<"complex number (" <&lt;c1.real<&lt; ','<&lt; c1.imaginary <<")+("<&lt;c2.real<&lt;','<&lt;c2.imaginary<<")=("<&lt;c3.real<&lt;','<&lt;c3.imaginary<<")\n";<br>
+    }</p>
+<p>int add(int m, int n) <br>
+    {&nbsp;return m+n; }</p>
+<p>double add(double x, double y) <br>
+    {&nbsp;return x+y; }</p>
+<p>complex add(complex c1, complex c2) <br>
+    {<br>
+    &nbsp; &nbsp;complex c; <br>
+    &nbsp; &nbsp;c.real=c1.real+c2.real; <br>
+    &nbsp; &nbsp;c.imaginary=c1.imaginary+c2.imaginary; <br>
+    &nbsp; &nbsp;return c; <br>
+    }</p>
+<h4>运行结果：</h4>
+<p>Enter two integer: 3 5<br>
+    integer 3+5=8<br>
+    Enter two real number: 2.3 5.8<br>
+    real number 2.3+5.8= 8.1<br>
+    Enter the first complex number: 12.3 45.6<br>
+    Enter the second complex number: 56.7 67.8<br>
+    complex number (12.3,45.6)+(56.7,67.8)= (69,113.4)</p>
+</body>
+</html>

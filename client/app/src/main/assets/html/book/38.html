@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>用vector创建数组对象</title>
+</head>
+<body>
+<p>vector是C++标准库提供的被封装的动态数组，它不是一个类，是一个类模板，被封装的数组可以具有各种类型。通过使用vector可以避免重复性的创建动态数组类。<br>
+    为什么需要vector？ <br>
+    ?将动态数组封装，自动创建和删除 <br>
+    ?数组下标越界检查 <br>
+    ?课本例6-18中封装的ArrayOfPoints动态数组类也提供了类似功能，但只适用于一种类型的数组 </p>
+<p>vector定义动态数组的形式为：<br>
+    ?vector<元素类型> 数组对象名(数组长度);<br>
+        ?例：vector<int> arr(5)<br>
+            建立大小为5的int数组 <br>
+            &nbsp; &nbsp;注：与普通数组不同的是，用vector定义的数组对象的所有元素都会被初始化。若数组元素为基本数据类型，则所有元素初始化为0；若数组元素为类类型，则会调用类的默认构造函数初始化。<br>
+            &nbsp; &nbsp; &nbsp; &nbsp;也可以自己指定初值，但必须所有初值相同。<br>
+            &nbsp; &nbsp; &nbsp; &nbsp;形式为：vector<元素类型> 数组对象名(数组长度，元素初值);</p>
+<p>对数组元素的引用<br>
+    ?与普通数组具有相同形式：<br>
+    数组对象名 [ 下标表达式 ]<br>
+    ?但vector数组对象名不表示数组首地址 </p>
+<p>vector定义的属于对象有一个重要的成员函数size(),返回数组的大小：数组对象名.size()</p>
+<p>&nbsp;</p>
+</body>
+</html>

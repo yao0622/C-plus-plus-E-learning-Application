@@ -1,0 +1,523 @@
+<html>
+<head>
+    <title>类和对象</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<h2>类和对象</h2>
+<p>一、实验目的： <br />
+    （1）掌握类和对象的声明及使用； <br />
+    （2）复习具有不同访问属性的成员的访问方式； <br />
+    （3）观察构造函数和析构函数的执行过程； <br />
+    （4）学习类的组合的使用方法。 </p>
+<p>二、实验内容 <br />
+    （1）声明一个CPU类，包含等级（rank）、频率（frequency）、电压（voltage）等属性，有两个公有成员函数run、stop。其中rank为枚举类型CPU_Rank，声明为enum  CPU_Rank｛P1=1, P2, P3, P4, P5, P6, P7｝；frequency为单位是MHz的整型数，voltage为浮点型的电压值。观察构造函数和析构函数的调用次序。 <br />
+    （2）声明一个简单的Computer类，有数据成员芯片（cpu）、内存（ram）、光驱（cdrom）等，有两个公有成员函数run和stop。cpu为CPU类的一个对象，ram为RAM类的一个对象，cdrom为CDROM类的一个对象，声明并实现这个类。 </p>
+<p>三、实验步骤 </p><p>（1）首先声明枚举类型CPU_Rank，例如enum CPU_Rank｛P1=1, P2, P3, P4,  P5, P6, P7｝，再声明CPU类，包含等级（rank）、频率（frequency）、电压（voltage）等私有数据成员，声明成员函数run和stop，用来输出提示信息，在构造函数和析构函数中也可以输出提示信息。在主程序中声明一个CPU的对象，调用其成员函数，观察类对象的构造与析构顺序，以及成员函数的调用。 <br>
+<p>参考代码<br>
+        		    //lab4_1.cpp<br>
+        		    #include &lt;iostream&gt;<br>
+        		    using namespace std;<br>
+        		    enum CPU_Rank {P1=1,P2,P3,P4,P5,P6,P7};<br>
+        		    class CPU<br>
+        		    {<br>
+        		    private:<br>
+        		    CPU_Rank rank;<br>
+        		    int frequency;<br>
+        		    float voltage;<br>
+        		    public:<br>
+        		    CPU (CPU_Rank r,  int f, float v)<br>
+        		    {<br>
+        		    rank = r;<br>
+        		    frequency  = f;<br>
+        		    voltage =  v;<br>
+        		    cout  &lt;&lt; &quot;构造了一个CPU!&quot; &lt;&lt; endl;<br>
+        		    }<br>
+        		    ~CPU () { cout  &lt;&lt; &quot;析构了一个CPU!&quot; &lt;&lt; endl; }<br>
+        		    CPU_Rank GetRank()  const { return rank; }<br>
+        		    int GetFrequency() const { return frequency; }<br>
+        		    float  GetVoltage() const { return voltage; }<br>
+        		    void  SetRank(CPU_Rank r) { rank = r; }<br>
+        		    void  SetFrequency(int f) { frequency = f; }<br>
+        		    void  SetVoltage(float v) { voltage = v; }<br>
+        		    void Run() {cout  &lt;&lt; &quot;CPU开始运行!&quot; &lt;&lt; endl; }<br>
+        		    void Stop() {cout  &lt;&lt; &quot;CPU停止运行!&quot; &lt;&lt; endl; }<br>
+        		    };<br>
+        		    int main()<br>
+        		    {<br>
+        		    CPU  a(P6,300,2.8);<br>
+        		    a.Run();<br>
+        		    a.Stop();<br>
+        		    }<br></span></p>
+<p>（2）声明RAM类和CDROM类，再声明Computer类，声明私有数据成员cpu、ram、cdrom，声明公有成员函数run和stop，在其中输出提示信息。在主程序中声明一个Computer的对象，调用其成员函数，观察类对象及其成员变量的构造与析构顺序，以及成员函数的调用。 </p>
+<p>参考代码<br>
+        		    //lab4_2.cpp<br>
+        		    #include &lt;iostream&gt;<br>
+        		    using namespace std;<br>
+        		    enum CPU_Rank {P1=1,P2,P3,P4,P5,P6,P7};<br>
+        		    class CPU<br>
+        		    {<br>
+        		    private:<br>
+        		    CPU_Rank rank;<br>
+        		    int frequency;<br>
+        		    float voltage;<br>
+        		    public:<br>
+        		    CPU (CPU_Rank r,  int f, float v)<br>
+        		    {<br>
+        		    rank = r;<br>
+        		    frequency  = f;<br>
+        		    voltage =  v;<br>
+        		    cout  &lt;&lt; &quot;构造了一个CPU!&quot; &lt;&lt; endl;<br>
+        		    }<br>
+        		    CPU()<br>
+        		    {<br>
+        		    cout  &lt;&lt; &quot;构造了一个CPU!&quot; &lt;&lt; endl;<br>
+        		    };<br>
+        		    ~CPU ()<br>
+        		    { <br>
+        		    cout  &lt;&lt; &quot;析构了一个CPU!&quot; &lt;&lt; endl;<br>
+        		    }<br>
+        		    CPU_Rank GetRank()  const { return rank; }<br>
+        		    int GetFrequency()  const { return frequency; }<br>
+        		    float  GetVoltage() const { return voltage; }<br>
+        		    void  SetRank(CPU_Rank r) { rank = r; }<br>
+        		    void  SetFrequency(int f) { frequency = f; }<br>
+        		    void  SetVoltage(float v) { voltage = v; }<br>
+        		    void Run() {cout  &lt;&lt; &quot;CPU开始运行!&quot; &lt;&lt; endl; }<br>
+        		    void Stop() {cout  &lt;&lt; &quot;CPU停止运行!&quot; &lt;&lt; endl; }<br>
+        		    };<br>
+        		    class RAM<br>
+        		    {<br>
+        		    public:<br>
+        		    RAM ()<br>
+        		    {<br>
+        		    cout  &lt;&lt; &quot;构造了一个RAM!&quot; &lt;&lt; endl; <br>
+        		    }<br>
+        		    ~RAM () <br>
+        		    {<br>
+        		    cout  &lt;&lt; &quot;析构了一个RAM!&quot; &lt;&lt; endl;<br>
+        		    }<br>
+        		    void Run() {cout  &lt;&lt; &quot;RAM开始运行!&quot; &lt;&lt; endl; }<br>
+        		    void Stop() {cout  &lt;&lt; &quot;RAM停止运行!&quot; &lt;&lt; endl; }<br>
+        		    };<br>
+        		    class CDROM<br>
+        		    {<br>
+        		    public:<br>
+        		    CDROM (){?? cout &lt;&lt; &quot;构造了一个CDROM!&quot;  &lt;&lt; endl; }<br>
+        		    ~CDROM ()<br>
+        		    { <br>
+        		    cout  &lt;&lt; &quot;析构了一个CDROM!&quot; &lt;&lt; endl; <br>
+        		    }<br>
+        		    void Run() {cout  &lt;&lt; &quot;CDROM开始运行!&quot; &lt;&lt; endl; }<br>
+        		    void Stop() {cout  &lt;&lt; &quot;CDROM停止运行!&quot; &lt;&lt; endl; }<br>
+        		    };<br>
+        		    class COMPUTER<br>
+        		    {<br>
+        		    private:<br>
+        		    CPU cpu;<br>
+        		    RAM ram;<br>
+        		    CDROM  cdrom;<br>
+        		    public:<br>
+        		    COMPUTER()<br>
+        		    {<br>
+        		    cout  &lt;&lt; &quot;构造了一个COMPUTER!&quot;  &lt;&lt; endl;<br>
+        		    }<br>
+        		    ~COMPUTER  ()<br>
+        		    { <br>
+        		    cout  &lt;&lt; &quot;析构了一个COMPUTER!&quot;  &lt;&lt; endl;<br>
+        		    }<br>
+        		    void Run() <br>
+        		    {<br>
+        		    cout  &lt;&lt; &quot;COMPUTER开始运行!&quot; &lt;&lt; endl;<br>
+        		    cpu.Run();<br>
+        		    ram.Run();<br>
+        		    }<br>
+        		    void Stop() <br>
+        		    {<br>
+        		    ram.Stop();<br>
+        		    cpu.Stop();<br>
+        		    cout  &lt;&lt; &quot;COMPUTER停止运行!&quot;  &lt;&lt; endl; <br>
+        		    }<br>
+        		    };<br>
+        		    int main()<br>
+        		    {<br>
+        		    COMPUTER a;<br>
+        		    a.Run();<br>
+        		    a.Stop();<br>
+        		    }<br></span></p>
+<p>一、编写一个名为Person的类，表示人的名字和地址，使用string来保存每个元素。</p>
+<p>
+    参考代码<br />class person { <br />
+  public:  <br />
+  person( string pName, string pAddress )  { <br />
+  name = pName;  address = pAddress;  }  <br />
+  private:  <br />
+  string name;  <br />
+  string address; }; </span></p>
+<p>二、指明person的哪个成员应声明为public，哪个成员应声明为private。解释。?</p><p>
+    参考代码 <br />数据成员name和address应为private,?保证只能被类的成员所用，外界不可访问。成员函数get_name()和get_address()?应声明为public，为外界提供接口访问类的数据成员。构造函数也应声明为public，以便初始化类的对象。 </span></p>
+
+<h3>案例1：
+    本案例编写一个有理数类，在构造函数中包含一条输出语句用于跟踪该函数的执行。</h3>
+<h5 align="left">#include&lt;iostream&gt; <br />
+    using namespace std;<br />
+    int gcd(int m, int n) //返回m和n的最大公约数 <br />
+    {<br />
+    if (m &lt; n)<br />
+    swap(m,  n);<br />
+    while (n &gt;  0)<br />
+    {<br />
+    int r = m % n;<br />
+    m = n;<br />
+    n = r;<br />
+    }<br />
+    return m;<br />
+    }<br />
+    class Ratio<br />
+    {<br />
+    public:<br />
+    Ratio(int n =  0, int d = 1)<br />
+    :num(n),  den(d)<br />
+    {<br />
+    cout  &lt;&lt; &quot;Common constructor called&quot;  &lt;&lt; endl;<br />
+    reduce();<br />
+    }<br />
+    Ratio(const  Ratio &amp;r):num(r.num),  den(r.den)<br />
+    {<br />
+    cout  &lt;&lt; &quot;Copy constructor called&quot;  &lt;&lt; endl;<br />
+    }<br />
+    void disp()<br />
+    {<br />
+    cout &lt;&lt; num &lt;&lt; &quot;/&quot; &lt;&lt; den &lt;&lt; endl;<br />
+    }<br />
+    private:<br />
+    int  num, den;<br />
+    void  reduce()<br />
+    {<br />
+    if (num == 0  || den == 0)<br />
+    {<br />
+    num =  0;<br />
+    den =  1;<br />
+    return;<br />
+    }<br />
+    if (den &lt;  0)<br />
+    {<br />
+    den  *= -1;<br />
+    num  *= -1;<br />
+    }<br />
+    if (den == 1)<br />
+    return;<br />
+    int sgn =  (num &lt; 0 ? -1: 1);<br />
+    int g =  gcd(sgn * num, den);<br />
+    num /= g;<br />
+    den /= g;<br />
+    }<br />
+    };<br />
+    Ratio func(Ratio r) //初始化形参时调用拷贝构造函数 <br />
+    {<br />
+    Ratio s = r;<br />
+    return  s;//返回时调用拷贝构造函数 <br />
+    }<br />
+    int main()<br />
+    {<br />
+    Ratio x(20, 7);<br />
+    cout &lt;&lt; &quot;Ratio  x is: &quot;;<br />
+    x.disp();<br />
+    Ratio y(x);<br />
+    cout &lt;&lt; &quot;Ratio  y is: &quot;;<br />
+    y.disp();<br />
+    cout &lt;&lt; &quot;Func()  start: &quot; &lt;&lt; endl;<br />
+    func(y);<br />
+    cout &lt;&lt; &quot;Func()  end&quot; &lt;&lt; endl;<br />
+    return 0;<br />
+    }<br />
+    运行结果： </h5>
+<p align="left">  Common constructor called<br />
+    Ratio x is: 20/7<br />
+    Copy constructor called<br />
+    Ratio y is: 20/7<br />
+    Func() start:<br />
+    Copy constructor called<br />
+    Copy constructor called<br />
+    Copy constructor called<br />
+    Func() end</p>
+<p>&nbsp;</p>
+<h3>案例2： <br />
+    编写一个程序，设计一个电子日历类CDate的界面。满足以下要求： <br />
+    （1）用年/月/日格式输出日期。 <br />
+    （2）可运行日期加一天的操作。 <br />
+    （3）设置日期。 </h3>
+<table width="354" border="1" cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="394" valign="top"><p align="center">CDate</p></td>
+    </tr>
+    <tr>
+        <td width="394" valign="top"><p>- m_nYear: int<br />
+            - m_nMonth: int<br />
+            - m_nDay: int</p></td>
+    </tr>
+    <tr>
+        <td width="394" valign="top"><p>+ CDate()<br />
+            + CDate(year:int, month:int, day:int)<br />
+            + Display(): void<br />
+            + AddDay(): void<br />
+            + SetDate(year:int, month:int, day:int): void<br />
+            + ~CDate()<br />
+            - IsLeapYear(): bool</p></td>
+    </tr>
+</table>
+<p align="left">#include &lt;iostream&gt;<br />
+    #include &lt;cstdlib&gt;<br />
+    using namespace std;<br />
+    class CDate<br />
+    {<br />
+    int m_nYear;<br />
+    int m_nMonth;<br />
+    int m_nDay;<br />
+    public:<br />
+    CDate() {}<br />
+    CDate(int  year, int month, int  day)<br />
+    {<br />
+    SetDate(year,  month, day);<br />
+    }<br />
+    void  Display();<br />
+    void  AddDay();<br />
+    void SetDate(int year, int month, int day)<br />
+    {<br />
+    m_nYear  = year;<br />
+    m_nMonth  = month;<br />
+    m_nDay  = day;<br />
+    }<br />
+    ~CDate() {}<br />
+    private:<br />
+    bool  IsLeapYear();<br />
+    };</p>
+<p align="left">void CDate::Display()<br />
+    {<br />
+    char year[5],  month[5], day[5];<br />
+    _itoa(m_nYear, year, 10);<br />
+    _itoa(m_nMonth, month, 10);<br />
+    _itoa(m_nDay, day, 10);<br />
+    cout &lt;&lt; year &lt;&lt; &quot;/&quot; &lt;&lt; month &lt;&lt; &quot;/&quot; &lt;&lt; day &lt;&lt; endl;<br />
+    }<br />
+    void CDate::AddDay()<br />
+    {<br />
+    m_nDay++;<br />
+    if (m_nDay ==  32)// 1, 3, 5, 7, 8,  10, 12月份 <br />
+    {<br />
+    m_nMonth++;<br />
+    m_nDay  = 1;<br />
+    if (m_nMonth  == 13)<br />
+    {<br />
+    m_nYear++;<br />
+    m_nMonth = 1;<br />
+    }<br />
+    return;<br />
+    }<br />
+    if (m_nDay ==  31)// 4, 6, 9, 11月份 <br />
+    {<br />
+    if (m_nMonth == 4 || m_nMonth == 6 || m_nMonth == 9  || m_nMonth == 11)<br />
+    {<br />
+    m_nMonth++;<br />
+    m_nDay = 1;<br />
+    }<br />
+    return;<br />
+    }<br />
+    if (m_nMonth  == 2) //二月份 <br />
+    {<br />
+    if (m_nDay == 30)  //闰年 <br />
+    {<br />
+    m_nMonth++;<br />
+    m_nDay = 1;<br />
+    return;<br />
+    }<br />
+    if (m_nDay == 29)<br />
+    if  (!IsLeapYear()) //非闰年 <br />
+    {<br />
+    m_nMonth++;<br />
+    m_nDay  = 1;<br />
+    return;<br />
+    }<br />
+    }<br />
+    <br />
+    }<br />
+    bool CDate::IsLeapYear()<br />
+    {<br />
+    bool bLeap;<br />
+    if (m_nYear %  4 != 0)<br />
+    bLeap  = false;<br />
+    else if (m_nYear % 100 != 0)<br />
+    bLeap  = true;<br />
+    else if (m_nYear % 400 != 0)<br />
+    bLeap  = false;<br />
+    else<br />
+    bLeap  = true;<br />
+    return bLeap;<br />
+    }</p>
+<p align="left">void main()<br />
+    {<br />
+    CDate d(2004, 9, 25);<br />
+    cout &lt;&lt; &quot;Current  date: &quot;;<br />
+    d.Display();<br />
+    d.AddDay();<br />
+    cout &lt;&lt; &quot;Add  1 to Current date: &quot;;<br />
+    d.Display();<br />
+    d.SetDate(2004, 10, 1);<br />
+    cout &lt;&lt; &quot;After  reset Date, the date: &quot;;<br />
+    d.Display();<br />
+    getchar();<br />
+    }</p>
+<h5>运行结果： </h5>
+<p>  Current date: 2004/9/25<br />
+    Add 1 to Current date: 2004/9/26<br />
+    After reset Date, the date: 2004/10/1</p>
+
+
+<p><strong>Q</strong>：复制构造函数用于哪三个方面？<br />
+    <strong>A</strong>：<br />
+    （1）用类的一个对象去初始化该类的另一个对象时使用。<br />
+    （2）当函数的形参是类的对象，调用函数时，进行形参与实参结合时使用。<br />
+    （3）当函数的返回值是类对象，函数执行结束返回调用者时使用。</p>
+<p><strong>Q</strong>：C++中结构、联合与类三者间有何异同？<br />
+    <strong>A</strong>：在C++中结构（structure）与类几乎是完全一样的类型，差别仅仅在于缺省情况下结构的成员为公有的。联合（union）是C++的导出数据类型，在语法与功能上类似于结构，二者的区别是：结构变量的各成员同时被分配了各自独立的内存区，而联合变量的各个成员的存储开始地址都相同，所以在任一时刻联合变量只能存储一个成员。</p>
+
+<h3>类的组合举例1</h3>
+<p>class Point<br>
+    {
+    &nbsp;private: <br>
+    &nbsp; &nbsp;float x,y; //点的坐标 <br>
+    &nbsp;public: <br>
+    &nbsp; &nbsp;Point(float h,float v); //构造函数 <br>
+    &nbsp; &nbsp;float GetX(void); //取X坐标 <br>
+    &nbsp; &nbsp;float GetY(void); //取Y坐标 <br>
+    &nbsp; &nbsp;void Draw(void); //在(x,y)处画点 <br>
+    };<br>
+    //...函数的实现略</p>
+<p>class Line<br>
+    {<br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;Point  p1,p2; //线段的两个端点<br>
+    &nbsp;public: <br>
+    &nbsp; &nbsp;Line(Point a,Point b); //构造函数 <br>
+    &nbsp; &nbsp;Void Draw(void); //画出线段<br>
+    };<br>
+    //...函数的实现略 </p>
+
+<h3>类的组合举例2</h3>
+<p>class Part  //部件类 <br>
+    {<br>
+    &nbsp;public: <br>
+    &nbsp; &nbsp;Part();<br>
+    &nbsp; &nbsp;Part(int i); <br>
+    &nbsp; &nbsp;~Part();<br>
+    &nbsp; &nbsp;void Print();<br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;int val; <br>
+    };</p>
+<p>class Whole <br>
+    {<br>
+    &nbsp;public: <br>
+    &nbsp; &nbsp;Whole();<br>
+    &nbsp; &nbsp;Whole(int i,int j,int k); <br>
+    &nbsp; &nbsp;~Whole();<br>
+    &nbsp;void Print();<br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;Part one; <br>
+    &nbsp; &nbsp;Part two; <br>
+    &nbsp; &nbsp;int date; <br>
+    };</p>
+<p>Whole::Whole()<br>
+    {<br>
+    &nbsp; &nbsp;date=0; <br>
+    }</p>
+<p>Whole::Whole(int i,int j,int k): two(i),one(j),date(k) <br>
+    {}<br>
+    //...其它函数的实现略 </p>
+
+<h3>前向引用声明举例</h3>
+<h5>(1)</h5>
+<p>class Fred;	//前向引用声明</p>
+<p>class Barney {<br>
+    &nbsp; &nbsp;Fred x;	//错误：类Fred的声明尚不完善<br>
+    };</p>
+<p>class Fred {<br>
+    &nbsp; &nbsp;Barney y; <br>
+    };</p>
+<h5>(2)</h5>
+<p>class Fred;	//前向引用声明</p>
+<p>class Barney {<br>
+    &nbsp;public: <br>
+    &nbsp; &nbsp;void method()<br>
+    &nbsp; &nbsp;{<br>
+    &nbsp; &nbsp; &nbsp;x->yabbaDabbaDo( );//错误：Fred类的对象在定义之前被使用<br>
+    &nbsp; &nbsp;}<br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;Fred* x;   //正确，经过前向引用声明，可以声明Fred类的对象指针<br>
+    };</p>
+<p>class Fred {<br>
+    &nbsp;public: <br>
+    &nbsp; &nbsp;void yabbaDabbaDo();<br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;Barney* y; <br>
+    }; </p>
+
+<h3>例1 结构体应用</h3>
+<p>#include &lt;iostream><br>
+    #include &lt;iomanip><br>
+    using namespace std;</p>
+<p>struct student   //学生信息结构体<br>
+    {&nbsp;int num;  //学号<br>
+    &nbsp;&nbsp;char name[20];  //姓名<br>
+    &nbsp; &nbsp;char gender;  //性别<br>
+    &nbsp; &nbsp;int age;  //年龄<br>
+    }stu={97001,"Lin Lin",'F',19};</p>
+<p>int main()<br>
+    {&nbsp;cout<&lt;setw(7)<&lt;stu.num<&lt;setw(20)<&lt;stu.name<&lt;setw(3)<&lt;stu.gender<&lt;setw(3)<&lt;stu.age; <br>
+    }</p>
+
+<h3>例2 使用联合体保存成绩信息</h3>
+<p>#include &lt;string><br>
+    #include &lt;iostream><br>
+    using namespace std;</p>
+<p>class ExamInfo{<br>
+    public: <br>
+    &nbsp; &nbsp;ExamInfo(string name, char grade): name(name), mode(GRADE), grade(grade){ }<br>
+    &nbsp; &nbsp;ExamInfo(string name, bool pass): name(name), mode(PASS), pass(pass){ }<br>
+    &nbsp; &nbsp;ExamInfo(string name, int percent): name(name), mode(PERCENTAGE), percent(percent){ }<br>
+    &nbsp; &nbsp;void show( ); <br>
+    private: <br>
+    &nbsp; &nbsp;string name; <br>
+    &nbsp; &nbsp;enum {<br>
+    &nbsp; &nbsp;GRADE, <br>
+    &nbsp; &nbsp;PASS, <br>
+    &nbsp; &nbsp;PERCENTAGE<br>
+    &nbsp; &nbsp;} mode;<br>
+    &nbsp; &nbsp;union{<br>
+    &nbsp; &nbsp;&nbsp; &nbsp;char grade; <br>
+    &nbsp; &nbsp;&nbsp; &nbsp;bool pass; <br>
+    &nbsp; &nbsp;&nbsp; &nbsp;int percent; <br>
+    &nbsp; &nbsp;};<br>
+    };</p>
+<p>void ExamInfo::show()<br>
+    {<br>
+    &nbsp; &nbsp;cout<&lt;name<<": ";<br>
+    &nbsp; &nbsp;switch (mode){ <br>
+    &nbsp; &nbsp;case GRADE: cout<&lt;grade; break; <br>
+    &nbsp; &nbsp;case PASS: cout<&lt;(pass?"PASS":"FAIL"); break; <br>
+    &nbsp; &nbsp;case PERCENTAGE: cout<&lt;percent; break; <br>
+    &nbsp; &nbsp;}<br>
+    &nbsp; &nbsp;cout<&lt;endl; <br>
+    }</p>
+<p>int main(){<br>
+    &nbsp; &nbsp;ExamInfo course1("English", 'B'); <br>
+    &nbsp; &nbsp;ExamInfo course2("Calculus", true); <br>
+    &nbsp; &nbsp;ExamInfo course3("C++ Programming", 85); <br>
+    &nbsp; &nbsp;course1.show();<br>
+    &nbsp; &nbsp;course2.show();<br>
+    &nbsp; &nbsp;course3.show();<br>
+    &nbsp; &nbsp;return 0; <br>
+    }</p>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">C++帮</string>
+    <string name="login">登入</string>
+    <string name="register">注册</string>
+    <string name="mainBook">大纲讲义</string>
+    <string name="mainVideo">视频天地</string>
+    <string name="mainPpt">课件下载</string>
+    <string name="mainExam">在线测试</string>
+</resources>

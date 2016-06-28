@@ -1,0 +1,43 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>动态内存分配</title>
+</head>
+<body>
+<p>虽然可以通过数组对大量的数据和对象进行有效的管理，但是在程序运行前并不能总是申请到合适的内存，在C++中，动态内存分配技术可以保证程序在运行过程中按照实际需要申请适量的内存，使用结束后还可以释放，这种在程序运行过程中申请和释放的存储单元也称为堆对象，申请和释放过程一般称为建立和删除。<br>
+    &nbsp;&nbsp;建立和删除堆对象的两个运算符：new和delete<br>
+    &nbsp;&nbsp;new的语法形式：<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;new  类型名T（初始化参数列表）<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;功能：在程序执行期间，申请用于存放T类型对象的内存空间，并依初值列表赋以初值。 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;结果值：成功：T类型的指针，指向新分配的内存；失败：抛出异常。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;注：对于new T和new T（）<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（1）建立的是基本数据类型，第一种表示对分配的内存不设定初值；第二种表示则表示用0对该对象初始化。<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（2）建立的是类的实例对象，如果用户定义了默认构造函数，这两种写法都会调用这个默认的构造函数；如果用户未定义默认的构造函数，则第一种会调用系统默认的构造函数，第二种不仅调用系统的默认构造函数，而且还会递归的对基本数据类型和指针类型的成员用0赋值。<br>
+    &nbsp;&nbsp;delete的语法形式：<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;delete 指针p <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;功能：释放指针p所指向的内存。p必须是new操作的返回值。 <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;如果被删除的是对象，该对象的析构函数将被调用。对于用new建立的对象必须而且只能用delete删除一次。</p>
+<p>动态创建和删除动态数组的语法形式为： <br>
+    &nbsp;&nbsp;创建：new 类型名T [ 数组长度 ] <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?数组长度可以是任何表达式，在运行时计算  <br>
+    &nbsp;&nbsp;删除：delete[] 数组名p <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;释放指针p <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;所指向的数组。p必须是用new分配得到的数组首地址。 </p>
+<p>由于两种原因将动态数组封装成类： <br>
+    &nbsp;&nbsp;更加简洁，便于管理  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?建立和删除数组的过程比较繁琐  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?封装成类后更加简洁，便于管理  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?可以自动完成对象数组的创建与删除 <br>
+    &nbsp;&nbsp;可以在访问数组元素前检查下标是否越界  <br>
+    &nbsp;&nbsp;&nbsp;&nbsp;?用assert来检查，assert只在调试时生效 </p>
+</p>
+<p>动态创建多维数组的语法形式为： <br>
+    &nbsp;&nbsp;new 类型名T[第1维长度][第2维长度]…；<br>
+    如果内存申请成功，new运算返回一个指向新分配内存首地址的指针，是一个T类型的数组，数组元素的个数为除最左边一维外各维下标表达式的乘积。<br>
+    例如：<br>
+    char (*fp)[3];<br>
+    fp = new char[2][3];<br>
+    注意：第一维长度可以是任何结果为正整数的表达式，而其他各维数组长度必须是结果为正整数的常量表达式。</p>
+<p>&nbsp;</p>
+</body>
+</html>

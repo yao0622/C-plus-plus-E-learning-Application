@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>类的继承与派生</title>
+</head>
+<body>
+<style type="text/css">
+    <!--
+    .STYLE1 {color: #FF0000}
+    -->
+</style>
+<h3>继承与派生的概念</h3>
+<p align="left"> <br>
+    所谓继承，就是在一个已有类的基础上建立一个新类，已有的类称为“基类”或“父类”，新建立的类称为“派生类”或“子类”。 <br>
+    如果一个派生类只从一个基类派生，称为单继承；如果一个派生类从多个基类派生，称为多重继承。</p>
+<p align="center"> <br>
+    <span class="STYLE1">单继承</span> <br>
+    <img src="images/image001.jpg" width="474" height="134" />  <br clear="ALL">
+    <br>
+    <span class="STYLE1">多重继承 </span><br>
+    <img src="images/image002.jpg" width="331" height="150" />  <br clear="ALL">
+    <br>
+</p>
+<h3 align="left">派生类的声明 </h3>
+<p align="left">class 派生类名 ：[继承方式] 基类名 <br>
+    { <br>
+    派生类新增加的成员声明;<br>
+    };<br>
+    例如： <br>
+    class  Book //定义基类Book<br>
+    {  private:<br>
+    int num; //书号 <br>
+    float price; //定价 <br>
+    int sellnum; //销售量 <br>
+    public:<br>
+    float sale() //计算销售额 <br>
+    { return price*sellnum; }<br>
+    };<br>
+    class  Book1:public Book //定义派生类Book1<br>
+    {  private:<br>
+    char type; //定义图书类别，新增加的数据成员 <br>
+    char name[40]; //书名，新增加的数据成员 <br>
+    char publisher[20]; //出版社，新增加的数据成员 <br>
+    public:<br>
+    void show() //显示图书信息，新增加的成员函数 <br>
+    {  cout&lt;&lt;&quot;type:&quot;&lt;&lt;type&lt;&lt;endl;<br>
+    cout&lt;&lt;&quot;name:&quot;&lt;&lt;name&lt;&lt;endl;<br>
+    cout&lt;&lt;&quot;publisher:&quot;&lt;&lt;publisher&lt;&lt;endl;<br>
+    }<br>
+    };</p>
+<h3 align="left">派生类的构成 </h3>
+<p align="left"><br>
+    派生类中的成员包括两部分，一部分是从基类继承过来的成员，一部分是在声明派生类时新增加的成员，每一部分均包括数据成员和成员函数。 </p>
+<p align="center"><span class="STYLE1">Book类和Book1类之间的继承关系 </span><br>
+    <img src="images/image003.jpg" width="446" height="265" /><br clear="ALL">
+</p>
+</body>
+</html>

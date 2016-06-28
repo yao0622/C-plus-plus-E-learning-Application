@@ -1,0 +1,138 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>输出流</title>
+</head>
+<body>
+<div class=WordSection1 style='layout-grid:15.6pt'>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>最重要的三个输出流是</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ostream</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ofstream</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ostringstream</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>输出流对象</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ofstream</span><span
+            style='font-family:"微软雅黑","sans-serif"'>类支持磁盘文件输出</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>如果在构造函数中指定一个文件名，当构造这个文件时该文件是自动打开的</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ofstream
+myFile(&quot;filename&quot;);</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>可以在调用默认构造函数之后使用<span
+            lang=EN-US>open</span>成员函数打开文件</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ofstream
+myFile; //</span><span style='font-family:"微软雅黑","sans-serif"'>声明一个静态文件输出流对象</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>myFile.open(&quot;filename&quot;);&nbsp;&nbsp;&nbsp;
+<br>
+&nbsp;//</span><span style='font-family:"微软雅黑","sans-serif"'>打开文件，使流对象与文件建立联系</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>在构造对象或用<span
+            lang=EN-US>open</span>打开文件时可以指定模式</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>ofstream
+myFile(&quot;filename&quot;, ios_base::out | ios_base::binary);</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>插入运算符（<span
+            lang=EN-US>&lt;&lt;</span>）</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>插入<span
+            lang=EN-US>(&lt;&lt;)</span>运算符是所有标准<span lang=EN-US>C++</span>数据类型预先设计的。</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>用于传送字节到一个输出流对象。</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>控制输出格式</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>控制输出宽度</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>为了调整输出，可以通过在流中放入<span
+            lang=EN-US>setw</span>操纵符或调用<span lang=EN-US>width</span>成员函数为每个项指定输出宽度。</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>进制</span></b></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>dec</span><span
+            style='font-family:"微软雅黑","sans-serif"'>、<span lang=EN-US>oct</span>和<span
+            lang=EN-US>hex</span>操纵符设置输入和输出的默认进制。</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>文件输出流成员函数</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>输出流成员函数有三种类型：</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>与操纵符等价的成员函数。</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>执行非格式化写操作的成员函数。</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>其它修改流状态且不同于操纵符或插入运算符的成员函数。</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>open</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>函数</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>把流与一个特定的磁盘文件关联起来。</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>需要指定打开模式。</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>put</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>函数</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>把一个字符写到输出流中。</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>write</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>函数</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>把内存中的一块内容写到一个文件输出流中</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>seekp</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>和<span lang=EN-US>tellp</span>函数</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>操作文件流的内部指针</span></p>
+
+    <p class=MsoNormal><b><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>close</span></b><b><span
+            style='font-family:"微软雅黑","sans-serif"'>函数</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>关闭与一个文件输出流关联的磁盘文件</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>错误处理函数</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>在写到一个流时进行错误处理</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>二进制输出文件</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>以通常方式构造一个流，然后使用<span
+            lang=EN-US>setmode</span>成员函数，在文件打开后改变模式。</span></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>使用<span
+            lang=EN-US>ofstream</span>构造函数中的模式参量指定二进制输出模式</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>字符串输出流<span
+            lang=EN-US>ostringstream</span></span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>用于构造字符串</span></b></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>功能</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>支持<span
+            lang=EN-US>ofstream</span>类的除<span lang=EN-US>open</span>、<span lang=EN-US>close</span>外的所有操作</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>str</span><span
+            style='font-family:"微软雅黑","sans-serif"'>函数可以返回当前已构造的字符串</span></p>
+
+    <p class=MsoNormal><b><span style='font-family:"微软雅黑","sans-serif"'>典型应用</span></b></p>
+
+    <p class=MsoNormal><span style='font-family:"微软雅黑","sans-serif"'>将数值转换为字符串</span></p>
+
+    <p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US
+                                                        style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-US style='font-family:"微软雅黑","sans-serif"'>&nbsp;</span></p>
+</div>
+</body>
+</html>

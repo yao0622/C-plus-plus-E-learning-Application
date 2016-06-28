@@ -1,0 +1,738 @@
+<html>
+<head>
+    <title>数据的共享与保护</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<h2>数据的共享与保护</h2>
+
+<p>一、实验目的： <br />
+    （1）观察程序运行过程中变量的作用域、生存期和可见性； <br />
+    （2）学习类是静态成员的使用； <br />
+    （3）学习多文件结构在C++程序中的使用。 </p>
+<p>二、实验内容 <br />
+    （1）运行下面的程序，观察变量x、y的值。 <br />
+    #include  &lt;iostream&gt;<br />
+    using  namespace std;</p>
+<p>void  fn1(); <br />
+    int x =  1, y = 2; </p>
+<p>int  main()<br />
+    {<br />
+    cout &lt;&lt; &quot;Begin...&quot;  &lt;&lt; endl;<br />
+    cout &lt;&lt; &quot;x = &quot; &lt;&lt; x  &lt;&lt; endl;<br />
+    cout &lt;&lt; &quot;y = &quot; &lt;&lt; y  &lt;&lt; endl;<br />
+    cout &lt;&lt; &quot;Evaluate x and y in  main()...&quot; &lt;&lt; endl;<br />
+    int x = 10, y = 20;<br />
+    cout &lt;&lt; &quot;x = &quot; &lt;&lt; x  &lt;&lt; endl;<br />
+    cout &lt;&lt; &quot;y = &quot; &lt;&lt; y  &lt;&lt; endl;<br />
+    cout &lt;&lt; &quot;Step into  fn1()...&quot; &lt;&lt; endl;<br />
+    fn1();<br />
+    cout &lt;&lt; &quot;Back in main&quot; &lt;&lt;  endl;<br />
+    cout &lt;&lt; &quot;x = &quot; &lt;&lt; x  &lt;&lt; endl;<br />
+    cout &lt;&lt; &quot;y = &quot; &lt;&lt; y  &lt;&lt; endl;<br />
+    return 0;<br />
+    }<br />
+    void  fn1()<br />
+    {<br />
+    int y = 200;<br />
+    cout &lt;&lt; &quot;x = &quot; &lt;&lt; x  &lt;&lt; endl;<br />
+    cout &lt;&lt; &quot;y = &quot; &lt;&lt; y  &lt;&lt; endl;<br />
+    }<br />
+    （2）实现客户机（CLIENT）类。声明字符型静态数据成员ServerName，保存其服务器名称；声明整型静态数据成员ClientNum，记录已定义的客户数量；定义静态函数ChangeServerName（）改变服务器名称。在头文件client.h中声明类，在文件client.cpp中实现，在文件test.cpp中测试这个类，观察相应的成员变量取值的变化情况。 </p>
+<p>&nbsp;</p>
+<p>三、实验步骤 </p> <p>（1）运行给定的程序，观察输出。 <br>
+    （2）新建一个空的项目，添加头文件client.h，在其中声明类CLIENT，注意使用编译预处理命令；再添加源程序文件client.cpp，在其中实现CLIENT类，注意静态成员变量的使用方法；再添加文件test.cpp，在其中定义main（）函数，测试CLIENT类，观察相应的成员变量取值的变化情况。 </p>
+<p>参考代码<br>
+    //client.h<br>
+    #ifndef? Client_H<br>
+    #define  Client_H<br>
+    #include  &lt;iostream&gt;<br>
+    #include  &lt;string&gt;<br>
+    using  namespace std;<br>
+    class  CLIENT<br>
+    {<br>
+    private:<br>
+    static char ServerName;<br>
+    static int ClientNum;<br>
+    public:<br>
+    CLIENT();<br>
+    ~CLIENT();<br>
+    static int GetClientNum();<br>
+    static void ChangServerName(char name);<br>
+    static char GetServerName();<br>
+    };<br>
+    #endif//Client_H<br><br>
+    //client.cpp<br>
+    #include  &quot;client.h&quot;<br>
+    CLIENT::CLIENT()<br>
+    {<br>
+    ClientNum++ ; <br>
+    }<br>
+    CLIENT::~CLIENT() <br>
+    { <br>
+    ClientNum-- ; <br>
+    }<br>
+    int  CLIENT::GetClientNum() <br>
+    {<br>
+    return ClientNum; <br>
+    }<br>
+    void  CLIENT::ChangServerName(char name)<br>
+    { <br>
+    ServerName=name; <br>
+    }<br>
+    char  CLIENT::GetServerName() <br>
+    {<br>
+    return ServerName; <br>
+    }<br><br>
+    //test.cpp<br>
+    #include &quot;client.h&quot;<br>
+    int  CLIENT::ClientNum = 0;<br>
+    char  CLIENT::ServerName= 'N';<br>
+    int  main()<br>
+    {<br>
+    CLIENT a;<br>
+    CLIENT b;<br>
+    cout &lt;&lt; &quot;服务器名称为：&quot; &lt;&lt; CLIENT::GetServerName()  &lt;&lt; endl;<br>
+    CLIENT::ChangServerName('A');<br>
+    cout &lt;&lt; &quot;客户机数量为：&quot; &lt;&lt; CLIENT::GetClientNum()  &lt;&lt; endl;<br>
+    cout &lt;&lt; &quot;服务器名称为：&quot; &lt;&lt; CLIENT::GetServerName()  &lt;&lt; endl; <br>
+    }<br></span></p>
+
+
+
+<p>问答题</p>
+<p>1．阅读下面的程序，试求：</p>
+<p>（1）给出程序的运行结果。</p>
+<p>（2）指出程序的运行机制。<br />
+    #include&lt;iostream.h&gt;<br />
+    class A<br/>
+    {<br />
+    static int n;<br />
+    public:A(){n=1;}<br />
+    A(int  num){ n=num;}<br />
+    void print(){ cout &lt;&lt; n;}<br />
+    };<br />
+    int A::n=2;<br />
+    void main()<br />
+    { <br />
+    A  a,b(3);a.print();b.print();cout &lt;&lt; endl; <br />
+    }<br />
+<p>
+    参考答案（1）程序的运行结果：33<br />
+    （2）程序的运行机制：静态数据成员的使用。</span></p>
+2．阅读下面的程序，给出程序的运行结果是什么?<br />
+#include&lt;iostream.h&gt;<br />
+int c;<br />
+class A<br />
+{<br />
+private:int a;static int b;public:A(){a=0;c=0;}<br />
+void seta(){a++;}? void  setb(){b++;} void setc(){c++;}<br />
+void display(){ cout &lt;&lt; a &lt;&lt;&quot; &quot; &lt;&lt; b  &lt;&lt;&quot; &quot;? &lt;&lt; c; }<br />
+};<br />
+int A::b=0;<br />
+void main()<br />
+{<br />
+A  a1,a2;a1.seta();a1.setb();a1.setc();a2.seta();a2.setb();a2.setc();a2.display();<br />
+}</p>
+<p>
+    参考答案：1 2 2</span></p>
+
+
+
+<h3>1. 王婆卖瓜问题
+</h3>
+<h5>案例说明：</h5>
+<p>  王婆卖瓜，每卖一个瓜要记录瓜的重量，还要记录所卖出的总重量和总个数，同时还允许退瓜。用面向对象的方法设计王婆卖瓜程序。首先要设计类，一个自然的设想就是以西瓜为对象，对西瓜类定义各种属性和操作。</p>
+<h5>  案例解析：</h5>
+<p>
+    在西瓜类中，设计3个数据成员：weight是一个西瓜的重量，它属于某个西瓜的，而成员total_weight和total_number是所有卖了的西瓜所共有的。也就是说，无论某个西瓜对象是否存在，这两个数据总是要保留的。为此把这2个数据成员声明为静态数据成员。<br />
+    关于成员函数的选取与定义，根据题意，西瓜类应该包含如下成员函数：卖瓜用构造函数模拟，退瓜用析构函数模拟，瓜重用函数disp（）成员函数模拟。为了用不与特定对象相联系的静态成员函数来访问静态数据，另外定义了一个显示总重和总数的静态成员函数total_disp（）。</p>
+<h5> 代码注解：</h5>
+<p>
+    #include&lt;iostream&gt;<br />
+    using namespace std;<br />
+    class watermelon<br />
+    {<br />
+    &nbsp; float  weight;<br />
+    &nbsp; static  float total_weight;<br />
+    &nbsp; static  int total_number;<br />
+    public:<br />
+    &nbsp; watermelon(float  w)<br />
+    &nbsp; {  <br />
+    &nbsp;  &nbsp;  weight=w;<br />
+    &nbsp;  &nbsp;  total_weight+=weight;<br />
+    &nbsp;  &nbsp; total_number++;<br />
+    &nbsp;  }<br />
+    &nbsp;   ~watermelon()<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp; total_weight-=weight;<br />
+    &nbsp;  &nbsp;  total_number--;<br />
+    &nbsp;  }<br />
+    &nbsp;  void  disp();<br />
+    &nbsp;  static  void total_disp();<br />
+    };<br />
+    float watermelon::total_weight=0;<br />
+    int watermelon::total_number=0;<br />
+    void watermelon::disp()<br />
+    {<br />
+    &nbsp; cout&lt;&lt;&quot;The  watermelon weight is:&quot;&lt;&lt;weight&lt;&lt;endl;</p>
+<p>}<br />
+    void watermelon::total_disp()<br />
+    {<br />
+    &nbsp;  cout&lt;&lt;&quot;Total  weight is:&quot;&lt;&lt;total_weight&lt;&lt;&quot;\nTotal number  is:&quot;&lt;&lt;total_number&lt;&lt;endl;<br />
+    }<br />
+    int main()<br />
+    {<br />
+    &nbsp; watermelon  w1(4.5f);<br />
+    &nbsp; w1.disp();<br />
+    &nbsp;  watermelon::total_disp();<br />
+    &nbsp; watermelon  w2(8.5f);<br />
+    &nbsp; w2.disp();<br />
+    &nbsp; watermelon::total_disp();<br />
+    &nbsp; watermelon  w3(2.5f);<br />
+    &nbsp; w3.disp();<br />
+    &nbsp; watermelon::total_disp();<br />
+    &nbsp;  w2.~watermelon();<br />
+    &nbsp;  watermelon::total_disp();<br />
+    &nbsp; return  0;<br />
+    }<br />
+<h5>调试运行：</h5>
+<p> The watermelon weight is:4.5<br />
+    Total weight is:4.5<br />
+    Total number is:1<br />
+    The watermelon weight is:8.5<br />
+    Total weight is:13<br />
+    Total number is:2<br />
+    The watermelon weight is:2.5<br />
+    Total weight is:15.5<br />
+    Total number is:3<br />
+    Total weight is:7<br />
+    Total number is:2<br />
+    Press any key to continue</p>
+<h3>2. 统计银行存款问题</h3>
+<h5>案例说明：</h5>
+<p>
+    设计一个程序，其中有3个类，即CBank，BBank和GBank，分别为中国银行类、工商银行类和农业银行类。每个类都包含一个私有数据balance，用于存放储户在银行的存款数，另有一个友元函数total用于计算储户在这3家银行中的总存款数。</p>
+<h5>
+    案例解析：</h5>
+<p>
+    CBank，BBank和GBank3个类中均包含私有数据balance，以及其输入输出的相关函数。由于需要从外部对3个类的私有数据balance进行访问，因此需要设计一个友元函数total（），这样通过友元函数的访问属性，即可统计出3家银行中的总存款数。</p>
+<h5>
+    代码注解：</h5>
+<p>
+    #include&lt;iostream&gt;<br />
+    using namespace std;<br />
+    class BBank;<br />
+    class GBank;<br />
+    class CBank<br />
+    {<br />
+    &nbsp; int  balance;<br />
+    public:<br />
+    &nbsp;  CBank()<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp;  balance=0;<br />
+    &nbsp;  }<br />
+    &nbsp;  CBank(int  b)<br />
+    &nbsp; {<br />
+    &nbsp;  &nbsp;  balance=b;<br />
+    &nbsp;  }<br />
+    &nbsp; void  getbalance()<br />
+    &nbsp; {<br />
+    &nbsp;  &nbsp; cout&lt;&lt;&quot;Input  the saving in China Bank:&quot;;<br />
+    &nbsp;  &nbsp;  cin&gt;&gt;balance;<br />
+    &nbsp;  }<br />
+    &nbsp; void  disp()<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp;  cout&lt;&lt;&quot;The  saving in China Bank is:&quot;&lt;&lt;balance&lt;&lt;endl;<br />
+    &nbsp;  }<br />
+    friend void total(CBank,BBank,GBank);<br />
+    };<br />
+    class BBank<br />
+    {<br />
+    &nbsp;  int  balance;<br />
+    public:</p>
+<p> &nbsp; BBank()<br />
+    &nbsp; {<br />
+    &nbsp;  &nbsp; balance=0;<br />
+    &nbsp;  }<br />
+    &nbsp;  BBank(int  b)<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp;  balance=b;<br />
+    &nbsp;  }<br />
+    &nbsp; void  getbalance()<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp;  cout&lt;&lt;&quot;Input  the saving in Business Bank:&quot;;<br />
+    &nbsp;  &nbsp;  cin&gt;&gt;balance;<br />
+    &nbsp;  }<br />
+    &nbsp;  void  disp()<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp;  cout&lt;&lt;&quot;The  saving in Business Bank is:&quot;&lt;&lt;balance&lt;&lt;endl;<br />
+    &nbsp;  }<br />
+    friend  void total(CBank,BBank,GBank);<br />
+    };<br />
+    class GBank<br />
+    {<br />
+    &nbsp;  int  balance;<br />
+    public:<br />
+    &nbsp;  GBank()<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp;  balance=0;<br />
+    &nbsp;  }<br />
+    &nbsp;  GBank(int  b)<br />
+    &nbsp; {<br />
+    &nbsp;  &nbsp;  balance=b;<br />
+    &nbsp;  }<br />
+    &nbsp;  void  getbalance()<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp;  cout&lt;&lt;&quot;Input  the saving in Agriculture Bank:&quot;;<br />
+    &nbsp;  &nbsp;  cin&gt;&gt;balance;<br />
+    &nbsp;  }<br />
+    &nbsp;  void  disp()<br />
+    &nbsp;  {<br />
+    &nbsp;  &nbsp;  cout&lt;&lt;&quot;The  saving in Agriculture Bank is:&quot;&lt;&lt;balance&lt;&lt;endl;<br />
+    &nbsp;  }<br />
+    friend  void total(CBank,BBank,GBank);<br />
+    };<br />
+    void total(CBank A,BBank B,GBank C)<br />
+    {<br />
+    &nbsp;  cout&lt;&lt;&quot;Total  saving is:&quot;&lt;&lt;A.balance+B.balance+C.balance&lt;&lt;endl;<br />
+    }<br />
+    <br />
+    int main()<br />
+    {<br />
+    &nbsp;  CBank  X(100);<br />
+    &nbsp;  BBank  Y;<br />
+    &nbsp;  GBank  Z;<br />
+    &nbsp;   X.disp();<br />
+    &nbsp;  Y.disp();<br />
+    &nbsp;  Z.disp();<br />
+    &nbsp;  Y.getbalance();<br />
+    &nbsp;   Z.getbalance();<br />
+    &nbsp;  total(X,Y,Z);<br />
+    &nbsp;  return  0;</p>
+<p>}<br />
+<h5> 调试运行：</h5>
+<p> The saving in China Bank is:100<br />
+    The saving in Business Bank is:0<br />
+    The saving in Agriculture Bank is:0<br />
+    Input the saving in Business Bank:200<br />
+    Input the saving in Agriculture Bank:300<br />
+    Total saving is:600<br />
+    Press any key to continue</p>
+
+
+<p><strong>Q</strong>:友元函数能否访问类中的保护成员？友元函数访问类中私有成员与成员函数访问私有成员的形式相同吗？<br />
+    <strong>A</strong>：能。相同。</p>
+<p>  <strong>Q</strong>:运算符重载使用成员函数方法和友元函数方法是否都可以？并且是没有区别的吗？<br />
+    <strong>A</strong>： 两种方都法可以。有区别，参数个数不同。</p>
+<p><strong>Q</strong>:使用const定义符号常量比使用#define定义符号常量有何优点？<br />
+    <strong>A</strong>:使用const定义符号常量时要指出数据类型，而用#define定义符号常量时不需提出类型，因此前者比后者对类型要   求更严格，这样会更安全。</p>
+<p><strong>Q</strong>:用预处理指令#define声明一个常数，用以表示一年中有多少秒（忽略闰年问题）？<br />
+    <strong>A</strong>：#define SECOND_PER_YEAR (60*60*24*365)UL</p>
+<p><strong>Q</strong>:写一个“标准”宏MIN，这个宏输入两个参数并返回较小的一个。<br />
+    <strong>A</strong>：#define MIN（A,B） （（A）&lt;=（B）?(A):(B)）</p>
+<p><strong>Q</strong>:Const有什么用途？请说明两种<br />
+    <strong>A</strong>：（1）可以定义const常量（2）可以修饰函数的参数和返回值。被const修饰的东西都受强制保护，可以预防意外的变动，能提高程序的健壮性。</p>
+<p><strong>Q</strong>:有类如下：<br />
+    class A class<br />
+    {<br />
+    &nbsp; void f() const<br />
+    &nbsp; {} <br />
+    }<br />
+    在上面这种情况下，如果要修改类的成员变量，应该怎么办？<br />
+    <strong>A</strong>：在const成员函数中，用mutable修饰成员变量后就可以修改类的成员变量。<br />
+</p>
+
+<h3>变量的生存期与可见性</h3>
+<p>#include&lt;iostream><br>
+    using namespace std; <br>
+    int i=1;  // i 为全局变量，具有静态生存期。</p>
+<p>int main()   <br>
+    {&nbsp; static int a;  // 静态局部变量，有全局寿命，局部可见。<br>
+    &nbsp; &nbsp;int b=-10;  // b, c为局部变量，具有动态生存期。<br>
+    &nbsp; &nbsp;int c=0; <br>
+    &nbsp; &nbsp;void other(void); <br>
+    &nbsp; &nbsp;cout<<"---MAIN---\n";<br>
+    &nbsp; &nbsp;cout<<" i: "<&lt;i<<" a: "<&lt;a<<" b: "<&lt;b<<" c: "<&lt;c<&lt;endl; <br>
+    &nbsp; &nbsp;c=c+8;  other();<br>
+    &nbsp; &nbsp;cout<<"---MAIN---\n";<br>
+    &nbsp; &nbsp;cout<<" i: "<&lt;i<<" a: "<&lt;a<<" b: "<&lt;b<<" c: "<&lt;c<&lt;endl; <br>
+    &nbsp; &nbsp;i=i+10; other();  <br>
+    }</p>
+<p>void other(void) <br>
+    {<br>
+    &nbsp; &nbsp;static int a=2; <br>
+    &nbsp; &nbsp;static int b; <br>  // a,b为静态局部变量，具有全局寿命，局部可见。<br>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//只第一次进入函数时被初始化。<br>
+    &nbsp; &nbsp;int c=10;   // C为局部变量，具有动态生存期，<br>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;//每次进入函数时都初始化。<br>
+    &nbsp; &nbsp;a=a+2; i=i+32; c=c+5; <br>
+    &nbsp; &nbsp;cout<<"---OTHER---\n";<br>
+    &nbsp; &nbsp;cout<<" i: "<&lt;i<<" a: "<&lt;a<<" b: "<&lt;b<<" c: "<&lt;c<&lt;endl; <br>
+    &nbsp; &nbsp;b=a; <br>
+    }</p>
+<h4>运行结果：</h4>
+<p>---MAIN---<br>
+    i: 1 a: 0 b: -10 c: 0 <br>
+    ---OTHER---<br>
+    i: 33 a: 4 b: 0 c: 15 <br>
+    ---MAIN---<br>
+    i: 33 a: 0 b: -10 c: 8 <br>
+    ---OTHER---<br>
+    i: 75 a: 6 b: 4 c: 15 </p>
+
+<h3>具有静态、动态生存期对象的时钟程序 </h3>
+<p>#include&lt;iostream><br>
+    using namespace std;</p>
+<p>class Clock	//时钟类声明<br>
+    {public:	//外部接口<br>
+    &nbsp; &nbsp;Clock();<br>
+    &nbsp; &nbsp;void SetTime(int NewH, int NewM, int NewS);   //三个形参均具有函数原型作用域<br>
+    &nbsp; &nbsp;void ShowTime();<br>
+    &nbsp; &nbsp;~Clock(){}<br>
+    private:	//私有数据成员<br>
+    &nbsp; &nbsp;int Hour,Minute,Second; <br>
+    };</p>
+<p>//时钟类成员函数实现<br>
+    Clock::Clock()	//构造函数<br>
+    {&nbsp;Hour=0; <br>
+    &nbsp; &nbsp;Minute=0; <br>
+    &nbsp; &nbsp;Second=0; <br>
+    }</p>
+<p>void Clock::SetTime(int NewH, int NewM, int NewS) <br>
+    //三个形参均具有局部作用域<br>
+    {&nbsp;Hour=NewH; <br>
+    &nbsp; &nbsp;Minute=NewM; <br>
+    &nbsp; &nbsp;Second=NewS; <br>
+    }</p>
+<p>void Clock::ShowTime()<br>
+    {&nbsp;cout<&lt;Hour<<":"<&lt;Minute<<":"<&lt;Second<&lt;endl; <br>
+    }</p>
+<p>Clock globClock;	//声明对象globClock，<br>
+    //具有静态生存期，命名空间作用域, 由默认构造函数初始化为0:0:0</p>
+<p>int main()	//主函数<br>
+    {<br>
+    &nbsp; &nbsp;cout<<"First time output:"<&lt;endl;	<br>
+    &nbsp; &nbsp;//引用具有文件作用域的对象：<br>
+    &nbsp; &nbsp;globClock.ShowTime(); //对象的成员函数具有类作用域<br>
+    &nbsp; &nbsp;globClock.SetTime(8,30,30);	<br>
+    &nbsp; &nbsp;Clock myClock(globClock); //声明具有局部作用域的对象myClock<br>
+    &nbsp; &nbsp;cout<<"Second time output:"<&lt;endl;<br>
+    &nbsp; &nbsp;myClock.ShowTime();	//引用具有局部作用域的对象<br>
+    }</p>
+<h4>程序的运行结果为：</h4>
+<p>First time output:<br>
+    0:0:0<br>
+    Second time output:<br>
+    8:30:30</p>
+
+
+
+<h3>具有静态数据成员的 Point类</h3>
+<p>#include &lt;iostream><br>
+    using namespace std;</p>
+<p>class Point	<br>
+    //引入静态数据成员count来统计Point类对象个数<br>
+    {public: <br>
+    &nbsp; &nbsp;Point(int xx=0, int yy=0):X(xx), Y(yy) {count++; } <br>
+    &nbsp; &nbsp;Point(Point &p);	//复制构造函数<br>
+    &nbsp; &nbsp; ~Point(){count--;}    //析构函数<br>
+    &nbsp; &nbsp;int GetX() {return X;} <br>
+    &nbsp; &nbsp;int GetY() {return Y;} <br>
+    &nbsp; &nbsp;void showCount() {cout<<"  Object count="<&lt;count<&lt;endl;} <br>
+    private: <br>
+    &nbsp; &nbsp;int X,Y; <br>
+    &nbsp; &nbsp;static int count; <br>
+    };</p>
+<p>Point::Point(Point &p) <br>
+    {&nbsp;X=p.X; <br>
+    &nbsp; &nbsp;Y=p.Y; <br>
+    &nbsp; &nbsp;count++;<br>
+    }</p>
+<p>int Point::count=0; </p>
+<p>int main()<br>
+    {&nbsp;Point a(4,5); <br>
+    &nbsp; &nbsp;cout<<"Point A: "<&lt;a.GetX()<<", "<&lt;a.GetY();<br>
+    &nbsp; &nbsp;a.showCount();<br>
+    &nbsp; &nbsp;Point b(a); <br>
+    &nbsp; &nbsp;cout<<"Point B: "<&lt;b.GetX()<<", "<&lt;b.GetY();<br>
+    &nbsp; &nbsp;b.showCount();<br>
+    &nbsp; &nbsp;return 0; <br>
+    }</p>
+
+<h3>具有静态数据、函数成员的 Point类</h3>
+<p>#include&lt;iostream><br>
+    using namespace std;</p>
+<p>class Point	//Point类声明<br>
+    {public://外部接口<br>
+    &nbsp; &nbsp;Point(int xx=0, int yy=0 ):X(xx), Y(yy) {count++; } <br>
+    &nbsp; &nbsp;Point(Point &p);	//复制构造函数<br>
+    &nbsp; &nbsp; ~Point(){count--;}    //析构函数<br>
+    &nbsp; &nbsp;int GetX() {return X;} <br>
+    &nbsp; &nbsp;int GetY() {return Y;} <br>
+    &nbsp; &nbsp;static void showCount()<br>
+    &nbsp; &nbsp;{cout<<"  Object count="<&lt;count<&lt;endl;}<br>
+    private://私有数据成员<br>
+    &nbsp; &nbsp;int X,Y; <br>
+    &nbsp; &nbsp;static int count; <br>
+    }</p>
+<p>Point::Point(Point &p) <br>
+    {&nbsp;X=p.X; <br>
+    &nbsp; &nbsp;Y=p.Y; <br>
+    &nbsp; &nbsp;count++;<br>
+    }</p>
+<p>int Point::count=0;</p>
+<p>int main()	//主函数实现<br>
+    {&nbsp;Point a(4,5);//声明对象A<br>
+    &nbsp; &nbsp;cout<<"Point A,"<&lt;a.GetX()<<", "<&lt;a.GetY();<br>
+    &nbsp; &nbsp;Point::showCount();	//输出对象个数<br>
+    &nbsp; &nbsp;Point b(a);//声明对象B<br>
+    &nbsp; &nbsp;cout<<"Point B,"<&lt;b.GetX()<<", "<&lt;b.GetY();<br>
+    &nbsp; &nbsp;Point:: showCount();	//输出对象个数<br>
+    &nbsp; &nbsp;return 0; <br>
+    }</p>
+
+
+<h3>使用友元函数计算两点距离</h3>
+<p>#include &lt;iostream><br>
+    #include &lt;cmath><br>
+    using namespace std;</p>
+<p>class Point	//Point类声明<br>
+    { public://外部接口<br>
+    &nbsp;&nbsp;Point(int xx=0, int yy=0) {X=xx;Y=yy;} <br>
+    &nbsp; &nbsp;int GetX() {return X;} <br>
+    &nbsp; &nbsp;int GetY() {return Y;} <br>
+    &nbsp; &nbsp;friend float Distance(Point &a, Point &b); <br>
+    &nbsp;private:	//私有数据成员<br>
+    &nbsp; &nbsp;int X,Y; <br>
+    };</p>
+<p>double Distance( Point& a, Point& b) <br>
+    {<br>
+    &nbsp; &nbsp;double dx=a.X-b.X; <br>
+    &nbsp; &nbsp;double dy=a.Y-b.Y; <br>
+    &nbsp; &nbsp;return sqrt(dx*dx+dy*dy); <br>
+    }</p>
+<p>int main()<br>
+    {&nbsp;Point p1(3.0, 5.0), p2(4.0, 6.0); <br>
+    &nbsp; &nbsp;double d=Distance(p1, p2); <br>
+    &nbsp; &nbsp;cout<<"The distance is "<&lt;d<&lt;endl; <br>
+    &nbsp; &nbsp;return 0; <br>
+    }</p>
+
+<h3>友元类举例</h3>
+<p>class A<br>
+    {&nbsp;friend class B; <br>
+    &nbsp; public: <br>
+    &nbsp; &nbsp;void Display()<br>
+    &nbsp; &nbsp;{cout<&lt;x<&lt;endl;} <br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;int x; <br>
+    }</p>
+<p>class B<br>
+    {&nbsp;public: <br>
+    &nbsp; &nbsp;void Set(int i); <br>
+    &nbsp; &nbsp;void Display();<br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp;A a; <br>
+    };</p>
+<p>void B::Set(int i) <br>
+    {<br>
+    &nbsp; &nbsp;a.x=i; <br>
+    }</p>
+<p>void B::Display()<br>
+    {<br>
+    &nbsp; &nbsp;a.Display();<br>
+    }</p>
+
+<h3>常成员函数举例</h3>
+<p>#include&lt;iostream><br>
+    using namespace std;</p>
+<p>class R<br>
+    {&nbsp; public: <br>
+    &nbsp; &nbsp; R(int r1, int r2){R1=r1;R2=r2;} <br>
+    &nbsp; &nbsp; void print();<br>
+    &nbsp; &nbsp;void print() const; <br>
+    &nbsp;private: <br>
+    &nbsp; &nbsp; int R1,R2; <br>
+    };</p>
+<p>void R::print()<br>
+    {&nbsp; &nbsp;cout<&lt;R1<<":"<&lt;R2<&lt;endl; <br>
+    }</p>
+<p>void R::print() const<br>
+    {&nbsp; &nbsp;cout<&lt;R1<<";"<&lt;R2<&lt;endl; <br>
+    }</p>
+<p>int main()<br>
+    {&nbsp;R a(5,4); <br>
+    &nbsp; &nbsp; a.print();  //调用void print()<br>
+    &nbsp; &nbsp; const R b(20,52);  <br>
+    &nbsp; &nbsp; b.print();  //调用void print() const <br>
+    }</p>
+
+<h3>常数据成员举例</h3>
+<p>#include&lt;iostream><br>
+    using namespace std;</p>
+<p>class A<br>
+    {public: <br>
+    &nbsp; &nbsp;A(int i); <br>
+    &nbsp; &nbsp;void print();<br>
+    &nbsp; &nbsp;const int& r; <br>
+    private: <br>
+    &nbsp; &nbsp;const int a; <br>
+    &nbsp; &nbsp;static const int b;   //静态常数据成员<br>
+    };</p>
+<p>const int A::b=10; </p>
+<p>A::A(int i):a(i),r(a) {}</p>
+<p>void A::print()<br>
+    {&nbsp; &nbsp;cout<&lt;a<<":"<&lt;b<<":"<&lt;r<&lt;endl; }</p>
+<p>int main()<br>
+    {/*建立对象a和b，并以100和0作为初值，分别调用构造函数，通过构造函数的初始化列&nbsp; &nbsp;A a1(100),a2(0);  <br>
+    &nbsp; &nbsp;a1.print();<br>
+    &nbsp; &nbsp;a2.print();<br>
+    }</p>
+
+<h3>常引用做形参</h3>
+<p>#include&lt;iostream><br>
+    using namespace std;</p>
+<p>void display(const double& r); </p>
+<p>int main()<br>
+    {&nbsp;double d(9.5); <br>
+    &nbsp; &nbsp; display(d); <br>
+    &nbsp; &nbsp; return 0; <br>
+    }</p>
+<p>void display(const double& r) <br>
+    //常引用做形参，在函数中不能更新 r所引用的对象。 <br>
+    {&nbsp; &nbsp;cout<&lt;r<&lt;endl;   }</p>
+
+
+<p>阅读下面的程序，试求：</p>
+<p>（1）给出程序的运行结果。</p>
+<p>（2）指出程序的运行机制。<br />
+    #include&lt;iostream.h&gt;<br />
+    class A<br />
+    { <br />
+    static int n;<br />
+    public:A(){n=1;}<br />
+    A(int  num){ n=num;}<br />
+    void print(){ cout &lt;&lt; n;}<br />
+    };<br />
+    int A::n=2;<br />
+    void main()<br />
+    { <br />
+    A  a,b(3);a.print();b.print();cout &lt;&lt; endl; <br />
+    }</p><p>
+    参考答案：
+    （1）给出程序的运行结果：33。<br>
+    （2）指出程序的运行机制：静态数据成员的使用。
+    </span></p>
+
+<p>阅读下面的程序，给出程序的运行结果是什么？<br />
+    #include&lt;iostream.h&gt;<br />
+    int c;<br />
+    class A<br />
+    {<br />
+    private:int a;static int b;public:A(){a=0;c=0;}<br />
+    void seta(){a++;}? void  setb(){b++;}? void setc(){c++;}<br />
+    void display(){ cout &lt;&lt; a &lt;&lt;&quot; &quot; &lt;&lt; b  &lt;&lt;&quot; &quot;? &lt;&lt; c; }<br />
+    };<br />
+    int A::b=0;<br />
+    void main()<br />
+    {<br />
+    A  a1,a2;a1.seta();a1.setb();a1.setc();a2.seta();a2.setb();a2.setc();a2.display();<br />
+    }</p><p>
+    参考答案：程序的运行结果是 1 2 2 </span></p>
+
+<h3>不使用条件编译的头文件</h3>
+<p>//main.cpp<br>
+    #include "file1.h"<br>
+    #include "file2.h"<br>
+    int main()<br>
+    {<br>
+    …<br>
+    }</p>
+<p>//file1.h<br>
+    #include "head.h"<br>
+    …</p>
+<p>//file2.h<br>
+    #include "head.h"<br>
+    …</p>
+<p>//head.h<br>
+    …<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …</p>
+<h4>经过编译预处理后</h4>
+<p>//main.cpp<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …<br>
+    …<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …<br>
+    …<br>
+    void main()<br>
+    {<br>
+    …<br>
+    }</p>
+<p>//file1.h<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …<br>
+    …</p>
+<p>//file2.h<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …<br>
+    …</p>
+<h3>使用条件编译的头文件</h3>
+<p>//head.h<br>
+    #ifndef  HEAD_H<br>
+    #define  HEAD_H<br>
+    …<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …<br>
+    #endif</p>
+<h4>经过编译预处理后</h4>
+<p>//main.cpp<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …<br>
+    …<br>
+    …<br>
+    void main()<br>
+    {<br>
+    …<br>
+    }</p>
+<p>//file1.h<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …<br>
+    …</p>
+<p>//file2.h<br>
+    class Point<br>
+    {<br>
+    …<br>
+    }<br>
+    …<br>
+    …</p>
+</body>
+</html>
